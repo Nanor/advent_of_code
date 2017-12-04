@@ -1,32 +1,20 @@
+from itertools import combinations
+
 def part1(inputs):
-    total = 0
-
-    for line in inputs:
-        if len(set(line)) == len(line):
-            total += 1
-
-    return total
+    return len([line for line in inputs if len(set(line)) == len(line)])
 
 def part2(inputs):
-    total = 0
+    def valid(line):
+        for word1, word2 in combinations(line, 2):
+            if sorted(word1) == sorted(word2):
+                return False
+        return True
 
-    for line in inputs:
-        valid = True
-        for i, word1 in enumerate(line):
-            for j, word2 in enumerate(line):
-                if i != j:
-                    if sorted(word1) == sorted(word2):
-                        valid = False
-        if valid:
-            total += 1
-
-    return total
+    return len([line for line in inputs if valid(line)])
 
 def main():
-    inputs = []
     with open('day4.txt') as f:
-        for line in f:
-            inputs.append(line.strip().split(' '))
+        inputs = [line.strip().split(' ') for line in f]
 
     print(part1(inputs))
     print(part2(inputs))
