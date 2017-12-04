@@ -1,4 +1,6 @@
+#!/usr/local/bin/python3
 from collections import defaultdict
+
 
 def move(x, y):
     if -y <= -x <= y:
@@ -12,14 +14,16 @@ def move(x, y):
 
     return x, y
 
+
 def part1(input):
     x = 0
     y = 0
 
-    for _ in range(input-1):
+    for _ in range(input - 1):
         x, y = move(x, y)
-        
+
     return abs(x) + abs(y)
+
 
 def part2(input):
     x = 1
@@ -29,16 +33,19 @@ def part2(input):
 
     total = 0
     while total < input:
-        total = sum(board[x+dx, y+dy] for (dx, dy) in [(1, 0), (1, -1),(0, -1),(-1, -1),(-1, 0),(-1, 1),(0, 1),(1, 1)])
+        neighbors = [(1, 0), (1, -1), (0, -1), (-1, -1), (-1, 0), (-1, 1), (0, 1), (1, 1)]
+        total = sum(board[x + dx, y + dy] for (dx, dy) in neighbors)
         board[(x, y)] = total
         x, y = move(x, y)
 
     return total
 
+
 def main():
     input = 347991
     print(part1(input))
     print(part2(input))
+
 
 if __name__ == '__main__':
     main()

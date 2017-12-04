@@ -1,5 +1,9 @@
+#!/usr/local/bin/python3
+
+
 def part1(spreadsheet):
     return sum(max(line) - min(line) for line in spreadsheet)
+
 
 def part2(spreadsheet):
     total = 0
@@ -10,6 +14,7 @@ def part2(spreadsheet):
                     total += a / b
     return total
 
+
 def main():
     spreadsheet = []
     with open('day2.txt') as f:
@@ -18,6 +23,7 @@ def main():
 
     print(part1(spreadsheet))
     print(part2(spreadsheet))
+
 
 if __name__ == '__main__':
     main()
