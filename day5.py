@@ -5,7 +5,7 @@ def part1(instructions):
     i = 0
     c = 0
 
-    while i >= 0 and i < len(instructions):
+    while 0 <= i < len(instructions):
         new_i = i + instructions[i]
         instructions[i] += 1
         i = new_i
@@ -18,7 +18,7 @@ def part2(instructions):
     i = 0
     c = 0
 
-    while i >= 0 and i < len(instructions):
+    while 0 <= i < len(instructions):
         new_i = i + instructions[i]
 
         if instructions[i] >= 3:
