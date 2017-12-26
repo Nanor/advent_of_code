@@ -34,44 +34,30 @@ def part1(instructions):
 
     return mul_count
 
-def part2(instructions):
-    registers = defaultdict(lambda: 0)
-    registers['a'] = 1
-    pointer = 0
 
-    def value(val):
-        try:
-            return int(val)
-        except ValueError:
-            return registers[val]
+def is_prime(n):
+    if n < 2:
+        return False
+    for x in range(2, int(n**0.5) + 1):
+        if n % x == 0:
+            return False
+    return True
 
-    while pointer < len(instructions):
-        (op, x, y) = instructions[pointer]
 
-        if op == 'set':
-            registers[x] = value(y)
-            pointer += 1
-        elif op == 'sub':
-            registers[x] -= value(y)
-            pointer += 1
-        elif op == 'mul':
-            registers[x] *= value(y)
-            pointer += 1
-        elif op == 'jnz':
-            if value(x) != 0:
-                pointer += value(y)
-            else:
-                pointer += 1
-        print(registers['h'])
+def part2():
+    h = 0
+    for b in range(106700, 123701, 17):
+        if not is_prime(b):
+            h += 1
+    return h
 
-    return registers['h']
 
 def main():
     with open('day23.txt') as f:
         instructions = [line.strip().split(' ') for line in f]
 
     print(part1(instructions))
-    print(part2(instructions))
+    print(part2())
 
 if __name__ == '__main__':
     main()
