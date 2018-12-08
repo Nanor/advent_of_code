@@ -25,7 +25,7 @@ fn reduce(p: &str) -> usize {
 }
 
 fn main() {
-  let mut f = File::open("day5.txt").expect("No such file");
+  let mut f = File::open("files/day5.txt").expect("No such file");
   let mut polymer = String::new();
   f.read_to_string(&mut polymer).expect("Could not read");
 

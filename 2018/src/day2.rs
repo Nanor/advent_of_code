@@ -4,7 +4,7 @@ use std::io::BufRead;
 use std::io::BufReader;
 
 fn part1() -> u32 {
-  let f = File::open("day2.txt").expect("No file found");
+  let f = File::open("files/day2.txt").expect("No file found");
   let lines = BufReader::new(&f).lines();
 
   let mut two_count: u32 = 0;
@@ -32,12 +32,12 @@ fn part1() -> u32 {
 }
 
 fn part2() -> String {
-  let f = File::open("day2.txt").expect("No file found");
+  let f = File::open("files/day2.txt").expect("No file found");
   let lines = BufReader::new(&f).lines();
 
   for line in lines {
     let line = line.expect("Can't read line");
-    let f = File::open("day2.txt").expect("No file found");
+    let f = File::open("files/day2.txt").expect("No file found");
     let lines2 = BufReader::new(&f).lines();
     for line2 in lines2 {
       let line2 = line2.expect("Can't read line");

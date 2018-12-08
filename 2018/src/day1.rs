@@ -4,7 +4,7 @@ use std::io::BufRead;
 use std::io::BufReader;
 
 fn part1() -> i32 {
-  let f = File::open("day1.txt").unwrap();
+  let f = File::open("files/day1.txt").unwrap();
   let file = BufReader::new(&f);
 
   let mut counter: i32 = 0;
@@ -21,7 +21,7 @@ fn part2() -> i32 {
   let mut values: HashMap<i32, bool> = HashMap::new();
 
   loop {
-    let f = File::open("day1.txt").unwrap();
+    let f = File::open("files/day1.txt").unwrap();
     let file = BufReader::new(&f);
 
     for (_, line) in file.lines().enumerate() {

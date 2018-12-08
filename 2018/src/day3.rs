@@ -16,7 +16,7 @@ struct Claim {
 }
 
 fn main() {
-    let f = File::open("day3.txt").expect("File not found.");
+    let f = File::open("files/day3.txt").expect("File not found.");
     let file = BufReader::new(&f);
 
     let re = Regex::new(r"#(\d+) @ (\d+),(\d+): (\d+)x(\d+)").unwrap();

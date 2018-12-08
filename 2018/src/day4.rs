@@ -7,7 +7,7 @@ use std::fs::File;
 use std::io::{BufRead, BufReader};
 
 fn main() {
-    let f = File::open("day4.txt").expect("File not found.");
+    let f = File::open("files/day4.txt").expect("File not found.");
     let file = BufReader::new(&f);
     let mut lines: Vec<String> = file.lines().filter_map(|line| line.ok()).collect();
 
