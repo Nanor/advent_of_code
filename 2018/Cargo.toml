@@ -6,6 +6,7 @@ authors = ["Ronan Forman <ronan131@gmail.com>"]
 [dependencies]
 regex = "1"
 chrono = "0.4"
+itertools = "0.7"
 
 [[bin]]
 name = "day1"
@@ -25,3 +26,6 @@ path = "src/day5.rs"
 [[bin]]
 name = "day6"
 path = "src/day6.rs"
+[[bin]]
+name = "day7"
+path = "src/day7.rs"
