@@ -5,7 +5,7 @@ const day = process.argv[2];
 const code = require(`./src/day${day}.ts`);
 
 readFile(`./resources/day${day}.txt`, (_err, data) => {
-  const inputString = data.toString();
+  const inputString = data ? data.toString() : "";
 
   const input: Input = {
     asString: () => inputString,
