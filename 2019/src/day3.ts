@@ -52,17 +52,29 @@ const getHits = (wires: Wire[]): Point[] => {
   const points1 = points[0];
   const points2 = points[1];
 
+  const points2Hash = {};
+
+  points2.forEach(p => {
+    points2Hash[hash(p)] = p;
+  });
+
   const hits: Point[] = [];
 
   points1.forEach(p1 => {
-    points2.forEach(p2 => {
-      if (p1.x === p2.x && p1.y === p2.y) {
-        hits.push({ x: p1.x, y: p2.y, dist: p1.dist + p2.dist });
-      }
-    });
+    if (points2Hash[hash(p1)]) {
+      const p2 = points2Hash[hash(p1)];
+      hits.push({ x: p1.x, y: p2.y, dist: p1.dist + p2.dist });
+    }
   });
 
   return hits;
+};
+
+const hash = ({ x, y }: Point): number => {
+  const t = Math.abs(x) + Math.abs(y);
+  const t2 = (t * (t + 2)) / 2;
+  const t3 = t2 - Math.abs(y);
+  return t3 * 4 + (x < 0 ? 1 : 0) + (y < 0 ? 2 : 0);
 };
 
 let hits: Point[];
