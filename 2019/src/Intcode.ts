@@ -1,7 +1,8 @@
 const intcode = (program: number[], input: number[] = []) => {
   let index = 0;
+  let inputIndex = 0;
   const data = [...program];
-  const output = [];
+  const output: number[] = [];
 
   const read = (param: number, indirect: boolean) => {
     const pos = data[index + param];
@@ -38,7 +39,8 @@ const intcode = (program: number[], input: number[] = []) => {
         index += 4;
         return;
       case 3:
-        write(1, input[0]);
+        write(1, input[inputIndex]);
+        inputIndex += 1;
         index += 2;
         return;
       case 4:
@@ -75,7 +77,10 @@ const intcode = (program: number[], input: number[] = []) => {
   while (true) {
     const op = read(0, false);
     if (op === 99) {
-      return { data, output };
+      return { data, output, halt: true };
+    }
+    if (op % 100 === 3 && input.length === inputIndex) {
+      return { data, output, halt: false };
     }
 
     calc(op % 100);
