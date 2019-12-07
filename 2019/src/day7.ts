@@ -1,5 +1,5 @@
 import { Input } from "./types";
-import intcode from "./Intcode";
+import intcode, { run } from "./Intcode";
 
 export const permutations = (arr: number[]): number[][] => {
   if (arr.length === 1) {
@@ -19,34 +19,35 @@ export const permutations = (arr: number[]): number[][] => {
 };
 
 export const run1 = (data: number[], settings: number[]): number => {
-  const outputs = [0];
+  let output = 0;
   settings.forEach((s, i) => {
-    const { output } = intcode(data, [s, outputs[i]]);
-    outputs.push(output[0]);
+    output = intcode(data, [s, output]).output[0];
   });
 
-  return outputs[5];
+  return output;
 };
 
 export const run2 = (data: number[], settings: number[]): number => {
-  const inputs = settings.map(s => [s]);
-  inputs[0].push(0);
+  const computers = settings.map(s => intcode(data, [s]));
 
   let curr = 0;
+  let value = 0;
 
   while (true) {
-    const { output, halt } = intcode(data, inputs[curr]);
+    const currComp = computers[curr];
+    const nextComp = run({ ...currComp, input: [value], output: [] });
+    computers[curr] = nextComp;
 
-    inputs[(curr + 1) % 5].push(output[output.length - 1]);
+    value = nextComp.output[0];
 
-    if (curr === 4 && halt) {
+    if (curr === 4 && nextComp.halted) {
       break;
     }
 
     curr = (curr + 1) % 5;
   }
 
-  return inputs[0][inputs[0].length - 1];
+  return value;
 };
 
 export const part1 = (input: Input) => {
