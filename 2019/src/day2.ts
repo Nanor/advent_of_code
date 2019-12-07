@@ -11,7 +11,7 @@ export const part1 = (input: Input) => {
   data[1] = 12;
   data[2] = 2;
 
-  return intcode(data)[0];
+  return intcode(data).data[0];
 };
 
 export const part2 = (input: Input) => {
@@ -21,7 +21,7 @@ export const part2 = (input: Input) => {
     data[1] = Math.floor(i / 100);
     data[2] = i % 100;
 
-    const result = intcode(data)[0];
+    const result = intcode(data).data[0];
 
     if (result === 19690720) {
       return i;

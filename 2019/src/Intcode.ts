@@ -1,6 +1,7 @@
 const intcode = (program: number[], input: number[] = []) => {
   let index = 0;
   const data = [...program];
+  const output = [];
 
   const read = (param: number, indirect: boolean) => {
     const pos = data[index + param];
@@ -41,7 +42,7 @@ const intcode = (program: number[], input: number[] = []) => {
         index += 2;
         return;
       case 4:
-        console.log(param(1));
+        output.push(param(1));
         index += 2;
         return;
       case 5:
@@ -74,7 +75,7 @@ const intcode = (program: number[], input: number[] = []) => {
   while (true) {
     const op = read(0, false);
     if (op === 99) {
-      return data;
+      return { data, output };
     }
 
     calc(op % 100);

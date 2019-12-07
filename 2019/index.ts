@@ -1,18 +1,10 @@
-import { readFile } from "fs";
-import { Input } from "./src/types";
+import getInput from "./src/input";
 
 const day = process.argv[2];
 const code = require(`./src/day${day}.ts`);
 
-readFile(`./resources/day${day}.txt`, (_err, data) => {
-  const inputString = data ? data.toString() : "";
-
-  const input: Input = {
-    asString: () => inputString,
-    asLines: () => inputString.split("\n"),
-    asNumbers: () => inputString.split("\n").map(l => parseInt(l, 10)),
-    asNumberArray: () => inputString.split(",").map(n => parseInt(n, 10))
-  };
+const main = async () => {
+  const input = await getInput(day);
 
   if ("part1" in code) {
     console.log(code.part1(input));
@@ -20,4 +12,6 @@ readFile(`./resources/day${day}.txt`, (_err, data) => {
   if ("part2" in code) {
     console.log(code.part2(input));
   }
-});
+};
+
+main();
