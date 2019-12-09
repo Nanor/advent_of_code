@@ -4,41 +4,59 @@ export interface Intcode {
   output: number[];
   index: number;
   halted: boolean;
+  relativeBase: number;
 }
 
 export const create = (data: number[], input = []): Intcode => ({
-  data,
+  data: [...data],
   input,
   output: [],
   index: 0,
-  halted: false
+  halted: false,
+  relativeBase: 0
 });
 
 const write = (intcode: Intcode, param: number, value: number): Intcode => {
-  const { data, index } = intcode;
+  const mode = digitAt(getOpCode(intcode), param + 1);
+
+  const { data, index, relativeBase } = intcode;
   const pos = data[index + param];
 
-  return { ...intcode, data: data.map((x, i) => (i === pos ? value : x)) };
+  if (mode === 0) {
+    data[pos] = value;
+  } else if (mode === 2) {
+    data[pos + relativeBase] = value;
+  } else {
+    throw new Error(`Unknown write mode ${mode}`);
+  }
+
+  return { ...intcode, data };
 };
 
-const read = (intcode: Intcode, param: number, indirect: boolean): number => {
-  const { data, index } = intcode;
-  const pos = data[index + param];
+const read = (intcode: Intcode, param: number, mode: number): number => {
+  const { data, index, relativeBase } = intcode;
+  const pos = data[index + param] || 0;
 
-  if (indirect) {
-    return data[pos];
-  } else {
+  if (mode === 0) {
+    return data[pos] || 0;
+  } else if (mode === 1) {
     return pos;
+  } else if (mode === 2) {
+    return data[pos + relativeBase] || 0;
+  } else {
+    throw new Error(`Unknown read mode ${mode}`);
   }
 };
+
+const getOpCode = (intcode: Intcode) => read(intcode, 0, 1);
 
 const digitAt = (number: number, pos: number) => {
   return Math.floor(number / Math.pow(10, pos)) % 10;
 };
 
 const param = (intcode: Intcode, p: number): number => {
-  const op = read(intcode, 0, false);
-  return read(intcode, p, digitAt(op, p + 1) === 0);
+  const op = getOpCode(intcode);
+  return read(intcode, p, digitAt(op, p + 1));
 };
 
 const increment = (intcode: Intcode): Intcode => ({
@@ -53,15 +71,20 @@ const increment = (intcode: Intcode): Intcode => ({
       5: 3,
       6: 3,
       7: 4,
-      8: 4
-    }[read(intcode, 0, false) % 100]
+      8: 4,
+      9: 2
+    }[getOpCode(intcode) % 100]
+});
+
+const changeBase = (intcode: Intcode, val: number): Intcode => ({
+  ...intcode,
+  relativeBase: intcode.relativeBase + val
 });
 
 export const step = (intcode: Intcode): Intcode => {
   let { input, output } = intcode;
 
-  const op = read(intcode, 0, false);
-
+  const op = getOpCode(intcode);
   switch (op % 100) {
     case 1:
       return increment(
@@ -95,6 +118,8 @@ export const step = (intcode: Intcode): Intcode => {
       return increment(
         write(intcode, 3, param(intcode, 1) === param(intcode, 2) ? 1 : 0)
       );
+    case 9:
+      return increment(changeBase(intcode, param(intcode, 1)));
     default:
       throw new Error(`Unknown opcode ${op}`);
   }
@@ -104,7 +129,7 @@ export const run = (intcode: Intcode): Intcode => {
   let curr = intcode;
 
   while (true) {
-    const op = read(curr, 0, false);
+    const op = getOpCode(curr);
     if (op === 99) {
       return { ...curr, halted: true };
     }
@@ -116,4 +141,5 @@ export const run = (intcode: Intcode): Intcode => {
   }
 };
 
-export default (data: number[], input: number[]) => run(create(data, input));
+export default (data: number[], input: number[] = []) =>
+  run(create(data, input));

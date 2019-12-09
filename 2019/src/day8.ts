@@ -1,5 +1,4 @@
 import { Input } from "./types";
-import { exportAllDeclaration } from "@babel/types";
 
 export class Image {
   data: String;
