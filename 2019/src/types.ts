@@ -3,4 +3,5 @@ export interface Input {
   asLines(): String[];
   asNumbers(): number[];
   asNumberArray(): number[];
+  asGrid(): String[][];
 }
