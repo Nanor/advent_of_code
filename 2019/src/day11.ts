@@ -10,50 +10,9 @@ const hash = ({ x, y }: Point): number => {
   return t3 * 4 + (x < 0 ? 1 : 0) + (y < 0 ? 2 : 0);
 };
 
-export const part1 = (input: Input) => {
+const runRobot = (input: Input, panels) => {
   const prog = input.asNumberArray();
   let comp = intcode(prog);
-
-  const panels: { [x: number]: number } = {};
-
-  let curr: Point = { x: 0, y: 0, dir: 0 };
-
-  while (!comp.halted) {
-    comp.input = [panels[hash(curr)] || 0];
-    comp.output = [];
-    comp = run(comp);
-
-    if (comp.halted) break;
-
-    const [col, turn] = comp.output;
-    panels[hash(curr)] = col;
-    curr.dir = (curr.dir + (turn === 0 ? -1 : 1)) % 4;
-    if (curr.dir < 0) curr.dir += 4;
-
-    switch (curr.dir) {
-      case 0:
-        curr.y -= 1;
-        break;
-      case 1:
-        curr.x += 1;
-        break;
-      case 2:
-        curr.y += 1;
-        break;
-      case 3:
-        curr.x -= 1;
-        break;
-    }
-  }
-
-  return Object.keys(panels).length;
-};
-
-export const part2 = (input: Input) => {
-  const prog = input.asNumberArray();
-  let comp = intcode(prog);
-
-  const panels: { [x: number]: number } = { 0: 1 };
 
   let curr: Point = { x: 0, y: 0, dir: 0 };
 
@@ -95,8 +54,21 @@ export const part2 = (input: Input) => {
     maxY = Math.max(maxY, curr.y);
   }
 
-  let out = "";
+  return { panels, minX, minY, maxX, maxY };
+};
 
+export const part1 = (input: Input) => {
+  const starting: { [x: number]: number } = {};
+  const { panels } = runRobot(input, starting);
+
+  return Object.keys(panels).length;
+};
+
+export const part2 = (input: Input) => {
+  const starting: { [x: number]: number } = { 0: 1 };
+  const { panels, minX, minY, maxX, maxY } = runRobot(input, starting);
+
+  let out = "";
   for (let y = minY; y <= maxY; y++) {
     for (let x = minX; x <= maxX; x++) {
       out += panels[hash({ x, y })] ? "#" : " ";
