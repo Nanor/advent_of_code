@@ -1,4 +1,4 @@
-import { Input } from "./types";
+import { Input } from "./input";
 
 const calcFuel = (n: number) => Math.floor(n / 3) - 2;
 

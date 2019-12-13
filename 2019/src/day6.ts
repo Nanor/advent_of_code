@@ -1,4 +1,4 @@
-import { Input } from "./types";
+import { Input } from "./input";
 
 export const part1 = (input: Input) => {
   const data = input.asLines().map(l => l.split(")"));

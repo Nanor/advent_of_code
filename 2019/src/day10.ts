@@ -1,4 +1,4 @@
-import { Input } from "./types";
+import { Input } from "./input";
 
 type Point = {
   x: number;

@@ -1,4 +1,4 @@
-import { Input } from "./types";
+import { Input } from "./input";
 import intcode, { run } from "./Intcode";
 
 export const permutations = (arr: number[]): number[][] => {

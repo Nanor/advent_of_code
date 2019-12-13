@@ -1,12 +1,7 @@
-import { Input } from "./types";
+import { Input } from "./input";
 import intcode from "./Intcode";
 
 export const part1 = (input: Input) => {
-  // console.log(intcode([1, 0, 0, 0, 99]));
-  // console.log(intcode([2, 3, 0, 3, 99]));
-  // console.log(intcode([2, 4, 4, 5, 99, 0]));
-  // console.log(intcode([1, 1, 1, 4, 99, 5, 6, 0, 99]));
-
   const data = input.asNumberArray();
   data[1] = 12;
   data[2] = 2;

@@ -1,4 +1,4 @@
-import { Input } from "./types";
+import { Input } from "./input";
 
 export class Image {
   data: String;

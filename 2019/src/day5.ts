@@ -1,4 +1,4 @@
-import { Input } from "./types";
+import { Input } from "./input";
 import intcode from "./Intcode";
 
 export const part1 = (input: Input) => {

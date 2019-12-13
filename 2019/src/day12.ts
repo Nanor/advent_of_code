@@ -1,19 +1,11 @@
-import { Input } from "./types";
+import { Input } from "./input";
 const lcm = require("compute-lcm");
 
 type Vec = { x: number; y: number; z: number };
 type Moon = { pos: Vec; vel: Vec };
 
-export const asMoons = (input: Input): Moon[] =>
-  input
-    .asLines()
-    .map(l => l.match(/<x=(-?\d+), y=(-?\d+), z=(-?\d+)>/).slice(1, 4))
-    .map(([x, y, z]) => ({
-      x: parseInt(x, 10),
-      y: parseInt(y, 10),
-      z: parseInt(z, 10)
-    }))
-    .map(pos => ({ pos, vel: { x: 0, y: 0, z: 0 } }));
+export const asMoons = (input: Input): Moon[] => 
+  input.asObjects().map(pos => ({ pos, vel: { x: 0, y: 0, z: 0 } }));
 
 const step = (moons: Moon[]): Moon[] => {
   for (let i = 0; i < moons.length; i++) {

@@ -1,4 +1,4 @@
-import { part1, asMoons, simulate, part2 } from "../src/day12";
+import { asMoons, simulate, part2 } from "../src/day12";
 import { asInput } from "../src/input";
 
 describe("day12", () => {
