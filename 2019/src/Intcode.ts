@@ -143,3 +143,6 @@ export const run = (intcode: Intcode): Intcode => {
 
 export default (data: number[], input: number[] = []) =>
   run(create(data, input));
+
+export const withInput = (intcode: Intcode, input: number[]): Intcode =>
+  run({ ...intcode, input, output: [] });
