@@ -7,6 +7,7 @@ export interface Input {
   asNumberArray(): number[];
   asGrid(): String[][];
   asObjects(): any[];
+  asDigits(): number[];
 }
 
 export const asInput = (str: string): Input => ({
@@ -24,7 +25,8 @@ export const asInput = (str: string): Input => ({
           return { [k]: parseInt(v, 10) };
         })
         .reduce((acc: any, i: any) => ({ ...acc, ...i }), {})
-    )
+    ),
+  asDigits: () => str.split("").map(c => parseInt(c, 10))
 });
 
 export default (day: string | number): Promise<Input> => {
