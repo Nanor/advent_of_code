@@ -1,11 +1,11 @@
 import { readFile } from "fs";
 
 export interface Input {
-  asString(): String;
-  asLines(): String[];
+  asString(): string;
+  asLines(): string[];
   asNumbers(): number[];
   asNumberArray(): number[];
-  asGrid(): String[][];
+  asGrid(): string[][];
   asObjects(): any[];
   asDigits(): number[];
 }
