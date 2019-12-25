@@ -30,19 +30,24 @@ const answers = [
   [19359752, 1141869516],
   [7395, 32376123569821],
   [24954, 17091],
-  [30446641, 1985]
+  [30446641, 1985],
+  ["4206594"]
 ];
 
 describe("all results", () => {
   answers.forEach(([r1, r2], i) => {
     const code = require(`../src/day${i + 1}`);
-    test(`day ${i + 1} part 1`, async () => {
-      const input = await getInput(i + 1);
-      expect(code.part1(input)).toBe(r1);
-    });
-    test(`day ${i + 1} part 2`, async () => {
-      const input = await getInput(i + 1);
-      expect(code.part2(input)).toBe(r2);
-    });
+    if (r1) {
+      test(`day ${i + 1} part 1`, async () => {
+        const input = await getInput(i + 1);
+        expect(code.part1(input)).toBe(r1);
+      });
+    }
+    if (r2) {
+      test(`day ${i + 1} part 2`, async () => {
+        const input = await getInput(i + 1);
+        expect(code.part2(input)).toBe(r2);
+      });
+    }
   });
 });
