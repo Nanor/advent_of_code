@@ -42,11 +42,13 @@ impl Cart {
     let track = *tracks.get(&(x, y)).unwrap();
     dir = match track {
       '\\' => 3 - dir,
-      '/' => if dir % 2 == 0 {
-        dir + 1
-      } else {
-        dir - 1
-      },
+      '/' => {
+        if dir % 2 == 0 {
+          dir + 1
+        } else {
+          dir - 1
+        }
+      }
       '+' => {
         count = (count + 1) % 3;
         match count {
@@ -72,6 +74,7 @@ impl Cart {
   }
 }
 
+#[allow(dead_code)]
 fn draw(tracks: &HashMap<(usize, usize), char>, carts: &Vec<Cart>) {
   let width = *tracks.keys().map(|(x, _)| x).max().unwrap() as u32;
   let height = *tracks.keys().map(|(_, y)| y).max().unwrap() as u32;

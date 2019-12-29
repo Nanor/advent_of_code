@@ -41,7 +41,7 @@ fn main() {
             let total = sleep_totals.entry(guard_id).or_insert(0);
             *total += mins;
 
-            let mut guard = sleep_times.entry(guard_id).or_insert(HashMap::new());
+            let guard = sleep_times.entry(guard_id).or_insert(HashMap::new());
             for t in sleep_time..time {
                 let c = guard.entry(t).or_insert(0);
                 *c += 1;

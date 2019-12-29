@@ -7,6 +7,7 @@ authors = ["Ronan Forman <ronan131@gmail.com>"]
 regex = "1"
 chrono = "0.4"
 itertools = "0.7"
+pathfinding = "2.0.3"
 
 [[bin]]
 name = "day1"
@@ -50,3 +51,6 @@ path = "src/day13.rs"
 [[bin]]
 name = "day14"
 path = "src/day14.rs"
+[[bin]]
+name = "day15"
+path = "src/day15.rs"

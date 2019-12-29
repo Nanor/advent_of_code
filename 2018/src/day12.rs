@@ -5,6 +5,7 @@ use std::collections::HashSet;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 
+#[allow(dead_code)]
 fn draw_plants(plants: &HashSet<i32>) {
   let min = *plants.iter().min().unwrap();
   let max = *plants.iter().max().unwrap();
