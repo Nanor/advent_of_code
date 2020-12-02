@@ -1,6 +1,9 @@
 import getInput from "../src/input";
 
-const answers = [[927684, 292093004]];
+const answers = [
+  [927684, 292093004],
+  [418, 616],
+];
 
 describe("all results", () => {
   answers.forEach(([r1, r2], i) => {
