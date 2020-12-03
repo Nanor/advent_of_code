@@ -3,6 +3,7 @@ import getInput from "../src/input";
 const answers = [
   [927684, 292093004],
   [418, 616],
+  [247, 2983070376],
 ];
 
 describe("all results", () => {
