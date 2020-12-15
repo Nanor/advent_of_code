@@ -1,25 +1,19 @@
 import { Input } from "./input";
 
 export const game = (numbers: number[], end: number): number => {
-  const ages = {};
+  const ages = new Map();
   numbers.slice(0, numbers.length - 1).forEach((val, i) => {
-    ages[val] = i;
+    ages.set(val, i);
   });
 
   let t = numbers.length;
   let last = numbers[numbers.length - 1];
   while (t < end) {
-    const prev = ages[last];
-    const newVal = prev === undefined ? 0 : t - prev - 1;
-
-    ages[last] = t - 1;
+    const newVal = ages.has(last) ? t - ages.get(last) - 1 : 0;
+    ages.set(last, t - 1);
 
     last = newVal;
     t += 1;
-
-    // if (t % (end / 100) === 0) {
-    //   console.log(t / end);
-    // }
   }
 
   return last;
