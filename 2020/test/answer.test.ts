@@ -22,6 +22,7 @@ const answers = [
   [248, 381],
   [54755174472007, 1692],
   [2485, "bqkndvb,zmb,bmrmhm,snhrpv,vflms,bqtvr,qzkjrtl,rkkrx"],
+  [32162, 32534],
 ];
 
 describe("all results", () => {
