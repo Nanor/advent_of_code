@@ -4,6 +4,7 @@ import * as days from "../src/days";
 const answers = [
   [1226, 1252],
   [2039256, 1856459736],
+  [845186, 4636702],
 ];
 
 describe("all results", () => {
