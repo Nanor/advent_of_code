@@ -44,7 +44,7 @@ fn part1(player_count: u32, last_marble: usize) -> u32 {
       marbles[next].prev.set(m);
       marbles[current].next.set(m);
 
-      &marbles.push(Marble {
+      let _ = &marbles.push(Marble {
         next: Cell::new(next),
         prev: Cell::new(prev),
       });

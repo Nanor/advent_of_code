@@ -21,7 +21,7 @@ fn main() {
     let mut sleep_totals: HashMap<u32, u32> = HashMap::new();
     let mut sleep_times: HashMap<u32, HashMap<u32, u32>> = HashMap::new();
 
-    &lines.sort();
+    let _ = &lines.sort();
     for line in &lines {
         let m = time_regex.captures(line).unwrap();
         let time = m.get(1).map_or("", |m| m.as_str());

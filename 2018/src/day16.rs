@@ -160,7 +160,7 @@ fn main() {
         instruction: Instruction::new(inst),
       };
 
-      &samples.push(sample);
+      let _ = &samples.push(sample);
     }
   }
 
