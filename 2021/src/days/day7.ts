@@ -14,21 +14,7 @@ export const part1 = (input: Input) => {
   return minFuel;
 };
 
-const triangles: number[] = [];
-
-const triangle = (x: number): number => {
-  if (!(x in triangles)) {
-    let v: number;
-    if (x === 0) {
-      v = 0;
-    } else {
-      v = triangle(x - 1) + x;
-    }
-    triangles[x] = v;
-  }
-
-  return triangles[x];
-};
+const triangle = (x: number) => (x * (x + 1)) / 2;
 
 export const part2 = (input: Input) => {
   const crabs = input.asNumberArray();
