@@ -6,6 +6,7 @@ export interface Input {
   asNumbers(): number[];
   asNumberArray(): number[];
   asGrid(): string[][];
+  asNumberGrid(): number[][];
   asObjects(): any[];
   asDigits(): number[];
   asParagraphs(): string[][];
@@ -17,6 +18,8 @@ export const asInput = (str: string): Input => ({
   asNumbers: () => str.split("\n").map((l) => parseInt(l, 10)),
   asNumberArray: () => str.split(",").map((n) => parseInt(n, 10)),
   asGrid: () => str.split("\n").map((l) => l.split("")),
+  asNumberGrid: () =>
+    str.split("\n").map((l) => l.split("").map((d) => parseInt(d, 10))),
   asObjects: () =>
     str.split("\n").map((l) =>
       l
