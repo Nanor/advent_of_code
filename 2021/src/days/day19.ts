@@ -8,6 +8,7 @@ type Scanner = {
   located: boolean;
   checked: number[];
   location?: Point;
+  dists: number[];
 };
 
 const eq = (a: Point, b: Point): boolean =>
@@ -24,6 +25,11 @@ const sub = (a: Point, b: Point): Point => ({
   y: a.y - b.y,
   z: a.z - b.z,
 });
+
+const dist = (a: Point, b: Point): number => {
+  const diff = sub(a, b);
+  return Object.values(diff).reduce((x, v) => x + Math.abs(v), 0);
+};
 
 const ROTATIONS = [
   ["x", "y", "z"],
@@ -65,6 +71,15 @@ const locate = (scanner1: Scanner, scanner2: Scanner): boolean => {
   if (scanner2.located) throw new Error("Scanner 2 already located");
   if (scanner2.checked.includes(scanner1.id))
     throw new Error("Already tried this");
+
+  const beaconOverlap = scanner1.dists.filter((d) =>
+    scanner2.dists.includes(d)
+  ).length;
+
+  if (beaconOverlap < 132) {
+    scanner2.checked.push(scanner1.id);
+    return;
+  }
 
   const bs1 = scanner1.beacons;
 
@@ -117,6 +132,9 @@ export const part1 = (input: Input) => {
       located: i === 0,
       checked: [],
       location: i === 0 ? { x: 0, y: 0, z: 0 } : undefined,
+      dists: beacons
+        .flatMap((b1) => beacons.map((b2) => dist(b1, b2)))
+        .filter(Boolean),
     };
   });
 
@@ -148,10 +166,7 @@ export const part2 = (input: Input) => {
 
   scanners.forEach((s1) =>
     scanners.forEach((s2) => {
-      const diff = sub(s1.location, s2.location);
-      const dist = Object.values(diff).reduce((x, v) => x + Math.abs(v), 0);
-
-      maxDist = Math.max(maxDist, dist);
+      maxDist = Math.max(maxDist, dist(s1.location, s2.location));
     })
   );
 
