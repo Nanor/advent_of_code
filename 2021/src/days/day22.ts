@@ -37,20 +37,20 @@ const area = (a: Inst): number =>
   (a.x2 - a.x1 + 1) * (a.y2 - a.y1 + 1) * (a.z2 - a.z1 + 1);
 
 const split = (a: Inst, b: Inst) => {
-  const splitPart = (a: Inst, axis: "x" | "y" | "z", v: number): Inst[] => {
-    if (a[`${axis}1`] < v && a[`${axis}2`] > v) {
+  const splitPart = (o: Inst, axis: "x" | "y" | "z", v: number): Inst[] => {
+    if (overlaps(o, b) && o[`${axis}1`] < v && o[`${axis}2`] > v) {
       return [
         {
-          ...a,
+          ...o,
           [`${axis}2`]: Math.floor(v),
         },
         {
-          ...a,
+          ...o,
           [`${axis}1`]: Math.ceil(v),
         },
       ];
     } else {
-      return [a];
+      return [o];
     }
   };
 
