@@ -1,5 +1,3 @@
-import { resourceUsage } from "process";
-import { IfStatement } from "typescript";
 import { Input } from "../input";
 
 type Inst = {
