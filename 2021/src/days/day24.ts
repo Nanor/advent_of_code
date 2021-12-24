@@ -72,42 +72,29 @@ const solve = (input: Input, part: number) => {
     }
   });
 
-  const min = 1111111;
-  const max = 9999999;
-  for (let j = min; j <= max; j++) {
-    const i = part === 1 ? max - j : j;
+  const answer: number[] = [];
+  const stack: number[][] = [];
 
-    const inp = `${i}`.split("").map((d) => parseInt(d));
-    if (inp.includes(0)) continue;
+  for (let i = 0; i < 14; i++) {
+    if (divisor[i]) {
+      const [a, b] = stack.pop();
 
-    const output = [];
+      for (let k = 0; k <= 9; k++) {
+        const j = part === 1 ? 9 - k : k + 1;
 
-    let z = 0;
+        const n = b + adder1[i] + j;
 
-    try {
-      for (let i = 0; i < 14; i++) {
-        if (divisor[i]) {
-          const x = (z % 26) + adder1[i];
-
-          if (x < 1 || x > 9) throw Error("Bad input");
-
-          output.push(x);
-          z = ~~(z / 26);
-        } else {
-          const w = inp.shift();
-          z = z * 26 + w + adder2[i];
-
-          output.push(w);
+        if (n >= 1 && n <= 9) {
+          answer[a] = j;
+          answer[i] = n;
+          break;
         }
       }
-    } catch {
-      continue;
-    }
-
-    if (z === 0) {
-      return parseInt(output.join(""));
+    } else {
+      stack.push([i, adder2[i]]);
     }
   }
+  return parseInt(answer.join(""));
 };
 
 export const part1 = (input: Input) => solve(input, 1);
