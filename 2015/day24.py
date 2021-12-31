@@ -1,6 +1,5 @@
 #!/usr/local/bin/python3
 from math import prod
-from itertools import product
 
 
 def part1(weights):
