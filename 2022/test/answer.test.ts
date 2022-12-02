@@ -1,7 +1,10 @@
 import getInput from "../src/input";
 import * as days from "../src/days";
 
-const answers = [[69626, 206780]];
+const answers = [
+  [69626, 206780],
+  [15523, 15702],
+];
 
 describe("all results", () => {
   answers.forEach(([r1, r2], i) => {
