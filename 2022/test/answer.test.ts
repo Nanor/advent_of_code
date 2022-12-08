@@ -9,6 +9,7 @@ const answers = [
   ["WCZTHTMPS", "BLSGJSDTS"],
   [1134, 2263],
   [1350966, 6296435],
+  [1845, 230112],
 ];
 
 describe("all results", () => {
