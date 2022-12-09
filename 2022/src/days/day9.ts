@@ -48,8 +48,8 @@ const solve = (input: Input, length: number) => {
         rope[0] = move(rope[0], dir);
         [...Array(length - 1)].forEach((_, i) => {
           rope[i + 1] = pull(rope[i + 1], rope[i]);
-          path.push(rope[length - 1]);
         });
+        path.push(rope[length - 1]);
       });
     });
 
