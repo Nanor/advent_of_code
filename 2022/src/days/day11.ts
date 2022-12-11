@@ -31,18 +31,20 @@ const solve = (input: Input, rounds: number, doDiv: boolean) => {
       lines[5].match(/If false: throw to monkey (\d+)/)[1]
     );
 
+    const l = x !== "old" ? parseInt(x) : null;
+    const r = y !== "old" ? parseInt(y) : null;
+
     const func: Monkey["func"] = (oldLevel) => {
-      const left = x === "old" ? oldLevel : parseInt(x);
-      const right = y === "old" ? oldLevel : parseInt(y);
+      const left = l ?? oldLevel;
+      const right = r ?? oldLevel;
 
-      const newLevel =
-        Math.floor(
-          (op === "*" ? left * right : left + right) / (doDiv ? 3 : 1)
-        ) % modulo;
+      const res1 = op === "*" ? left * right : left + right;
+      const res2 = doDiv ? Math.floor(res1 / 3) : res1;
+      const res3 = res2 % modulo;
 
-      const nextMonkey = newLevel % testDiv === 0 ? trueMonkey : falseMonkey;
+      const nextMonkey = res3 % testDiv === 0 ? trueMonkey : falseMonkey;
 
-      return { monkey: nextMonkey, worry: newLevel };
+      return { monkey: nextMonkey, worry: res3 };
     };
 
     return {
@@ -61,7 +63,7 @@ const solve = (input: Input, rounds: number, doDiv: boolean) => {
 
         const { monkey: nextMonkey, worry: nextItem } = monkey.func(item);
 
-        monkeys.find((m) => m.index === nextMonkey).items.push(nextItem);
+        monkeys[nextMonkey].items.push(nextItem);
       }
     });
   }

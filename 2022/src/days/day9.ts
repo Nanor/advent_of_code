@@ -53,9 +53,7 @@ const solve = (input: Input, length: number) => {
       });
     });
 
-  return path.filter(
-    (t, i) => path.findIndex((a) => a.x === t.x && a.y === t.y) === i
-  ).length;
+  return new Set(path.map(({ x, y }) => `${x},${y}`)).size;
 };
 
 export const part1 = (input: Input) => solve(input, 2);
