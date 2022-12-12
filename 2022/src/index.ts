@@ -7,6 +7,10 @@ const code = days[`day${day}`];
 const main = async () => {
   const input = await getInput(day);
 
+  if ("load" in code) {
+    code.load(input);
+  }
+
   if ("part1" in code) {
     console.log(code.part1(input));
   }
