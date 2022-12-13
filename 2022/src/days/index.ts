@@ -10,3 +10,4 @@ export * as day9 from "./day9";
 export * as day10 from "./day10";
 export * as day11 from "./day11";
 export * as day12 from "./day12";
+export * as day13 from "./day13";
