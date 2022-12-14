@@ -73,33 +73,46 @@ class Grid {
     return Array.from(this._grid.values());
   }
 
-  drop() {
-    let x = 500;
-    let y = 0;
+  drop(path: { x: number; y: number }[]) {
+    while (path.length > 0) {
+      const { x, y } = path[path.length - 1];
 
-    if (this.has(x, y)) return false;
+      if (y > this.maxY + 10) return undefined;
 
-    while (y <= this.maxY + 10) {
+      if (this.has(x, y)) {
+        path.pop();
+        continue;
+      }
+
       if (!this.has(x, y + 1)) {
-        y += 1;
-        continue;
+        path.push({ x, y: y + 1 });
+      } else if (!this.has(x - 1, y + 1)) {
+        path.push({ x: x - 1, y: y + 1 });
+      } else if (!this.has(x + 1, y + 1)) {
+        path.push({ x: x + 1, y: y + 1 });
+      } else {
+        this.set(x, y, Material.Sand);
+        return path;
       }
-      if (!this.has(x - 1, y + 1)) {
-        x -= 1;
-        y += 1;
-        continue;
-      }
-      if (!this.has(x + 1, y + 1)) {
-        x += 1;
-        y += 1;
-        continue;
-      }
-
-      this.set(x, y, Material.Sand);
-      return true;
     }
 
-    return false;
+    return undefined;
+  }
+
+  simulate() {
+    let count = 0;
+
+    let path = [{ x: 500, y: 0 }];
+
+    while (true) {
+      path = this.drop(path);
+
+      if (!path) {
+        return count;
+      }
+
+      count += 1;
+    }
   }
 
   draw() {
@@ -124,15 +137,7 @@ export default Grid;
 
 export const part1 = (input: Input) => {
   const grid = new Grid(input);
-
-  let count = 0;
-  while (grid.drop()) {
-    count += 1;
-  }
-
-  // grid.draw();
-
-  return count;
+  return grid.simulate();
 };
 
 export const part2 = (input: Input) => {
@@ -142,12 +147,5 @@ export const part2 = (input: Input) => {
     grid.set(x, grid.maxY + 2, Material.Rock);
   }
 
-  let count = 0;
-  while (grid.drop()) {
-    count += 1;
-  }
-
-  // grid.draw();
-
-  return count;
+  return grid.simulate();
 };
