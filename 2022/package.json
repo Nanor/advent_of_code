@@ -5,6 +5,7 @@
   "description": "",
   "scripts": {
     "start": "ts-node src/index.ts",
+    "write": "ts-node src/index.ts > answers.log",
     "test": "jest"
   },
   "author": "",

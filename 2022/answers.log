@@ -1,13 +1,9 @@
-
-> 2022@1.0.0 start
-> ts-node src/index.ts
-
 Day 1
 
-Part 1 (0ms)
+Part 1 (1ms)
 69626
 
-Part 2 (1ms)
+Part 2 (0ms)
 206780
 
 Total (1ms)
@@ -19,10 +15,10 @@ Day 2
 Part 1 (2ms)
 15523
 
-Part 2 (2ms)
+Part 2 (1ms)
 15702
 
-Total (4ms)
+Total (3ms)
 
 ----------------------------
 
@@ -31,7 +27,7 @@ Day 3
 Part 1 (0ms)
 8123
 
-Part 2 (0ms)
+Part 2 (1ms)
 2620
 
 Total (1ms)
@@ -40,13 +36,13 @@ Total (1ms)
 
 Day 4
 
-Part 1 (2ms)
+Part 1 (1ms)
 475
 
 Part 2 (1ms)
 825
 
-Total (3ms)
+Total (2ms)
 
 ----------------------------
 
@@ -55,31 +51,31 @@ Day 5
 Part 1 (1ms)
 WCZTHTMPS
 
-Part 2 (1ms)
+Part 2 (0ms)
 BLSGJSDTS
 
-Total (2ms)
+Total (1ms)
 
 ----------------------------
 
 Day 6
 
-Part 1 (1ms)
+Part 1 (0ms)
 1134
 
 Part 2 (1ms)
 2263
 
-Total (2ms)
+Total (1ms)
 
 ----------------------------
 
 Day 7
 
-Part 1 (1ms)
+Part 1 (2ms)
 1350966
 
-Part 2 (1ms)
+Part 2 (0ms)
 6296435
 
 Total (2ms)
@@ -91,28 +87,28 @@ Day 8
 Part 1 (7ms)
 1845
 
-Part 2 (65ms)
+Part 2 (57ms)
 230112
 
-Total (72ms)
+Total (64ms)
 
 ----------------------------
 
 Day 9
 
-Part 1 (10ms)
+Part 1 (9ms)
 5878
 
-Part 2 (8ms)
+Part 2 (5ms)
 2405
 
-Total (18ms)
+Total (14ms)
 
 ----------------------------
 
 Day 10
 
-Part 1 (1ms)
+Part 1 (0ms)
 15260
 
 Part 2 (0ms)
@@ -125,7 +121,7 @@ Part 2 (0ms)
 #.....###.#..#.#.....###.####..##...###.
 
 
-Total (1ms)
+Total (0ms)
 
 ----------------------------
 
@@ -134,10 +130,10 @@ Day 11
 Part 1 (1ms)
 110264
 
-Part 2 (38ms)
+Part 2 (33ms)
 23612457316
 
-Total (39ms)
+Total (34ms)
 
 ----------------------------
 
@@ -148,7 +144,7 @@ Load (8ms)
 Part 1 (0ms)
 534
 
-Part 2 (0ms)
+Part 2 (1ms)
 525
 
 Total (9ms)
@@ -172,22 +168,22 @@ Day 14
 Part 1 (4ms)
 1001
 
-Part 2 (8ms)
+Part 2 (9ms)
 27976
 
-Total (12ms)
+Total (13ms)
 
 ----------------------------
 
 Day 15
 
-Part 1 (192ms)
+Part 1 (190ms)
 5112034
 
-Part 2 (437ms)
+Part 2 (397ms)
 13172087230812
 
-Total (629ms)
+Total (587ms)
 
 ----------------------------
 
