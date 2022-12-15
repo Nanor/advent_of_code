@@ -34,9 +34,9 @@ export const asInput = (str: string): Input => ({
   asParagraphs: () => str.split("\n\n").map((p) => p.split("\n")),
 });
 
-export default (day: string | number): Promise<Input> => {
+export default (name: string): Promise<Input> => {
   return new Promise((resolve, reject) => {
-    readFile(`./resources/day${day}.txt`, (_err, data) => {
+    readFile(`./resources/${name}.txt`, (_err, data) => {
       const inputString = data ? data.toString() : "";
       const input = asInput(inputString);
 
