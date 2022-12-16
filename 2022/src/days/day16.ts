@@ -124,17 +124,23 @@ export const part2 = (input: Input) => {
     value,
   }));
 
+  options.sort((a, b) => b.value - a.value);
+
   let max = 0;
 
-  options.forEach(({ set: op1, value: v1 }) => {
-    options.forEach(({ set: op2, value: v2 }) => {
+  for (let i = 0; i < options.length; i++) {
+    for (let j = i + 1; j < options.length; j++) {
+      const { set: op1, value: v1 } = options[i];
+      const { set: op2, value: v2 } = options[j];
+
       const joined = new Set([...op1, ...op2]);
 
       if (op1.size + op2.size === joined.size) {
         max = Math.max(max, v1 + v2);
+        break;
       }
-    });
-  });
+    }
+  }
 
   return max;
 };
