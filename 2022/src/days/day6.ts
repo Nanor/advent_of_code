@@ -1,7 +1,5 @@
-import { Input } from "../input";
-
 const solve = (input: Input, size: number) => {
-  const chars = input.asString().split("");
+  const chars = input.asChars();
 
   for (let i = 0; i < chars.length; i++) {
     const packet = chars.slice(i, i + size);

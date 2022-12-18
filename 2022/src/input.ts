@@ -1,38 +1,34 @@
 import { readFile } from "fs";
 
-export interface Input {
-  asString(): string;
-  asLines(): string[];
-  asNumbers(): number[];
-  asNumberArray(): number[];
-  asGrid(): string[][];
-  asNumberGrid(): number[][];
-  asObjects(): any[];
-  asDigits(): number[];
-  asParagraphs(): string[][];
-}
-
-export const asInput = (str: string): Input => ({
+export const asInput = (str: string) => ({
   asString: () => str,
-  asLines: () => str.split("\n"),
-  asNumbers: () => str.split("\n").map((l) => parseInt(l, 10)),
-  asNumberArray: () => str.split(",").map((n) => parseInt(n, 10)),
+  asLines: () => str.split("\n").filter(Boolean),
+  asInts: () =>
+    str
+      .split("\n")
+      .filter(Boolean)
+      .map((n) => parseInt(n, 10)),
   asGrid: () => str.split("\n").map((l) => l.split("")),
   asNumberGrid: () =>
     str.split("\n").map((l) => l.split("").map((d) => parseInt(d, 10))),
-  asObjects: () =>
-    str.split("\n").map((l) =>
-      l
-        .match(/\w+=[-\d]+/g)
-        .map((str) => {
-          const [k, v] = str.split("=");
-          return { [k]: parseInt(v, 10) };
-        })
-        .reduce((acc: any, i: any) => ({ ...acc, ...i }), {})
-    ),
+  asChars: () => str.split(""),
   asDigits: () => str.split("").map((c) => parseInt(c, 10)),
-  asParagraphs: () => str.split("\n\n").map((p) => p.split("\n")),
+  asParagraphs: () =>
+    str
+      .split("\n\n")
+      .map((p) => p.split("\n").filter(Boolean))
+      .filter((p) => p.length > 0),
+  asMatches: (regex: RegExp) => Array.from(str.matchAll(regex)),
+  asMatchGroups: (regex: RegExp) =>
+    Array.from(str.matchAll(regex)).map((r) => r.groups),
+  asNumberArrays: () =>
+    str
+      .split("\n")
+      .filter(Boolean)
+      .map((l) => l.split(",").map((n) => parseInt(n))),
 });
+
+export type Input = ReturnType<typeof asInput>;
 
 export default (name: string): Promise<Input> => {
   return new Promise((resolve, reject) => {

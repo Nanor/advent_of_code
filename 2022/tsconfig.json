@@ -3,13 +3,13 @@
     "sourceMap": true,
     "outDir": "dist",
     "esModuleInterop": true,
-    "target": "ESNext"
+    "target": "ESNext",
+    "moduleResolution": "node"
   },
   "include": [
     "src/**/*"
   ],
   "exclude": [
-    "node_modules",
-    "**/*.spec.ts"
-  ]
+    "node_modules/**",
+  ],
 }

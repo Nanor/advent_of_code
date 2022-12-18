@@ -1,21 +1,18 @@
-import { validateHeaderValue } from "http";
-import { Input } from "../input";
+import breadthFirstSearch from "../common/breadthFirstSearch";
 
-const parse = (input: Input) =>
-  input
-    .asLines()
-    .filter(Boolean)
-    .map((l) => {
-      const m = l.match(
-        /^Valve (\w+) has flow rate=(\d+); tunnels? leads? to valves? ([A-Z, ]+)$/
-      );
-
+const parse = (input: Input) => {
+  return input
+    .asMatchGroups(
+      /Valve (?<id>\w+) has flow rate=(?<flow>\d+); tunnels? leads? to valves? (?<cons>[A-Z, ]+)/g
+    )
+    .map((m) => {
       return {
-        id: m[1],
-        flow: parseInt(m[2], 10),
-        connects: m[3].split(", "),
+        id: m.id,
+        flow: parseInt(m.flow, 10),
+        connects: m.cons.split(", "),
       };
     });
+};
 
 type Valve = ReturnType<typeof parse>[number];
 
@@ -23,23 +20,20 @@ const makeConnections = (valves: Valve[]) => {
   const connects: { [from: string]: { [to: string]: number } } = {};
 
   for (const valve of valves) {
-    connects[valve.id] = { [valve.id]: 1 };
+    const costs = breadthFirstSearch(
+      valve,
+      (v) => v.id,
+      (v) =>
+        v.connects.map((node) => ({
+          node: valves.find(({ id }) => id === node),
+          cost: 1,
+        }))
+    );
 
-    const toCheck = [valve.id];
-
-    while (toCheck.length > 0) {
-      const next = toCheck.shift();
-
-      for (const cons of valves.find((v) => v.id === next).connects) {
-        if (
-          !connects[valve.id][cons] ||
-          connects[valve.id][next] + 1 < connects[valve.id][cons]
-        ) {
-          connects[valve.id][cons] = connects[valve.id][next] + 1;
-          toCheck.push(cons);
-        }
-      }
-    }
+    connects[valve.id] = {};
+    costs.forEach(({ node, cost }) => {
+      connects[valve.id][node.id] = cost + 1;
+    });
   }
 
   return connects;
@@ -84,7 +78,7 @@ const solve = (
   }
 };
 
-export const part1 = (input: Input) => {
+const outerSolve = (input: Input, time: number) => {
   const valves = parse(input);
   const connections = makeConnections(valves);
 
@@ -94,30 +88,23 @@ export const part1 = (input: Input) => {
     valves.filter((v) => v.flow > 0),
     connections,
     "AA",
-    30,
+    time,
     [],
     0,
     output
   );
+
+  return output;
+};
+
+export const part1 = (input: Input) => {
+  const output = outerSolve(input, 30);
 
   return Math.max(...Object.values(output));
 };
 
 export const part2 = (input: Input) => {
-  const valves = parse(input);
-  const connections = makeConnections(valves);
-
-  const output: { [opens: string]: number } = {};
-
-  solve(
-    valves.filter((v) => v.flow > 0),
-    connections,
-    "AA",
-    26,
-    [],
-    0,
-    output
-  );
+  const output = outerSolve(input, 26);
 
   const options = Object.entries(output).map(([ops, value]) => ({
     set: new Set(ops.split(",")),

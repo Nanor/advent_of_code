@@ -1,5 +1,3 @@
-import { Input } from "../input";
-
 enum Throw {
   Rock = 1,
   Paper = 2,
@@ -9,8 +7,6 @@ enum Throw {
 export const part1 = (input: Input) =>
   input
     .asLines()
-    .map((l) => l.trim())
-    .filter((l) => l)
     .map((l) => l.split(" "))
     .map(([opp, res]) => ({
       opp: { A: Throw.Rock, B: Throw.Paper, C: Throw.Scissors }[opp],
@@ -31,8 +27,6 @@ enum Result {
 export const part2 = (input: Input) =>
   input
     .asLines()
-    .map((l) => l.trim())
-    .filter((l) => l)
     .map((l) => l.split(" "))
     .map(([opp, res]) => ({
       opp: { A: Throw.Rock, B: Throw.Paper, C: Throw.Scissors }[opp],

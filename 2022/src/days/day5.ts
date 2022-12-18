@@ -1,7 +1,5 @@
-import { Input } from "../input";
-
 const parse = (input: Input) => {
-  const [stackInput, moveInput] = input.asParagraphs();
+  const [stackInput] = input.asParagraphs();
 
   stackInput.reverse();
 
@@ -23,15 +21,14 @@ const parse = (input: Input) => {
     }
   });
 
-  const moves = moveInput.filter(Boolean).map((m) => {
-    const [_, count, from, to] = m.match(/move (\d+) from (\d+) to (\d+)/);
-
-    return {
+  const moves = input
+    .asMatchGroups(/move (?<count>\d+) from (?<from>\d+) to (?<to>\d+)/g)
+    .map(({ count, from, to }) => ({
       count: parseInt(count, 10),
       from: parseInt(from, 10) - 1,
       to: parseInt(to, 10) - 1,
-    };
-  });
+    }));
+
   return { moves, stacks };
 };
 

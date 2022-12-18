@@ -6,7 +6,7 @@ Part 1 (1ms)
 Part 2 (0ms)
 206780
 
-Total (2ms)
+Total (1ms)
 
 ----------------------------
 
@@ -27,7 +27,7 @@ Day 3
 Part 1 (0ms)
 8123
 
-Part 2 (1ms)
+Part 2 (0ms)
 2620
 
 Total (1ms)
@@ -63,19 +63,19 @@ Day 6
 Part 1 (0ms)
 1134
 
-Part 2 (2ms)
+Part 2 (1ms)
 2263
 
-Total (2ms)
+Total (1ms)
 
 ----------------------------
 
 Day 7
 
-Part 1 (2ms)
+Part 1 (1ms)
 1350966
 
-Part 2 (0ms)
+Part 2 (1ms)
 6296435
 
 Total (2ms)
@@ -84,31 +84,31 @@ Total (2ms)
 
 Day 8
 
-Part 1 (6ms)
+Part 1 (8ms)
 1845
 
-Part 2 (61ms)
+Part 2 (64ms)
 230112
 
-Total (67ms)
+Total (72ms)
 
 ----------------------------
 
 Day 9
 
-Part 1 (6ms)
+Part 1 (7ms)
 5878
 
-Part 2 (5ms)
+Part 2 (6ms)
 2405
 
-Total (11ms)
+Total (14ms)
 
 ----------------------------
 
 Day 10
 
-Part 1 (0ms)
+Part 1 (1ms)
 15260
 
 Part 2 (0ms)
@@ -130,16 +130,16 @@ Day 11
 Part 1 (1ms)
 110264
 
-Part 2 (36ms)
+Part 2 (44ms)
 23612457316
 
-Total (37ms)
+Total (45ms)
 
 ----------------------------
 
 Day 12
 
-Load (7ms)
+Load (19ms)
 
 Part 1 (0ms)
 534
@@ -147,79 +147,79 @@ Part 1 (0ms)
 Part 2 (1ms)
 525
 
-Total (8ms)
+Total (20ms)
 
 ----------------------------
 
 Day 13
 
-Part 1 (5ms)
+Part 1 (6ms)
 6428
 
 Part 2 (6ms)
 22464
 
-Total (11ms)
+Total (12ms)
 
 ----------------------------
 
 Day 14
 
-Part 1 (5ms)
+Part 1 (6ms)
 1001
 
-Part 2 (11ms)
+Part 2 (19ms)
 27976
 
-Total (16ms)
+Total (25ms)
 
 ----------------------------
 
 Day 15
 
-Part 1 (270ms)
+Part 1 (404ms)
 5112034
 
-Part 2 (518ms)
+Part 2 (706ms)
 13172087230812
 
-Total (788ms)
+Total (1110ms)
 
 ----------------------------
 
 Day 16
 
-Part 1 (336ms)
+Part 1 (357ms)
 1737
 
-Part 2 (184ms)
+Part 2 (206ms)
 2216
 
-Total (520ms)
+Total (563ms)
 
 ----------------------------
 
 Day 17
 
-Part 1 (7ms)
+Part 1 (12ms)
 3219
 
-Part 2 (10ms)
+Part 2 (11ms)
 1582758620701
 
-Total (17ms)
+Total (23ms)
 
 ----------------------------
 
 Day 18
 
-Part 1 (5ms)
+Part 1 (7ms)
 4604
 
-Part 2 (17ms)
+Part 2 (21ms)
 2604
 
-Total (22ms)
+Total (28ms)
 
 ----------------------------
 

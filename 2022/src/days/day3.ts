@@ -1,11 +1,8 @@
-import { Input } from "../input";
-
 const LETTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 export const part1 = (input: Input) =>
   input
     .asLines()
-    .filter(Boolean)
     .map((l) => {
       const length = l.length / 2;
 
@@ -20,7 +17,7 @@ export const part1 = (input: Input) =>
     .reduce((a, x) => a + x, 0);
 
 export const part2 = (input: Input) => {
-  const lines = input.asLines().filter(Boolean);
+  const lines = input.asLines();
 
   return [...Array(lines.length / 3)]
     .map((_, i) => lines.slice(i * 3, (i + 1) * 3))

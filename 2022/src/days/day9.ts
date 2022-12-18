@@ -1,5 +1,3 @@
-import { Input } from "../input";
-
 type Coord = {
   x: number;
   y: number;
@@ -36,22 +34,19 @@ const solve = (input: Input, length: number) => {
 
   const path = [rope[length - 1]];
 
-  input
-    .asLines()
-    .filter(Boolean)
-    .forEach((line) => {
-      const parts = line.trim().split(" ");
-      const dir = parts[0] as Dir;
-      const count = parseInt(parts[1], 10);
+  input.asLines().forEach((line) => {
+    const parts = line.trim().split(" ");
+    const dir = parts[0] as Dir;
+    const count = parseInt(parts[1], 10);
 
-      [...Array(count)].forEach(() => {
-        rope[0] = move(rope[0], dir);
-        [...Array(length - 1)].forEach((_, i) => {
-          rope[i + 1] = pull(rope[i + 1], rope[i]);
-        });
-        path.push(rope[length - 1]);
+    [...Array(count)].forEach(() => {
+      rope[0] = move(rope[0], dir);
+      [...Array(length - 1)].forEach((_, i) => {
+        rope[i + 1] = pull(rope[i + 1], rope[i]);
       });
+      path.push(rope[length - 1]);
     });
+  });
 
   return new Set(path.map(({ x, y }) => `${x},${y}`)).size;
 };

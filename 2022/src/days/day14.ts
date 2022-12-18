@@ -1,19 +1,18 @@
-import { Input } from "../input";
+import Grid from "../common/Grid";
 
 enum Material {
   Rock = 1,
   Sand = 2,
 }
 
-class Grid {
-  private _grid: Map<number, Material>;
+class Cavern extends Grid<Material> {
   minX: number;
   maxX: number;
   minY: number;
   maxY: number;
 
   constructor(input: Input) {
-    this._grid = new Map();
+    super(10000);
 
     this.minY = 0;
     this.maxY = 0;
@@ -31,17 +30,17 @@ class Grid {
 
           if (cx !== undefined && x !== cx) {
             for (let dx = cx; dx !== x; dx += Math.sign(x - cx)) {
-              this.set(dx, y, Material.Rock);
+              this.set({ x: dx, y }, Material.Rock);
             }
           }
           if (cy !== undefined && y !== cy) {
             for (let dy = cy; dy !== y; dy += Math.sign(y - cy)) {
-              this.set(x, dy, Material.Rock);
+              this.set({ x, y: dy }, Material.Rock);
             }
           }
           cx = x;
           cy = y;
-          this.set(cx, cy, Material.Rock);
+          this.set({ x, y }, Material.Rock);
 
           this.minX = Math.min(this.minX, x);
           this.maxX = Math.max(this.maxX, x);
@@ -53,45 +52,25 @@ class Grid {
       });
   }
 
-  private toIndex(x: number, y: number) {
-    return x * 10000 + y;
-  }
-
-  set(x: number, y: number, v: Material) {
-    this._grid.set(this.toIndex(x, y), v);
-  }
-
-  get(x: number, y: number): Material {
-    return this._grid.get(this.toIndex(x, y));
-  }
-
-  has(x: number, y: number): Boolean {
-    return this._grid.has(this.toIndex(x, y));
-  }
-
-  values() {
-    return Array.from(this._grid.values());
-  }
-
   drop(path: { x: number; y: number }[]) {
     while (path.length > 0) {
       const { x, y } = path[path.length - 1];
 
       if (y > this.maxY + 10) return undefined;
 
-      if (this.has(x, y)) {
+      if (this.has({ x, y })) {
         path.pop();
         continue;
       }
 
-      if (!this.has(x, y + 1)) {
+      if (!this.has({ x, y: y + 1 })) {
         path.push({ x, y: y + 1 });
-      } else if (!this.has(x - 1, y + 1)) {
+      } else if (!this.has({ x: x - 1, y: y + 1 })) {
         path.push({ x: x - 1, y: y + 1 });
-      } else if (!this.has(x + 1, y + 1)) {
+      } else if (!this.has({ x: x + 1, y: y + 1 })) {
         path.push({ x: x + 1, y: y + 1 });
       } else {
-        this.set(x, y, Material.Sand);
+        this.set({ x, y }, Material.Sand);
         return path;
       }
     }
@@ -124,7 +103,7 @@ class Grid {
           {
             [Material.Rock]: "#",
             [Material.Sand]: "o",
-          }[this.get(x, y)] ?? ".";
+          }[this.get({ x, y })] ?? ".";
       }
       out += "\n";
     }
@@ -133,18 +112,17 @@ class Grid {
   }
 }
 
-export default Grid;
-
 export const part1 = (input: Input) => {
-  const grid = new Grid(input);
+  const grid = new Cavern(input);
+
   return grid.simulate();
 };
 
 export const part2 = (input: Input) => {
-  const grid = new Grid(input);
+  const grid = new Cavern(input);
 
   for (let x = grid.minX - grid.maxY; x <= grid.maxX + grid.maxY; x++) {
-    grid.set(x, grid.maxY + 2, Material.Rock);
+    grid.set({ x, y: grid.maxY + 2 }, Material.Rock);
   }
 
   return grid.simulate();

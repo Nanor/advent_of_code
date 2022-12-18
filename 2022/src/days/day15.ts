@@ -1,36 +1,21 @@
-import { Input } from "../input";
-
-type Sensor = {
-  x: number;
-  y: number;
-  beacon: Beacon;
+interface Sensor extends Vec2 {
+  beacon: Vec2;
   distance: number;
-};
+}
 
-type Beacon = {
-  x: number;
-  y: number;
-};
-
-const dist = (
-  a: { x: number; y: number },
-  b: { x: number; y: number }
-): number => Math.abs(a.x - b.x) + Math.abs(a.y - b.y);
+const dist = (a: Vec2, b: Vec2): number =>
+  Math.abs(a.x - b.x) + Math.abs(a.y - b.y);
 
 const parse = (input: Input) => {
   const sensors: Sensor[] = [];
-  const beacons: Beacon[] = [];
+  const beacons: Vec2[] = [];
 
   input
-    .asLines()
-    .filter(Boolean)
-    .forEach((line) => {
-      const [sx, sy, bx, by] = line
-        .match(
-          /Sensor at x=([-0-9]+), y=([-0-9]+): closest beacon is at x=([-0-9]+), y=([-0-9]+)/
-        )
-        .slice(1, 5)
-        .map((n) => parseInt(n));
+    .asMatches(
+      /Sensor at x=([-0-9]+), y=([-0-9]+): closest beacon is at x=([-0-9]+), y=([-0-9]+)/g
+    )
+    .forEach((m) => {
+      const [sx, sy, bx, by] = m.slice(1, 5).map((n) => parseInt(n));
 
       const beacon = { x: bx, y: by };
       const sensor = {
@@ -76,7 +61,7 @@ export const part1 = (input: Input, y = 2000000) => {
 export const part2 = (input: Input, range = 4000000) => {
   const { sensors } = parse(input);
 
-  let locs: Beacon[] = [];
+  let locs: Vec2[] = [];
 
   sensors.forEach((s1) => {
     sensors.forEach((s2) => {
@@ -88,7 +73,7 @@ export const part2 = (input: Input, range = 4000000) => {
   });
 
   while (locs.length > 0) {
-    let answer: Beacon | null = null;
+    let answer: Vec2 | null = null;
 
     locs = locs
       .filter((l) => l.x >= 0 && l.x <= range && l.y >= 0 && l.y <= range)

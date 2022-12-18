@@ -1,6 +1,12 @@
-import { Input } from "../input";
+import HashSet from "../common/HashSet";
 
-type Pos = { x: number; y: number };
+const WIDTH = 7;
+
+class Chamber extends HashSet<Vec2, number> {
+  hash(t: Vec2): number {
+    return t.x + t.y * WIDTH;
+  }
+}
 
 const rocks = `####
 
@@ -25,7 +31,7 @@ const rocks = `####
       .split("\n")
       .map((l) => l.split("").map((c) => c === "#"));
 
-    const output: Pos[] = [];
+    const output: Vec2[] = [];
 
     rockGrid.forEach((line, y) =>
       line.forEach((c, x) => {
@@ -38,18 +44,16 @@ const rocks = `####
     return output;
   });
 
-const width = 7;
-
 const checkOverlap = (
-  chamber: Set<number>,
+  chamber: Chamber,
   rock: typeof rocks[number],
-  { x, y }: Pos
+  { x, y }: Vec2
 ): Boolean =>
   rock.some(({ x: rx, y: ry }) => {
     const wx = x + rx;
     const wy = y - ry;
 
-    return wx < 0 || wx >= width || wy < 0 || chamber.has(wx + wy * width);
+    return wx < 0 || wx >= WIDTH || wy < 0 || chamber.has({ x: wx, y: wy });
   });
 
 const solve = (input: Input, rockCount: number) => {
@@ -64,7 +68,7 @@ const solve = (input: Input, rockCount: number) => {
 
   let maxHeight = 0;
 
-  let chamber = new Set<number>();
+  const chamber = new Chamber();
 
   for (let i = 0; i < rockCount; i++) {
     if (i > 1000) {
@@ -110,7 +114,7 @@ const solve = (input: Input, rockCount: number) => {
           const x = rockPos.x + rx;
           const y = rockPos.y - ry;
 
-          chamber.add(x + y * width);
+          chamber.add({ x, y });
           maxHeight = Math.max(maxHeight, y + 1);
         });
 

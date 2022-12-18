@@ -1,5 +1,3 @@
-import { Input } from "../input";
-
 type Value = Value[] | number;
 
 const parse = (s: string): Value => {
@@ -42,10 +40,7 @@ export const part1 = (input: Input) => {
 };
 
 export const part2 = (input: Input) => {
-  const packets = input
-    .asLines()
-    .filter(Boolean)
-    .map((i) => parse(i));
+  const packets = input.asLines().map((i) => parse(i));
 
   packets.push([[2]], [[6]]);
 

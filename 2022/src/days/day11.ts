@@ -1,5 +1,3 @@
-import { Input } from "../input";
-
 type Monkey = {
   index: number;
   count: number;
@@ -9,51 +7,44 @@ type Monkey = {
 
 const solve = (input: Input, rounds: number, doDiv: boolean) => {
   const allDivs = input
-    .asLines()
-    .filter((l) => l.match(/Test: divisible by/))
-    .map((x) => parseInt(x.match(/\d+/)[0]));
-
+    .asMatches(/Test: divisible by (\d+)/g)
+    .map((m) => parseInt(m[1]));
   const modulo = allDivs.reduce((x, a) => x * a, 1);
 
-  const monkeys: Monkey[] = input.asParagraphs().map((lines) => {
-    const index = parseInt(lines[0].match(/Monkey (\d+):/)[1]);
-    const items = lines[1]
-      .match(/Starting items: ((?:\d+(?:, )?)+)$/)[1]
-      .split(", ")
-      .map((n) => parseInt(n));
+  const monkeys = input
+    .asMatchGroups(
+      /Monkey (?<index>\d+):\n  Starting items: (?<items>[0-9, ]+)\n. Operation: new = (?<left>\w+) (?<op>[+*]) (?<right>\w+)\n  Test: divisible by (?<div>\d+)\n.   If true: throw to monkey (?<true>\d+)\n    If false: throw to monkey (?<false>\d+)/gm
+    )
+    .map((m) => {
+      const items = m.items.split(", ").map((n) => parseInt(n));
 
-    const [_, x, op, y] = lines[2].match(/Operation: new = (\w+) ([*+]) (\w+)/);
-    const testDiv = parseInt(lines[3].match(/Test: divisible by (\d+)/)[1]);
-    const trueMonkey = parseInt(
-      lines[4].match(/If true: throw to monkey (\d+)/)[1]
-    );
-    const falseMonkey = parseInt(
-      lines[5].match(/If false: throw to monkey (\d+)/)[1]
-    );
+      const testDiv = parseInt(m.div);
+      const trueMonkey = parseInt(m.true);
+      const falseMonkey = parseInt(m.false);
 
-    const l = x !== "old" ? parseInt(x) : null;
-    const r = y !== "old" ? parseInt(y) : null;
+      const l = m.left !== "old" ? parseInt(m.left) : null;
+      const r = m.right !== "old" ? parseInt(m.right) : null;
 
-    const func: Monkey["func"] = (oldLevel) => {
-      const left = l ?? oldLevel;
-      const right = r ?? oldLevel;
+      const func: Monkey["func"] = (oldLevel) => {
+        const left = l ?? oldLevel;
+        const right = r ?? oldLevel;
 
-      const res1 = op === "*" ? left * right : left + right;
-      const res2 = doDiv ? Math.floor(res1 / 3) : res1;
-      const res3 = res2 % modulo;
+        const res1 = m.op === "*" ? left * right : left + right;
+        const res2 = doDiv ? Math.floor(res1 / 3) : res1;
+        const res3 = res2 % modulo;
 
-      const nextMonkey = res3 % testDiv === 0 ? trueMonkey : falseMonkey;
+        const nextMonkey = res3 % testDiv === 0 ? trueMonkey : falseMonkey;
 
-      return { monkey: nextMonkey, worry: res3 };
-    };
+        return { monkey: nextMonkey, worry: res3 };
+      };
 
-    return {
-      index,
-      count: 0,
-      items,
-      func,
-    };
-  });
+      return {
+        index: m.index,
+        count: 0,
+        items,
+        func,
+      };
+    });
 
   for (let round = 0; round < rounds; round++) {
     monkeys.forEach((monkey) => {
