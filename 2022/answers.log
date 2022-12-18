@@ -1,12 +1,12 @@
 Day 1
 
-Part 1 (0ms)
+Part 1 (1ms)
 69626
 
-Part 2 (1ms)
+Part 2 (0ms)
 206780
 
-Total (1ms)
+Total (2ms)
 
 ----------------------------
 
@@ -24,10 +24,10 @@ Total (4ms)
 
 Day 3
 
-Part 1 (1ms)
+Part 1 (0ms)
 8123
 
-Part 2 (0ms)
+Part 2 (1ms)
 2620
 
 Total (1ms)
@@ -63,7 +63,7 @@ Day 6
 Part 1 (0ms)
 1134
 
-Part 2 (1ms)
+Part 2 (2ms)
 2263
 
 Total (2ms)
@@ -72,10 +72,10 @@ Total (2ms)
 
 Day 7
 
-Part 1 (1ms)
+Part 1 (2ms)
 1350966
 
-Part 2 (1ms)
+Part 2 (0ms)
 6296435
 
 Total (2ms)
@@ -84,31 +84,31 @@ Total (2ms)
 
 Day 8
 
-Part 1 (7ms)
+Part 1 (6ms)
 1845
 
-Part 2 (56ms)
+Part 2 (61ms)
 230112
 
-Total (63ms)
+Total (67ms)
 
 ----------------------------
 
 Day 9
 
-Part 1 (7ms)
+Part 1 (6ms)
 5878
 
-Part 2 (6ms)
+Part 2 (5ms)
 2405
 
-Total (13ms)
+Total (11ms)
 
 ----------------------------
 
 Day 10
 
-Part 1 (1ms)
+Part 1 (0ms)
 15260
 
 Part 2 (0ms)
@@ -127,24 +127,24 @@ Total (1ms)
 
 Day 11
 
-Part 1 (2ms)
+Part 1 (1ms)
 110264
 
-Part 2 (34ms)
+Part 2 (36ms)
 23612457316
 
-Total (36ms)
+Total (37ms)
 
 ----------------------------
 
 Day 12
 
-Load (8ms)
+Load (7ms)
 
 Part 1 (0ms)
 534
 
-Part 2 (0ms)
+Part 2 (1ms)
 525
 
 Total (8ms)
@@ -153,49 +153,49 @@ Total (8ms)
 
 Day 13
 
-Part 1 (4ms)
+Part 1 (5ms)
 6428
 
-Part 2 (5ms)
+Part 2 (6ms)
 22464
 
-Total (9ms)
+Total (11ms)
 
 ----------------------------
 
 Day 14
 
-Part 1 (4ms)
+Part 1 (5ms)
 1001
 
-Part 2 (8ms)
+Part 2 (11ms)
 27976
 
-Total (12ms)
+Total (16ms)
 
 ----------------------------
 
 Day 15
 
-Part 1 (273ms)
+Part 1 (270ms)
 5112034
 
-Part 2 (516ms)
+Part 2 (518ms)
 13172087230812
 
-Total (789ms)
+Total (788ms)
 
 ----------------------------
 
 Day 16
 
-Part 1 (322ms)
+Part 1 (336ms)
 1737
 
 Part 2 (184ms)
 2216
 
-Total (506ms)
+Total (520ms)
 
 ----------------------------
 
@@ -204,10 +204,22 @@ Day 17
 Part 1 (7ms)
 3219
 
-Part 2 (8ms)
+Part 2 (10ms)
 1582758620701
 
-Total (16ms)
+Total (17ms)
+
+----------------------------
+
+Day 18
+
+Part 1 (5ms)
+4604
+
+Part 2 (17ms)
+2604
+
+Total (22ms)
 
 ----------------------------
 
