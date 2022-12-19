@@ -25,7 +25,7 @@ const parse = (input: Input) =>
 
 type Blueprint = ReturnType<typeof parse>[number];
 
-const simulate = (blueprint: Blueprint, time: number) => {
+const simulate = (blueprint: Blueprint, time: number, homestretch = 0) => {
   const startingInventory = {
     robots: {
       ore: 1,
@@ -57,7 +57,12 @@ const simulate = (blueprint: Blueprint, time: number) => {
     const values = [];
 
     items
-      .filter((i) => inventory.robots[i] < maxRobots[i])
+      .filter(
+        (i) =>
+          inventory.robots[i] * time + inventory.minerals[i] <
+            maxRobots[i] * time &&
+          (!(i === "clay" || i === "ore") || time > homestretch)
+      )
       .forEach((nextToBuy) => {
         let t = time;
 
@@ -108,5 +113,5 @@ export const part2 = (input: Input) => {
 
   return blueprints
     .slice(0, 3)
-    .reduce((acc, blueprint) => acc * simulate(blueprint, 32), 1);
+    .reduce((acc, blueprint) => acc * simulate(blueprint, 32, 13), 1);
 };
