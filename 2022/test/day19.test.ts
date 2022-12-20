@@ -9,7 +9,3 @@ Blueprint 2: Each ore robot costs 2 ore. Each clay robot costs 3 ore. Each obsid
 test("part 1", () => {
   expect(part1(input)).toBe(33);
 });
-
-// test("part 2", () => {
-//   expect(part2(input)).toBe(58);
-// });

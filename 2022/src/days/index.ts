@@ -17,3 +17,4 @@ export * as day16 from "./day16";
 export * as day17 from "./day17";
 export * as day18 from "./day18";
 export * as day19 from "./day19";
+export * as day20 from "./day20";

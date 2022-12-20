@@ -21,6 +21,11 @@ export const asInput = (str: string) => ({
   asMatches: (regex: RegExp) => Array.from(str.matchAll(regex)),
   asMatchGroups: (regex: RegExp) =>
     Array.from(str.matchAll(regex)).map((r) => r.groups),
+  asNumbers: () =>
+    str
+      .split("\n")
+      .filter(Boolean)
+      .map((n) => parseInt(n)),
   asNumberArrays: () =>
     str
       .split("\n")
