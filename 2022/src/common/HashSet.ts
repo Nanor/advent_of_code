@@ -1,5 +1,5 @@
 abstract class HashSet<T, U> {
-  private map: Map<U, T>;
+  protected map: Map<U, T>;
 
   constructor(items?: T[]) {
     this.map = items ? new Map(items.map((t) => [this.hash(t), t])) : new Map();
