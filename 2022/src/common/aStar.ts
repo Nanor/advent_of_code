@@ -1,20 +1,21 @@
-function breadthFirstSearch<T>(
+function aStar<T>(
   start: T,
   hash: (t: T) => number | string,
-  neighbours: (t: T) => { node: T; cost: number }[]
-): { node: T; cost: number }[] {
-  const toCheck = [{ node: start, cost: 0 }];
+  neighbours: (t: T) => { node: T; cost: number }[],
+  halt: (t: T) => boolean,
+  heuristic: (t: T) => number
+) {
+  const toCheck = [{ node: start, cost: 0, heur: heuristic(start) }];
 
   const costs: { [x: string]: number } = {};
   costs[hash(start)] = 0;
-
-  const output: { [x: string]: { node: T; cost: number } } = {};
-  output[hash(start)] = { node: start, cost: 0 };
 
   while (toCheck.length > 0) {
     const next = toCheck.shift();
 
     if (costs[hash(next.node)] < next.cost) continue;
+
+    if (halt?.(next.node)) return next;
 
     for (const con of neighbours(next.node)) {
       const conIndex = hash(con.node);
@@ -23,27 +24,23 @@ function breadthFirstSearch<T>(
         const e = {
           node: con.node,
           cost: next.cost + con.cost,
+          heur: next.cost + con.cost + heuristic(con.node),
         };
         costs[conIndex] = e.cost;
-        output[hash(con.node)] = e;
 
         let added = false;
         for (let c = 0; c < toCheck.length; c++) {
           const e2 = toCheck[c];
-          if (e.cost <= e2.cost) {
+          if (e.heur <= e2.heur) {
             toCheck.splice(c, 0, e);
             added = true;
             break;
           }
         }
-        if (!added) {
-          toCheck.push(e);
-        }
+        if (!added) toCheck.push(e);
       }
     }
   }
-
-  return Object.values(output);
 }
 
-export default breadthFirstSearch;
+export default aStar;

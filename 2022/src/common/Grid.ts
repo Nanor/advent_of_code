@@ -1,5 +1,5 @@
 class Grid<T> {
-  private grid: Map<number, T>;
+  protected grid: Map<number, T>;
   readonly width: number;
 
   constructor(width: number) {
