@@ -12,13 +12,13 @@ Total (1ms)
 
 Day 2
 
-Part 1 (3ms)
+Part 1 (2ms)
 15523
 
 Part 2 (2ms)
 15702
 
-Total (5ms)
+Total (4ms)
 
 ----------------------------
 
@@ -36,10 +36,10 @@ Total (1ms)
 
 Day 4
 
-Part 1 (1ms)
+Part 1 (2ms)
 475
 
-Part 2 (2ms)
+Part 2 (1ms)
 825
 
 Total (3ms)
@@ -63,19 +63,19 @@ Day 6
 Part 1 (0ms)
 1134
 
-Part 2 (1ms)
+Part 2 (2ms)
 2263
 
-Total (1ms)
+Total (2ms)
 
 ----------------------------
 
 Day 7
 
-Part 1 (1ms)
+Part 1 (2ms)
 1350966
 
-Part 2 (0ms)
+Part 2 (1ms)
 6296435
 
 Total (3ms)
@@ -84,13 +84,13 @@ Total (3ms)
 
 Day 8
 
-Part 1 (8ms)
+Part 1 (7ms)
 1845
 
-Part 2 (66ms)
+Part 2 (60ms)
 230112
 
-Total (75ms)
+Total (68ms)
 
 ----------------------------
 
@@ -108,7 +108,7 @@ Total (11ms)
 
 Day 10
 
-Part 1 (0ms)
+Part 1 (1ms)
 15260
 
 Part 2 (0ms)
@@ -130,24 +130,24 @@ Day 11
 Part 1 (1ms)
 110264
 
-Part 2 (42ms)
+Part 2 (39ms)
 23612457316
 
-Total (44ms)
+Total (40ms)
 
 ----------------------------
 
 Day 12
 
-Load (12ms)
+Load (13ms)
 
 Part 1 (0ms)
 534
 
-Part 2 (0ms)
+Part 2 (1ms)
 525
 
-Total (12ms)
+Total (14ms)
 
 ----------------------------
 
@@ -156,10 +156,10 @@ Day 13
 Part 1 (4ms)
 6428
 
-Part 2 (6ms)
+Part 2 (5ms)
 22464
 
-Total (10ms)
+Total (9ms)
 
 ----------------------------
 
@@ -168,34 +168,34 @@ Day 14
 Part 1 (6ms)
 1001
 
-Part 2 (18ms)
+Part 2 (17ms)
 27976
 
-Total (24ms)
+Total (23ms)
 
 ----------------------------
 
 Day 15
 
-Part 1 (378ms)
+Part 1 (386ms)
 5112034
 
-Part 2 (748ms)
+Part 2 (835ms)
 13172087230812
 
-Total (1126ms)
+Total (1221ms)
 
 ----------------------------
 
 Day 16
 
-Part 1 (360ms)
+Part 1 (383ms)
 1737
 
-Part 2 (195ms)
+Part 2 (194ms)
 2216
 
-Total (556ms)
+Total (577ms)
 
 ----------------------------
 
@@ -213,61 +213,61 @@ Total (19ms)
 
 Day 18
 
-Part 1 (5ms)
+Part 1 (6ms)
 4604
 
 Part 2 (17ms)
 2604
 
-Total (22ms)
+Total (24ms)
 
 ----------------------------
 
 Day 19
 
-Part 1 (1444ms)
+Part 1 (1308ms)
 1650
 
-Part 2 (572ms)
+Part 2 (580ms)
 5824
 
-Total (2016ms)
+Total (1888ms)
 
 ----------------------------
 
 Day 20
 
-Part 1 (163ms)
+Part 1 (164ms)
 5498
 
-Part 2 (2306ms)
+Part 2 (2156ms)
 3390007892081
 
-Total (2470ms)
+Total (2321ms)
 
 ----------------------------
 
 Day 21
 
-Part 1 (9ms)
+Part 1 (8ms)
 75147370123646
 
 Part 2 (6ms)
 3423279932937
 
-Total (15ms)
+Total (14ms)
 
 ----------------------------
 
 Day 22
 
-Part 1 (15ms)
+Part 1 (13ms)
 190066
 
-Part 2 (12ms)
+Part 2 (11ms)
 134170
 
-Total (27ms)
+Total (24ms)
 
 ----------------------------
 
@@ -276,24 +276,33 @@ Day 23
 Part 1 (28ms)
 3931
 
-Part 2 (1527ms)
+Part 2 (1389ms)
 944
 
-Total (1556ms)
+Total (1417ms)
 
 ----------------------------
 
 Day 24
 
-Load (4ms)
+Load (3ms)
 
-Part 1 (1398ms)
+Part 1 (1341ms)
 225
 
-Part 2 (3994ms)
+Part 2 (3546ms)
 711
 
-Total (5396ms)
+Total (4890ms)
+
+----------------------------
+
+Day 25
+
+Part 1 (0ms)
+122-12==0-01=00-0=02
+
+Total (0ms)
 
 ----------------------------
 

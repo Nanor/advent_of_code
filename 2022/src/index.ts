@@ -25,13 +25,15 @@ const run = async (day: string) => {
   console.log(answer1);
   console.log("");
 
-  const part2Start = new Date().getTime();
-  const answer2 = "part2" in code ? code.part2(input) : undefined;
-  const part2Time = new Date().getTime() - part2Start;
+  if ("part2" in code) {
+    const part2Start = new Date().getTime();
+    const answer2 = "part2" in code ? code.part2(input) : undefined;
+    const part2Time = new Date().getTime() - part2Start;
 
-  console.log(`Part 2 (${part2Time}ms)`);
-  console.log(answer2);
-  console.log("");
+    console.log(`Part 2 (${part2Time}ms)`);
+    console.log(answer2);
+    console.log("");
+  }
 
   const totalTime = new Date().getTime() - startTime;
 
