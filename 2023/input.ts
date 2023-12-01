@@ -1,5 +1,10 @@
 export const asInput = (str: string) => ({
   asString: () => str,
+  asLines: () =>
+    str
+      .split("\n")
+      .map((l) => l.trim())
+      .filter(Boolean),
 });
 
 export type Input = ReturnType<typeof asInput>;
