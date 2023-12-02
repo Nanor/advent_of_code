@@ -3,3 +3,7 @@
 exports[`day 1 part 1 1`] = `55621`;
 
 exports[`day 1 part 2 1`] = `53592`;
+
+exports[`day 2 part 1 1`] = `2348`;
+
+exports[`day 2 part 2 1`] = `76008`;
