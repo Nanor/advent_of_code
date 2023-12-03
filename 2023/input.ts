@@ -5,6 +5,12 @@ export const asInput = (str: string) => ({
       .split("\n")
       .map((l) => l.trim())
       .filter(Boolean),
+  asGrid: () =>
+    str
+      .split("\n")
+      .map((l) => l.trim())
+      .filter(Boolean)
+      .map((l) => l.split("")),
 });
 
 export type Input = ReturnType<typeof asInput>;
