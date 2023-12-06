@@ -1,20 +1,8 @@
 import { Input } from "../input";
 
 const solveRace = (time: number, distance: number) => {
-  let minI = 0;
-  let maxI = time / 2;
-
-  while (minI < maxI - 1) {
-    const newI = Math.floor((minI + maxI) / 2);
-
-    if (newI * (time - newI) > distance) {
-      maxI = newI;
-    } else {
-      minI = newI;
-    }
-  }
-
-  return time - 2 * maxI + 1;
+  const i = Math.floor((time - Math.sqrt(time * time - 4 * distance)) / 2) + 1;
+  return time - 2 * i + 1;
 };
 
 export const part1 = (input: Input) => {
