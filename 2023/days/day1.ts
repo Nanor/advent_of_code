@@ -1,4 +1,5 @@
 import { Input } from "../input";
+import { sum } from "../utils";
 
 export const part1 = (input: Input) =>
   input
@@ -11,7 +12,7 @@ export const part1 = (input: Input) =>
       }
       return 0;
     })
-    .reduce((x, y) => x + y, 0);
+    .reduce(sum);
 
 const wordNumbers: Record<string, number> = {
   one: 1,
@@ -43,4 +44,4 @@ export const part2 = (input: Input) =>
 
       return a * 10 + b;
     })
-    .reduce((x, y) => x + y, 0);
+    .reduce(sum);

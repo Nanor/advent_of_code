@@ -1,4 +1,5 @@
 import { Input } from "../input";
+import { sum } from "../utils";
 
 const parse = (input: Input) => {
   return input.asLines().map((line) => {
@@ -15,7 +16,7 @@ export const part1 = (input: Input) =>
   parse(input)
     .map((card) => card.actual.filter((n) => card.winning.includes(n)).length)
     .map((count) => (count ? Math.pow(2, count - 1) : 0))
-    .reduceRight((x, y) => x + y);
+    .reduce(sum);
 
 export const part2 = (input: Input) => {
   const cards = parse(input).map((c) => ({ ...c, count: 1 }));
@@ -28,5 +29,5 @@ export const part2 = (input: Input) => {
       .forEach((c) => (c.count += card.count));
   });
 
-  return cards.reduce((acc, card) => acc + card.count, 0);
+  return cards.map((card) => card.count).reduce(sum);
 };

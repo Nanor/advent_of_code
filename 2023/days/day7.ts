@@ -1,4 +1,5 @@
 import { Input } from "../input";
+import { sum } from "../utils";
 
 const solve = (input: Input, wild: boolean) => {
   const strengths: Record<string, number> = {
@@ -43,9 +44,7 @@ const solve = (input: Input, wild: boolean) => {
       Math.sign(getStrength(b.cards[4]) - getStrength(a.cards[4]))
   );
 
-  return hands
-    .map((hand, i) => (hands.length - i) * hand.bid)
-    .reduceRight((x, y) => x + y);
+  return hands.map((hand, i) => (hands.length - i) * hand.bid).reduce(sum);
 };
 
 export const part1 = (input: Input) => solve(input, false);

@@ -1,4 +1,5 @@
 import { Input } from "../input";
+import { sum } from "../utils";
 
 const parse = (input: Input) => {
   const parts: {
@@ -29,13 +30,10 @@ const parse = (input: Input) => {
 };
 
 export const part1 = (input: Input) =>
-  parse(input).reduce(
-    (acc, p) => acc + p.numbers.reduceRight((x, y) => x + y),
-    0
-  );
+  parse(input).reduce((acc, p) => acc + p.numbers.reduce(sum), 0);
 
 export const part2 = (input: Input) =>
   parse(input)
     .filter((p) => p.symbol === "*" && p.numbers.length === 2)
     .map(({ numbers: [x, y] }) => x * y)
-    .reduceRight((x, y) => x + y);
+    .reduce(sum);

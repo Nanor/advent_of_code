@@ -1,4 +1,5 @@
 import { Input } from "../input";
+import { sum } from "../utils";
 
 type Game = {
   id: number;
@@ -33,7 +34,8 @@ export const part1 = (input: Input) =>
           (hand) => hand.red > 12 || hand.green > 13 || hand.blue > 14
         )
     )
-    .reduce((acc, game) => acc + game.id, 0);
+    .map((game) => game.id)
+    .reduce(sum);
 
 export const part2 = (input: Input) =>
   parse(input)
@@ -49,4 +51,4 @@ export const part2 = (input: Input) =>
 
       return minBag.red * minBag.green * minBag.blue;
     })
-    .reduce((x, y) => x + y, 0);
+    .reduce(sum);

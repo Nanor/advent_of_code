@@ -1,4 +1,5 @@
 import { Input } from "../input";
+import { product } from "../utils";
 
 const solveRace = (time: number, distance: number) => {
   const i = Math.floor((time - Math.sqrt(time * time - 4 * distance)) / 2) + 1;
@@ -18,7 +19,7 @@ export const part1 = (input: Input) => {
 
   return races
     .map((race) => solveRace(race.time, race.distance))
-    .reduceRight((x, y) => x * y);
+    .reduce(product);
 };
 
 export const part2 = (input: Input) => {
