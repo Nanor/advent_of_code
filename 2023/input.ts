@@ -21,6 +21,12 @@ export const asInput = (str: string) => ({
           .filter(Boolean)
       )
       .filter((p) => p.length),
+  asNumbers: () =>
+    str
+      .split("\n")
+      .map((l) => l.trim())
+      .filter(Boolean)
+      .map((l) => l.split(" ").map((d) => parseInt(d))),
 });
 
 export type Input = ReturnType<typeof asInput>;
