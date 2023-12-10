@@ -1,9 +1,9 @@
 import { describe, expect, test } from "bun:test";
-import getInput from "../input";
+import getInput from "../src/input";
 
 describe.each([...Array(25)].map((_, i) => i + 1))("", async (day) => {
   try {
-    const code = await import(`../days/day${day}`);
+    const code = await import(`../src/days/day${day}`);
     const input = await getInput(day.toString());
 
     describe(`day ${day}`, () => {

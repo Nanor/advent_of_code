@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test";
-import { asInput } from "../input";
-import { part1, part2 } from "../days/day8";
+import { asInput } from "../src/input";
+import { part1, part2 } from "../src/days/day8";
 
 describe("part1", () => {
   test("ex1", () => {

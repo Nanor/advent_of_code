@@ -1,6 +1,6 @@
 import { expect, test } from "bun:test";
-import { asInput } from "../input";
-import { part1, part2 } from "../days/day4";
+import { asInput } from "../src/input";
+import { part1, part2 } from "../src/days/day4";
 
 const input = asInput(`
 Card 1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53

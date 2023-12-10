@@ -1,6 +1,6 @@
 import { expect, test } from "bun:test";
-import { asInput } from "../input";
-import { part1, part2 } from "../days/day9";
+import { asInput } from "../src/input";
+import { part1, part2 } from "../src/days/day9";
 
 const input = asInput(`
 0 3 6 9 12 15

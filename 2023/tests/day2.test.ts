@@ -1,6 +1,6 @@
 import { expect, test } from "bun:test";
-import { asInput } from "../input";
-import { part1, part2 } from "../days/day2";
+import { asInput } from "../src/input";
+import { part1, part2 } from "../src/days/day2";
 
 const input = asInput(`
 Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green

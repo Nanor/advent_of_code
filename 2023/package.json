@@ -1,6 +1,6 @@
 {
   "name": "2023",
-  "module": "index.ts",
+  "module": "src/index.ts",
   "type": "module",
   "devDependencies": {
     "bun-types": "latest"
@@ -9,6 +9,6 @@
     "typescript": "^5.0.0"
   },
   "scripts": {
-    "start": "bun index.ts"
+    "start": "bun src/index.ts"
   }
 }
