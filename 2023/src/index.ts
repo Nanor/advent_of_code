@@ -1,4 +1,4 @@
-import { argv } from "process";
+import { argv } from "bun";
 import getInput, { type Input } from "./input";
 
 const day = argv[2];

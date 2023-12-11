@@ -1,4 +1,4 @@
-export type Coord = { x: number; y: number };
+import { Coord } from "./utils";
 
 export class Grid {
   private map: Map<number, string>;

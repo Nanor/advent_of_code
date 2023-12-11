@@ -7,6 +7,12 @@ export const asInput = (str: string) => ({
       .split("\n")
       .map((l) => l.trim())
       .filter(Boolean),
+  asCharGrid: () =>
+    str
+      .split("\n")
+      .map((l) => l.trim())
+      .filter(Boolean)
+      .map((l) => l.split("")),
   asGrid: () => new Grid(str),
   asParagraphs: () =>
     str
