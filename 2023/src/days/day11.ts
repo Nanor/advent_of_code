@@ -28,21 +28,16 @@ export const solve = (input: Input, expansion: number) => {
     }
   }
 
+  galaxies = galaxies.map((g) => ({
+    x: g.x + emptyCols.filter((x) => x < g.x).length * (expansion - 1),
+    y: g.y + emptyRows.filter((y) => y < g.y).length * (expansion - 1),
+  }));
+
   return galaxies
     .flatMap((g1, i) =>
-      galaxies.slice(0, i).map((g2) => {
-        const x1 = Math.min(g1.x, g2.x);
-        const x2 = Math.max(g1.x, g2.x);
-        const y1 = Math.min(g1.y, g2.y);
-        const y2 = Math.max(g1.y, g2.y);
-
-        const expX = emptyCols.filter((c) => c > x1 && c < x2).length;
-        const expY = emptyRows.filter((c) => c > y1 && c < y2).length;
-
-        return (
-          x2 - x1 + expX * (expansion - 1) + (y2 - y1 + expY * (expansion - 1))
-        );
-      })
+      galaxies
+        .slice(0, i)
+        .map((g2) => Math.abs(g1.x - g2.x) + Math.abs(g1.y - g2.y))
     )
     .reduce(sum);
 };
