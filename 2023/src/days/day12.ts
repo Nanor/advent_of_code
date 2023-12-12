@@ -8,31 +8,34 @@ type Row = {
 
 const memos = new Map<string, number>();
 
+const startsDots = new RegExp(/^[.]*/);
+const startsDotsOrQ = new RegExp(/^[.?]*/);
+const startsChunk = [...Array(20)].map(
+  (_, i) => new RegExp(`^[#?]{${i}}($|[.]+|[?])`)
+);
+
 const getOptions = (row: Row): number => {
   if (row.chunks.length === 0) {
     return !row.records.includes("#") ? 1 : 0;
   }
 
-  const records = row.records.replace(/^\.*/, "");
+  const records = row.records.replace(startsDots, "");
   const [nextChunk, ...chunks] = row.chunks;
-
-  if (!records.match(new RegExp(`(^|[.?])[#?]{${nextChunk}}([.?]|$)`)))
-    return 0;
 
   let out = 0;
 
-  for (let i = 0; i < records.length; i++) {
-    const match = records.match(
-      new RegExp(`^[.?]{${i}}[#?]{${nextChunk}}([.?]|$)`)
-    );
+  const max = records.match(startsDotsOrQ)?.[0].length || 0;
+  for (let i = 0; i <= max; i++) {
+    const match = records.slice(i).match(startsChunk[nextChunk]);
 
     if (match) {
       out += getOptionsMemoed({
-        records: records.slice(match[0].length),
+        records: records.slice(i + match[0].length),
         chunks,
       });
     }
   }
+
   return out;
 };
 
