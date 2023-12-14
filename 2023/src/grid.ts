@@ -37,4 +37,11 @@ export class Grid {
       }
     }
   }
+
+  entries(): [Coord, string][] {
+    return [...this.map.entries()].map(([k, v]) => [
+      { x: k % this.width, y: Math.floor(k / this.width) },
+      v,
+    ]);
+  }
 }
