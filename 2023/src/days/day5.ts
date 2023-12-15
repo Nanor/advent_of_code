@@ -30,6 +30,9 @@ export const part1 = (input: Input) => {
 export const part2 = (input: Input) => {
   const [[seedStr], ...mapStrings] = input.asParagraphs();
 
+
+
+
   let ss = [...seedStr.matchAll(/\d+/g)].flat().map((s) => parseInt(s));
   const seeds: { start: number; range: number }[] = [];
   while (ss.length) {
