@@ -1,7 +1,7 @@
 import { Grid } from "./grid";
 
 export const asInput = (str: string) => ({
-  asString: () => str,
+  asString: () => str.trim(),
   asLines: () =>
     str
       .split("\n")
