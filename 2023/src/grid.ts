@@ -1,12 +1,12 @@
 import { Coord } from "./utils";
 
-export class Grid {
-  private map: Map<number, string>;
+export class Grid<T extends string> {
+  private map: Map<number, T>;
   readonly width: number;
   readonly height: number;
 
   constructor(string: string) {
-    this.map = new Map<number, string>();
+    this.map = new Map<number, T>();
 
     const lines = string
       .split("\n")
@@ -17,7 +17,7 @@ export class Grid {
     this.width = lines[0].length;
 
     lines.forEach((line, y) =>
-      line.split("").forEach((c, x) => this.set({ x, y }, c))
+      line.split("").forEach((c, x) => this.set({ x, y }, c as T))
     );
   }
 
@@ -25,7 +25,7 @@ export class Grid {
     return this.map.get(y * this.width + x);
   }
 
-  set({ x, y }: Coord, v: string) {
+  set({ x, y }: Coord, v: T) {
     this.map.set(y * this.width + x, v);
     return this;
   }
@@ -38,7 +38,7 @@ export class Grid {
     }
   }
 
-  entries(): [Coord, string][] {
+  entries(): [Coord, T][] {
     return [...this.map.entries()].map(([k, v]) => [
       { x: k % this.width, y: Math.floor(k / this.width) },
       v,
