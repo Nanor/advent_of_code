@@ -13,6 +13,12 @@ export const asInput = (str: string) => ({
       .map((l) => l.trim())
       .filter(Boolean)
       .map((l) => l.split("")),
+  asNumberGrid: (): number[][] =>
+    str
+      .split("\n")
+      .map((l) => l.trim())
+      .filter(Boolean)
+      .map((l) => l.split("").map((d) => parseInt(d))),
   asGrid: () => new Grid(str),
   asParagraphs: () =>
     str

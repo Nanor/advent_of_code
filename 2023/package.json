@@ -10,5 +10,8 @@
   },
   "scripts": {
     "start": "bun src/index.ts"
+  },
+  "dependencies": {
+    "@datastructures-js/heap": "^4.3.2"
   }
 }

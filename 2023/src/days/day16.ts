@@ -1,8 +1,7 @@
 import type { Input } from "../input";
-import type { Coord } from "../utils";
+import type { Coord, Dir } from "../utils";
 
 type Cell = "." | "|" | "-" | "\\" | "/";
-type Dir = "L" | "R" | "U" | "D";
 type Beam = Coord & { dir: Dir };
 
 const countEnergised = (grid: Cell[][], start: Beam) => {

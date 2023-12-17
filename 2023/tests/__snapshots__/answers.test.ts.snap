@@ -63,3 +63,7 @@ exports[`day 15 part 2 1`] = `233537`;
 exports[`day 16 part 1 1`] = `8021`;
 
 exports[`day 16 part 2 1`] = `8216`;
+
+exports[`day 17 part 1 1`] = `785`;
+
+exports[`day 17 part 2 1`] = `922`;
