@@ -26,19 +26,19 @@ const solve = (instructions: { dir: Dir; dist: number }[]) => {
     [{ x: 0, y: 0 }]
   );
 
-  return (
-    coords
-      .slice(0, -1)
-      .map((_, i) => {
-        const a = coords[i];
-        const b = coords[i + 1];
+  const area = coords
+    .slice(0, -1)
+    .map((_, i) => {
+      const a = coords[i];
+      const b = coords[i + 1];
 
-        return (a.x * b.y - b.x * a.y) / 2;
-      })
-      .reduce(sum) +
-    instructions.map((i) => i.dist).reduce(sum) / 2 +
-    1
-  );
+      return (a.x - b.x) * a.y;
+    })
+    .reduce(sum);
+
+  const border = instructions.map((i) => i.dist).reduce(sum);
+
+  return area + border / 2 + 1;
 };
 
 export const part1 = (input: Input) => {
