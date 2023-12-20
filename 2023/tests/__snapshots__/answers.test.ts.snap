@@ -75,3 +75,7 @@ exports[`day 18 part 2 1`] = `201398068194715`;
 exports[`day 19 part 1 1`] = `489392`;
 
 exports[`day 19 part 2 1`] = `134370637448305`;
+
+exports[`day 20 part 1 1`] = `825167435`;
+
+exports[`day 20 part 2 1`] = `225514321828633`;
