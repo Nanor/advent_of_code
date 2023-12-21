@@ -1,6 +1,6 @@
 import { Queue } from "@datastructures-js/queue";
 import type { Input } from "../input";
-import { gcd, lcm } from "../utils";
+import { lcm } from "../utils";
 
 type BaseModule = {
   type: string;
