@@ -1,33 +1,18 @@
 import { Input } from "../input";
-import { Coord, sum } from "../utils";
+import { Coord, isDefined, sum } from "../utils";
 
 type Coord3 = Coord & { z: number };
 type Brick = [Coord3, Coord3];
 
-const intersects = (brick1: Brick, brick2: Brick) => {
-  const minX1 = Math.min(brick1[0].x, brick1[1].x);
-  const minY1 = Math.min(brick1[0].y, brick1[1].y);
-  const minZ1 = Math.min(brick1[0].z, brick1[1].z);
-  const maxX1 = Math.max(brick1[0].x, brick1[1].x);
-  const maxY1 = Math.max(brick1[0].y, brick1[1].y);
-  const maxZ1 = Math.max(brick1[0].z, brick1[1].z);
-
-  const minX2 = Math.min(brick2[0].x, brick2[1].x);
-  const minY2 = Math.min(brick2[0].y, brick2[1].y);
-  const minZ2 = Math.min(brick2[0].z, brick2[1].z);
-  const maxX2 = Math.max(brick2[0].x, brick2[1].x);
-  const maxY2 = Math.max(brick2[0].y, brick2[1].y);
-  const maxZ2 = Math.max(brick2[0].z, brick2[1].z);
-
-  return !(
-    maxX1 < minX2 ||
-    maxX2 < minX1 ||
-    maxY1 < minY2 ||
-    maxY2 < minY1 ||
-    maxZ1 < minZ2 ||
-    maxZ2 < minZ1
+const intersects = (brick1: Brick, brick2: Brick) =>
+  !(
+    brick1[1].x < brick2[0].x ||
+    brick2[1].x < brick1[0].x ||
+    brick1[1].y < brick2[0].y ||
+    brick2[1].y < brick1[0].y ||
+    brick1[1].z < brick2[0].z ||
+    brick2[1].z < brick1[0].z
   );
-};
 
 const moveDown = (brick: Brick): Brick => [
   { ...brick[0], z: brick[0].z - 1 },
@@ -36,57 +21,52 @@ const moveDown = (brick: Brick): Brick => [
 
 const parse = (input: Input): Brick[] =>
   input.asLines().map((l) => {
-    const [_, x1, y1, z1, x2, y2, z2] = l.match(
-      /^(\d+),(\d+),(\d+)~(\d+),(\d+),(\d+)$/
-    )!;
+    const [x1, y1, z1, x2, y2, z2] = l
+      .match(/^(\d+),(\d+),(\d+)~(\d+),(\d+),(\d+)$/)!
+      .slice(1)
+      .map((d) => parseInt(d));
+
     return [
-      { x: parseInt(x1), y: parseInt(y1), z: parseInt(z1) },
-      { x: parseInt(x2), y: parseInt(y2), z: parseInt(z2) },
+      { x: Math.min(x1, x2), y: Math.min(y1, y2), z: Math.min(z1, z2) },
+      { x: Math.max(x1, x2), y: Math.max(y1, y2), z: Math.max(z1, z2) },
     ];
   });
 
 const settle = (bricks: Brick[]) => {
-  let settled = false;
-  while (!settled) {
-    settled = true;
+  bricks.sort((a, b) => a[0].z - b[0].z);
 
-    bricks.forEach((brick1, i) => {
-      if (
-        brick1[0].z > 1 &&
-        brick1[1].z > 1 &&
-        !bricks.some(
-          (brick2, j) => i !== j && intersects(moveDown(brick1), brick2)
-        )
-      ) {
-        brick1[0].z -= 1;
-        brick1[1].z -= 1;
-        settled = false;
-      }
-    });
-  }
-};
+  bricks.forEach((brick, i) => {
+    const others = bricks.slice(0, i);
 
-const getSupports = (bricks: Brick[]) => {
-  const supportedBy: number[][] = bricks.map(() => []);
+    const maxZ = Math.max(
+      ...others
+        .filter((b2) => intersects(b2, [{ ...brick[0], z: 0 }, brick[1]]))
+        .map((b2) => b2[1].z),
+      0
+    );
+    const height = brick[1].z - brick[0].z;
 
-  bricks.forEach((brick1, i) => {
-    bricks.forEach((brick2, j) => {
-      if (i !== j && intersects(moveDown(brick1), brick2)) {
-        supportedBy[i].push(j);
-      }
-    });
+    brick[0].z = maxZ + 1;
+    brick[1].z = brick[0].z + height;
   });
-
-  return supportedBy;
 };
 
-let bricks: ReturnType<typeof parse>;
-let supportedBy: ReturnType<typeof getSupports>;
+const getSupports = (bricks: Brick[]): number[][] =>
+  bricks.map((brick1, i) =>
+    bricks
+      .slice(0, i)
+      .map((brick2, j) => {
+        if (intersects(moveDown(brick1), brick2)) {
+          return j;
+        }
+      })
+      .filter(isDefined)
+  );
 
 export const part1 = (input: Input) => {
-  bricks = parse(input);
+  const bricks = parse(input);
   settle(bricks);
-  supportedBy = getSupports(bricks);
+  const supportedBy = getSupports(bricks);
 
   return bricks.filter(
     (_, i) => !supportedBy.some((s) => s.length === 1 && s[0] === i)
@@ -94,6 +74,10 @@ export const part1 = (input: Input) => {
 };
 
 export const part2 = (input: Input) => {
+  const bricks = parse(input);
+  settle(bricks);
+  const supportedBy = getSupports(bricks);
+
   return bricks
     .map((_, i) => {
       const falling = new Set([i]);
