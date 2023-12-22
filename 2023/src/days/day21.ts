@@ -112,17 +112,17 @@ export const part2 = (input: Input, steps = 26501365) => {
 
     toCheck = newToCheck;
 
-    if (i % 262 === 65) {
-      const n = Math.floor(i / 262);
+    if (i % 131 === 65) {
+      const n = Math.floor(i / 131);
 
       if (n === 0) {
-        f0 = oddLocations.size;
+        f0 = (i % 2 ? oddLocations : evenLocations).size;
       }
       if (n === 1) {
-        f1 = oddLocations.size;
+        f1 = (i % 2 ? oddLocations : evenLocations).size;
       }
       if (n === 2) {
-        f2 = oddLocations.size;
+        f2 = (i % 2 ? oddLocations : evenLocations).size;
         break;
       }
     }
@@ -132,6 +132,6 @@ export const part2 = (input: Input, steps = 26501365) => {
   const b = f1 - f0 - a;
   const c = f0;
 
-  const n = Math.floor(steps / 262);
+  const n = Math.floor(steps / 131);
   return a * n * n + b * n + c;
 };
