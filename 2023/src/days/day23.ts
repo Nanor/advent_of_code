@@ -8,6 +8,14 @@ const directions = [
   [1, 0, ">"],
 ] as const;
 
+type Nodes = Record<
+  string,
+  {
+    node: string;
+    cost: number;
+  }[]
+>;
+
 const buildGraph = (input: Input) => {
   const grid = input.asCharGrid();
 
@@ -17,7 +25,7 @@ const buildGraph = (input: Input) => {
   const toCheck: Coord[] = [start];
   const checked = new Set<string>();
 
-  const nodes: Record<string, { node: string; cost: number }[]> = {};
+  const nodes: Nodes = {};
 
   while (toCheck.length) {
     const node = toCheck.pop()!;
@@ -85,25 +93,27 @@ const buildGraph = (input: Input) => {
 };
 
 const solve = (
-  { nodes, start, end }: ReturnType<typeof buildGraph>,
+  nodes: Nodes,
+  node: string,
+  end: string,
   checked: string[] = []
 ): number => {
-  if (start === end) return 0;
-  if (checked.includes(start)) return -Infinity;
+  if (node === end) return 0;
+  if (checked.includes(node)) return -Infinity;
 
   return Math.max(
-    ...nodes[start].map(
-      (n) => n.cost + solve({ nodes, start: n.node, end }, [...checked, start])
+    ...nodes[node].map(
+      (n) => n.cost + solve(nodes, n.node, end, [...checked, node])
     )
   );
 };
 
 export const part1 = (input: Input) => {
-  const graph = buildGraph(input);
-  return solve(graph);
+  const { nodes, start, end } = buildGraph(input);
+  return solve(nodes, start, end);
 };
 
-const makeBi = (nodes: Record<string, { node: string; cost: number }[]>) => {
+const makeBi = (nodes: Nodes) => {
   Object.keys(nodes).forEach((i) => {
     nodes[i].forEach(({ node: j, cost }) => {
       if (j in nodes) {
@@ -120,7 +130,8 @@ const makeBi = (nodes: Record<string, { node: string; cost: number }[]>) => {
 };
 
 export const part2 = (input: Input) => {
-  const graph = buildGraph(input);
+  const { nodes, start, end } = buildGraph(input);
+  const biNodes = makeBi(nodes);
 
-  return solve({ ...graph, nodes: makeBi(graph.nodes) });
+  return solve(biNodes, start, end);
 };

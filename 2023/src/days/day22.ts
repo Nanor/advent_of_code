@@ -1,7 +1,6 @@
 import { Input } from "../input";
-import { Coord, isDefined, sum } from "../utils";
+import { Coord3, isDefined, sum } from "../utils";
 
-type Coord3 = Coord & { z: number };
 type Brick = [Coord3, Coord3];
 
 const intersects = (brick1: Brick, brick2: Brick) =>
