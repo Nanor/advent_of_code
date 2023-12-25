@@ -12,3 +12,4 @@ My solutions for [Advent of Code](https://adventofcode.com).
 | [2020](https://adventofcode.com/2020) | 50    | Typescript |
 | [2021](https://adventofcode.com/2021) | 50    | Typescript |
 | [2022](https://adventofcode.com/2022) | 50    | Typescript |
+| [2023](https://adventofcode.com/2023) | 50    | Typescript |
