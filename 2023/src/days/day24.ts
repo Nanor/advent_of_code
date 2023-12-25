@@ -69,52 +69,39 @@ export const part2 = (input: Input) => {
         vel: { x: vel.x - vX, y: vel.y - vY },
       }));
 
-      let intersect: Coord | undefined = undefined;
+      let intersect: Coord;
 
       for (let i = 0; i < hails2.length; i++) {
         for (let j = 0; j < i; j++) {
-          intersect = intersection2(hails2[i], hails2[j]);
+          const int = intersection2(hails2[i], hails2[j]);
 
-          if (intersect) break;
-        }
-        if (intersect) break;
-      }
-
-      if (!intersect) continue;
-
-      const velZs: { z: number; t: number }[] = [];
-
-      let sX = NaN;
-      let sY = NaN;
-
-      for (let i = 0; i < hails.length; i++) {
-        let time = NaN;
-        const t1 = (intersect.x - hails2[i].pos.x) / hails2[i].vel.x;
-
-        if (isNaN(t1)) {
-          const t2 = (intersect.y - hails2[i].pos.y) / hails2[i].vel.y;
-          if (!isNaN(t2)) {
-            time = t2;
+          if (int) {
+            intersect = int;
+            break;
           }
-        } else {
-          time = t1;
         }
-        if (isNaN(time)) continue;
-
-        const cX = hails[i].pos.x + hails[i].vel.x * time;
-        const cY = hails[i].pos.y + hails[i].vel.y * time;
-
-        sX = cX - vX * time;
-        sY = cY - vY * time;
-
-        velZs.push({ z: hails[i].pos.z + hails[i].vel.z * time, t: time });
+        if (typeof intersect! !== "undefined") break;
       }
 
-      if (velZs.length === 0) continue;
+      if (typeof intersect! === "undefined") continue;
 
-      const vZ = (velZs[0].z - velZs[1].z) / (velZs[0].t - velZs[1].t);
-      const cZ = hails[0].pos.z + hails[0].vel.z * velZs[0].t;
-      const sZ = cZ - vZ * velZs[0].t;
+      let valid = true;
+      const times = hails2.map((h) => {
+        const timeX = (intersect.x - h.pos.x) / h.vel.x;
+        const timeY = (intersect.y - h.pos.y) / h.vel.y;
+
+        return Math.min(h.vel.x ? timeX : Infinity, h.vel.y ? timeY : Infinity);
+      });
+
+      const vZ =
+        (hails[0].pos.z +
+          hails[0].vel.z * times[0] -
+          (hails[1].pos.z + hails[1].vel.z * times[1])) /
+        (times[0] - times[1]);
+
+      const sX = hails[0].pos.x + hails[0].vel.x * times[0] - vX * times[0];
+      const sY = hails[0].pos.y + hails[0].vel.y * times[0] - vY * times[0];
+      const sZ = hails[0].pos.z + hails[0].vel.z * times[0] - vZ * times[0];
 
       const shot = {
         pos: { x: sX, y: sY, z: sZ },
@@ -122,11 +109,8 @@ export const part2 = (input: Input) => {
       };
 
       if (
-        hails.every((h) => {
-          const p = intersection2(h, shot);
-          if (!p) return false;
-          const t = (p.x - shot.pos.x) / shot.vel.x;
-
+        hails.every((h, i) => {
+          const t = times[i];
           return (
             shot.pos.x + shot.vel.x * t === h.pos.x + h.vel.x * t &&
             shot.pos.y + shot.vel.y * t === h.pos.y + h.vel.y * t &&
