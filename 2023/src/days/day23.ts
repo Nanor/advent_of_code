@@ -1,3 +1,4 @@
+import { constrainedMemory } from "process";
 import { Input } from "../input";
 import { Coord } from "../utils";
 
@@ -92,20 +93,43 @@ const buildGraph = (input: Input) => {
   return { nodes, start: `${start.x},${start.y}`, end: `${end.x},${end.y}` };
 };
 
-const solve = (
-  nodes: Nodes,
-  node: string,
-  end: string,
-  checked: string[] = []
-): number => {
-  if (node === end) return 0;
-  if (checked.includes(node)) return -Infinity;
+const solve = (nodes: Nodes, node: string, end: string): number => {
+  let maxVal = 0;
+  let misses = 0;
 
-  return Math.max(
-    ...nodes[node].map(
-      (n) => n.cost + solve(nodes, n.node, end, [...checked, node])
-    )
-  );
+  const inner = (
+    nodes: Nodes,
+    node: string,
+    end: string,
+    checked: string[],
+    dist: number
+  ): void => {
+    if (misses > 200) return;
+
+    if (node === end) {
+      if (dist > maxVal) {
+        maxVal = dist;
+        misses = 0;
+      } else {
+        misses += 1;
+      }
+      return;
+    }
+    if (checked.includes(node)) return;
+
+    const path = [...checked, node];
+
+    const toEnd = nodes[node].find((n) => n.node === end);
+    if (toEnd) {
+      return inner(nodes, end, end, path, dist + toEnd.cost);
+    }
+
+    nodes[node].forEach((n) => inner(nodes, n.node, end, path, dist + n.cost));
+  };
+
+  inner(nodes, node, end, [], 0);
+
+  return maxVal;
 };
 
 export const part1 = (input: Input) => {
@@ -129,9 +153,18 @@ const makeBi = (nodes: Nodes) => {
   return nodes;
 };
 
+const sortGraph = (nodes: Nodes) => {
+  Object.keys(nodes).forEach((k) => {
+    nodes[k].sort((a, b) => b.cost - a.cost);
+  });
+
+  return nodes;
+};
+
 export const part2 = (input: Input) => {
   const { nodes, start, end } = buildGraph(input);
   const biNodes = makeBi(nodes);
+  sortGraph(biNodes);
 
   return solve(biNodes, start, end);
 };
