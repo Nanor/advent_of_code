@@ -116,15 +116,6 @@ func Part2(steps []Step) {
 			y += dy
 		}
 	}
-
-	if x < 0 {
-		x = -x
-	}
-	if y < 0 {
-		y = -y
-	}
-
-	fmt.Println(x + y)
 }
 
 func main() {
