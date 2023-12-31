@@ -1,12 +1,15 @@
-package main
+package day2
 
 import (
 	"fmt"
-	"os"
+
+	utils "github.com/nanor/advent_of_code/2016/utils"
 )
 
-func Part1(file []byte) {
+func Part1(file string) string {
 	x, y := 1, 1
+
+	out := ""
 
 	for _, c := range file {
 		switch c {
@@ -19,14 +22,15 @@ func Part1(file []byte) {
 		case 'R':
 			x += 1
 		case '\n':
-			fmt.Print(x + y*3 + 1)
+			out += fmt.Sprint(x + y*3 + 1)
 		}
 
 		x = min(max(0, x), 2)
 		y = min(max(0, y), 2)
 	}
 
-	fmt.Println(x + y*3 + 1)
+	out += fmt.Sprint(x + y*3 + 1)
+	return out
 }
 
 func toLetter(x, y int) byte {
@@ -51,10 +55,10 @@ func toLetter(x, y int) byte {
 	return 'D'
 }
 
-func Part2(file []byte) {
+func Part2(file string) string {
 	x, y := 0, 2
 
-	out := make([]byte, 0)
+	out := ""
 
 	for _, c := range file {
 		nx, ny := x, y
@@ -68,32 +72,23 @@ func Part2(file []byte) {
 		case 'R':
 			nx += 1
 		case '\n':
-			out = append(out, toLetter(x, y))
+			out += string(toLetter(x, y))
 		}
 
 		sum := nx + ny
-		diff := nx - ny
-		if diff < 0 {
-			diff = -diff
-		}
+		diff := utils.Abs(nx - ny)
 
 		if sum >= 2 && sum <= 6 && diff <= 2 {
 			x, y = nx, ny
 		}
 	}
 
-	out = append(out, toLetter(x, y))
+	out += string(toLetter(x, y))
 
-	fmt.Printf("%s\n", out)
+	return out
 }
 
-func main() {
-	file, err := os.ReadFile("./inputs/day2.txt")
-
-	if err != nil {
-		panic(err)
-	}
-
-	Part1(file)
-	Part2(file)
+func Main(file string) {
+	fmt.Println(Part1(file))
+	fmt.Println(Part2(file))
 }

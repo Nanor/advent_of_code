@@ -1,12 +1,13 @@
-package main
+package day1
 
 import (
 	"fmt"
-	"os"
+
+	"github.com/nanor/advent_of_code/2016/utils"
 )
 
 type Step struct {
-	dir byte
+	dir rune
 	len int
 }
 
@@ -15,10 +16,10 @@ type Coord struct {
 	y int
 }
 
-func parse(file []byte) []Step {
+func Parse(file string) []Step {
 	steps := make([]Step, 0)
 
-	var dir byte
+	var dir rune
 	var len int
 
 	for _, b := range file {
@@ -40,7 +41,7 @@ func parse(file []byte) []Step {
 	return steps
 }
 
-func Part1(steps []Step) {
+func Part1(steps []Step) string {
 	var dir, x, y int
 
 	for _, s := range steps {
@@ -63,17 +64,10 @@ func Part1(steps []Step) {
 
 	}
 
-	if x < 0 {
-		x = -x
-	}
-	if y < 0 {
-		y = -y
-	}
-
-	fmt.Println(x + y)
+	return fmt.Sprint(utils.Abs(x) + utils.Abs(y))
 }
 
-func Part2(steps []Step) {
+func Part2(steps []Step) string {
 	var dir, x, y int
 
 	visited := make(map[Coord]bool)
@@ -100,33 +94,19 @@ func Part2(steps []Step) {
 
 		for i := 0; i < s.len; i++ {
 			if visited[Coord{x, y}] {
-				if x < 0 {
-					x = -x
-				}
-				if y < 0 {
-					y = -y
-				}
-
-				fmt.Println(x + y)
-
-				return
+				return fmt.Sprint(utils.Abs(x) + utils.Abs(y))
 			}
 			visited[Coord{x, y}] = true
 			x += dx
 			y += dy
 		}
 	}
+
+	return ""
 }
 
-func main() {
-	file, err := os.ReadFile("./inputs/day1.txt")
-
-	if err != nil {
-		panic(err)
-	}
-
-	steps := parse(file)
-
-	Part1(steps)
-	Part2(steps)
+func Main(file string) {
+	parsed := Parse(file)
+	fmt.Println(Part1(parsed))
+	fmt.Println(Part2(parsed))
 }
