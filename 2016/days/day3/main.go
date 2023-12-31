@@ -16,8 +16,8 @@ func Parse(file string) []Tri {
 
 	lines := strings.Split(file, "\n")
 
+	re := regexp.MustCompile(`^\s*(\d+)\s*(\d+)\s*(\d+)$`)
 	for _, line := range lines {
-		re := regexp.MustCompile(`^\s*(\d+)\s*(\d+)\s*(\d+)$`)
 		matches := re.FindSubmatch([]byte(line))[1:]
 
 		a, _ := strconv.Atoi(string(matches[0]))
