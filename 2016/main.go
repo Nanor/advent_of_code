@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/nanor/advent_of_code/2016/days/day1"
+	"github.com/nanor/advent_of_code/2016/days/day10"
 	"github.com/nanor/advent_of_code/2016/days/day2"
 	"github.com/nanor/advent_of_code/2016/days/day3"
 	"github.com/nanor/advent_of_code/2016/days/day4"
@@ -44,5 +45,7 @@ func main() {
 		day8.Main(input)
 	case "9":
 		day9.Main(input)
+	case "10":
+		day10.Main(input)
 	}
 }
