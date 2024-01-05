@@ -22,7 +22,7 @@ func (s *screen) rect(w, h int) {
 }
 
 func (s *screen) row(y, d int) {
-	row := make([]bool, WIDTH, WIDTH)
+	row := make([]bool, WIDTH)
 	for x := 0; x < WIDTH; x++ {
 		row[x] = (*s)[coord{x, y}]
 	}
@@ -33,7 +33,7 @@ func (s *screen) row(y, d int) {
 }
 
 func (s *screen) col(x, d int) {
-	col := make([]bool, HEIGHT, HEIGHT)
+	col := make([]bool, HEIGHT)
 	for y := 0; y < HEIGHT; y++ {
 		col[y] = (*s)[coord{x, y}]
 	}

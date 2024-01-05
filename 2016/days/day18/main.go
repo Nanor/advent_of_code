@@ -22,7 +22,7 @@ func next(line string) string {
 	return string(out)
 }
 
-func Part1(line string, lines int) int {
+func solve(line string, lines int) int {
 	count := 0
 
 	for i := 0; i < lines; i++ {
@@ -38,6 +38,6 @@ func Part1(line string, lines int) int {
 }
 
 func Main(file string) {
-	fmt.Println(Part1(file, 40))
-	fmt.Println(Part1(file, 400000))
+	fmt.Println(solve(file, 40))
+	fmt.Println(solve(file, 400000))
 }

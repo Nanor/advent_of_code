@@ -56,8 +56,8 @@ func (b *bot) deal(bots *[]bot, outputs *[]int) {
 }
 
 func Run(file string, x, y int) ([]bot, []int) {
-	bots := make([]bot, 256, 256)
-	outputs := make([]int, 30, 30)
+	bots := make([]bot, 256)
+	outputs := make([]int, 30)
 	for i := range bots {
 		bots[i].x = x
 		bots[i].y = y

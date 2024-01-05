@@ -26,7 +26,7 @@ func Part1(id string) string {
 }
 
 func Part2(id string) string {
-	out := make([]byte, 8, 8)
+	out := make([]byte, 8)
 	filled := 0
 
 	for i := 0; filled < 8; i++ {
