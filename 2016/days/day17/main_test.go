@@ -32,7 +32,7 @@ func TestPart2(t *testing.T) {
 	for _, c := range cases {
 		got := Part2(c.in)
 		if got != c.want {
-			t.Errorf("Part1(%q) == %v, want %v", c.in, got, c.want)
+			t.Errorf("Part2(%q) == %v, want %v", c.in, got, c.want)
 		}
 	}
 }
