@@ -17,6 +17,7 @@ import (
 	"github.com/nanor/advent_of_code/2016/days/day19"
 	"github.com/nanor/advent_of_code/2016/days/day2"
 	"github.com/nanor/advent_of_code/2016/days/day20"
+	"github.com/nanor/advent_of_code/2016/days/day21"
 	"github.com/nanor/advent_of_code/2016/days/day3"
 	"github.com/nanor/advent_of_code/2016/days/day4"
 	"github.com/nanor/advent_of_code/2016/days/day5"
@@ -77,5 +78,7 @@ func main() {
 		day19.Main(input)
 	case "20":
 		day20.Main(input)
+	case "21":
+		day21.Main(input)
 	}
 }
