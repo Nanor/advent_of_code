@@ -5,7 +5,7 @@ My solutions for [Advent of Code](https://adventofcode.com).
 | Year                                  | Stars | Language   |
 | ------------------------------------- | ----- | ---------- |
 | [2015](https://adventofcode.com/2015) | 50    | Python     |
-| [2016](https://adventofcode.com/2016) | -     | -          |
+| [2016](https://adventofcode.com/2016) | 50    | Golang     |
 | [2017](https://adventofcode.com/2017) | 50    | Python     |
 | [2018](https://adventofcode.com/2018) | 50    | Rust       |
 | [2019](https://adventofcode.com/2019) | 50    | Typescript |

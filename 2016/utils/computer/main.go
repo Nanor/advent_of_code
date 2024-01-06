@@ -49,7 +49,7 @@ func Parse(file string) []inst {
 	return out
 }
 
-func (s *State) step(instructions []inst) (*State, bool) {
+func (s *State) step(instructions []inst, ch chan int) (*State, bool) {
 	if s.pc >= len(instructions) {
 		return s, true
 	}
@@ -94,18 +94,25 @@ func (s *State) step(instructions []inst) (*State, bool) {
 
 			instructions[s.pc+aVal].t = newInst
 		}
+	case "out":
+		ch <- aVal
 	}
 	s.pc++
 
 	return s, false
 }
 
-func Run(lines []inst, init State) State {
+func Run(lines []inst, init State, chs ...chan int) State {
+	var ch chan int
+	if len(chs) > 0 {
+		ch = chs[0]
+	}
+
 	s := &init
 
 	var done bool
 	for {
-		s, done = s.step(lines)
+		s, done = s.step(lines, ch)
 
 		if done {
 			return *s
