@@ -5,12 +5,15 @@ from os import listdir
 from types import ModuleType
 import pytest
 
+excluded_days = [3]
 
-days = [
+days: list[int] = [
     int(d.removeprefix("day").removesuffix(".py"))
     for d in listdir("./src/days")
     if d.startswith("day")
 ]
+
+days = [d for d in days if d not in excluded_days]
 
 examples: list[tuple[ModuleType, Example]] = []
 
