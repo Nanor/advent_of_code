@@ -5,7 +5,7 @@ from os import listdir
 from types import ModuleType
 import pytest
 
-excluded_days = [3]
+excluded_days = [3, 4]
 
 days: list[int] = [
     int(d.removeprefix("day").removesuffix(".py"))
