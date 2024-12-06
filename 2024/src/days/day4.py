@@ -1,28 +1,15 @@
 from aocd import get_data
 
+from src.Grid import Grid
 
-class Grid:
-    _lines: list[str]
-    width: int
-    height: int
 
-    def __init__(self, data: str) -> None:
-        self._lines = data.split("\n")
-        self.height = len(self._lines)
-        self.width = len(self._lines[0])
-
-    def get(self, x: int, y: int):
-        if x < 0 or x >= self.width or y < 0 or y >= self.height:
-            raise IndexError()
-
-        return self._lines[y][x]
-
+class SearchGrid(Grid):
     def get_line(self, x: int, y: int, dx: int, dy: int, length: int = 4) -> str:
         return "".join((self.get(x + dx * i, y + dy * i) for i in range(length)))
 
 
 def part1(data: str) -> int:
-    grid = Grid(data)
+    grid = SearchGrid(data)
 
     total = 0
 
@@ -47,7 +34,7 @@ def part1(data: str) -> int:
 
 
 def part2(data: str) -> int:
-    grid = Grid(data)
+    grid = SearchGrid(data)
 
     total = 0
 
