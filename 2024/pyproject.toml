@@ -1,8 +1,11 @@
 [tool.poetry]
-name = "2024"
+name = "aoc"
 version = "0.1.0"
 description = ""
 authors = ["Ronan <ronan131@gmail.com>"]
+
+[tool.poetry.scripts]
+solve = "aoc.main:main"
 
 [tool.poetry.dependencies]
 python = "^3.13"

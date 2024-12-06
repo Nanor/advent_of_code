@@ -1,4 +1,4 @@
-from src.days.day4 import part1, part2
+from aoc.days.day4 import Day4
 
 
 def test_example_1():
@@ -14,7 +14,8 @@ SAXAMASAAA
 MAMMMXMMMM
 MXMXAXMASX"""
     )
-    assert part1(example) == 18
+    day = Day4(example)
+    assert day.part1() == 18
 
 
 def test_example_2():
@@ -30,4 +31,5 @@ SAXAMASAAA
 MAMMMXMMMM
 MXMXAXMASX"""
     )
-    assert part2(example) == 9
+    day = Day4(example)
+    assert day.part2() == 9

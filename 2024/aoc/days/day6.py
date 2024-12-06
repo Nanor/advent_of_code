@@ -1,5 +1,5 @@
-from aocd import get_data
-from src.Grid import Grid
+from aoc.grid import Grid
+from aoc.puzzle import Puzzle
 
 
 DIRECTIONS = {
@@ -55,37 +55,29 @@ class Guard(Grid):
             self.pos = add(self.pos, DIRECTIONS[self.dir])
 
 
-def part1(data: str) -> int:
-    guard = Guard(data)
-    return len(guard.walk())
+class Day6(Puzzle):
+    day = 6
 
+    def part1(self) -> int:
+        guard = Guard(self.data)
+        return len(guard.walk())
 
-def part2(data: str) -> int:
-    g = Guard(data)
-    start_pos = g.pos
-    positions = g.walk()
-    positions.remove(start_pos)
-    positions = list(positions)
+    def part2(self) -> int:
+        g = Guard(self.data)
+        start_pos = g.pos
+        positions = g.walk()
+        positions.remove(start_pos)
+        positions = list(positions)
 
-    loops: int = 0
+        loops: int = 0
 
-    for x, y in positions:
-        guard = Guard(data)
-        guard.set(x, y, "#")
+        for x, y in positions:
+            guard = Guard(self.data)
+            guard.set(x, y, "#")
 
-        try:
-            guard.walk()
-        except LoopError:
-            loops += 1
+            try:
+                guard.walk()
+            except LoopError:
+                loops += 1
 
-    return loops
-
-
-def main() -> None:
-    data = get_data(year=2024, day=6)
-    print(part1(data))
-    print(part2(data))
-
-
-if __name__ == "__main__":
-    main()
+        return loops
