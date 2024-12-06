@@ -1,7 +1,6 @@
 from aocd import get_data
-from tqdm import tqdm
-
 from src.Grid import Grid
+
 
 DIRECTIONS = {
     "U": (0, -1),
@@ -10,6 +9,11 @@ DIRECTIONS = {
     "L": (-1, 0),
 }
 DIRS = ["U", "R", "D", "L"]
+NEXT_DIR = {"U": "R", "R": "D", "D": "L", "L": "U"}
+
+
+def add(a: tuple[int, int], b: tuple[int, int]) -> tuple[int, int]:
+    return (a[0] + b[0], a[1] + b[1])
 
 
 class LoopError(RuntimeError):
@@ -30,58 +34,42 @@ class Guard(Grid):
             if self.get(x, y) == "^"
         )
         self.dir = "U"
-        self.set(*self.pos, ".")
 
-    def walk(self):
-        visited = 0
+    def walk(self) -> set[tuple[int, int]]:
+        visited: set[tuple[int, int]] = set()
+        visited_directions: set[tuple[int, int, str]] = set()
 
         while True:
-            if self.get(*self.pos) == self.dir:
+            if (*self.pos, self.dir) in visited_directions:
                 raise LoopError()
 
-            if self.get(*self.pos) == ".":
-                visited += 1
-                self.set(*self.pos, self.dir)
+            visited.add(self.pos)
+            visited_directions.add((*self.pos, self.dir))
 
             try:
-                while (
-                    self.get(
-                        self.pos[0] + DIRECTIONS[self.dir][0],
-                        self.pos[1] + DIRECTIONS[self.dir][1],
-                    )
-                    == "#"
-                ):
-                    self.dir = DIRS[(DIRS.index(self.dir) + 1) % 4]
+                while self.get(*add(self.pos, DIRECTIONS[self.dir])) == "#":
+                    self.dir = NEXT_DIR[self.dir]
             except IndexError:
                 return visited
 
-            self.pos = (
-                self.pos[0] + DIRECTIONS[self.dir][0],
-                self.pos[1] + DIRECTIONS[self.dir][1],
-            )
+            self.pos = add(self.pos, DIRECTIONS[self.dir])
 
 
 def part1(data: str) -> int:
     guard = Guard(data)
-
-    return guard.walk()
+    return len(guard.walk())
 
 
 def part2(data: str) -> int:
     g = Guard(data)
     start_pos = g.pos
-    g.walk()
+    positions = g.walk()
+    positions.remove(start_pos)
+    positions = list(positions)
 
-    loops = 0
+    loops: int = 0
 
-    for x, y in tqdm(
-        [
-            (x, y)
-            for x in range(g.width)
-            for y in range(g.height)
-            if (x, y) != start_pos and g.get(x, y) in "URDL"
-        ]
-    ):
+    for x, y in positions:
         guard = Guard(data)
         guard.set(x, y, "#")
 
