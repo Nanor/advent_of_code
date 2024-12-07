@@ -11,22 +11,25 @@ class Equation:
         self.result = int(a)
         self.parts = [int(d) for d in b.split(" ")]
 
-    def is_valid(self, part1: bool = True) -> bool:
-        def solve(ps: list[int]) -> bool:
-            if ps[0] > self.result:
-                return False
+    def is_valid(self, part2: bool = False) -> bool:
+        def solve(acc: int, ps: list[int]) -> bool:
+            [*rs, v] = ps
 
-            if len(ps) == 1:
-                return ps[0] == self.result
+            if not rs:
+                return v == acc
 
-            [a, b, *rs] = ps
-            basic = solve([a + b, *rs]) or solve([a * b, *rs])
+            return (
+                (
+                    part2
+                    and acc != v
+                    and f"{acc}".endswith(f"{v}")
+                    and solve(int(f"{acc}".removesuffix(f"{v}")), rs)
+                )
+                or (acc % v == 0 and solve(acc // v, rs))
+                or (acc >= v and solve(acc - v, rs))
+            )
 
-            if part1:
-                return basic
-            return basic or solve([int(f"{a}{b}"), *rs])
-
-        return solve(self.parts)
+        return solve(self.result, self.parts)
 
 
 class Day7(Puzzle):
@@ -43,4 +46,4 @@ class Day7(Puzzle):
         return sum([e.result for e in self.equations if e.is_valid()])
 
     def part2(self) -> int:
-        return sum([e.result for e in self.equations if e.is_valid(False)])
+        return sum([e.result for e in self.equations if e.is_valid(True)])
