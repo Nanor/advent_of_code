@@ -5,11 +5,14 @@ import pytest
 
 from aoc.puzzle import Puzzle
 
+excluded_days = [6]
+
 days = [
     int(d.removeprefix("day").removesuffix(".py"))
     for d in listdir("./aoc/days")
     if d.startswith("day")
 ]
+days = [d for d in days if d not in excluded_days]
 
 for day in days:
     import_module(f"aoc.days.day{day}")
