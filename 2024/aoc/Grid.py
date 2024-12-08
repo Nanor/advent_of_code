@@ -19,3 +19,6 @@ class Grid:
             raise IndexError()
 
         self._lines[y][x] = value
+
+    def __repr__(self) -> str:
+        return "\n".join(["".join(l) for l in self._lines])

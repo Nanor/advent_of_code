@@ -2,14 +2,12 @@ from aoc.grid import Grid
 from aoc.puzzle import Puzzle
 
 
-DIRECTIONS = {
-    "U": (0, -1),
-    "R": (1, 0),
-    "D": (0, 1),
-    "L": (-1, 0),
-}
-DIRS = ["U", "R", "D", "L"]
-NEXT_DIR = {"U": "R", "R": "D", "D": "L", "L": "U"}
+DIRECTIONS = [
+    (0, -1),
+    (1, 0),
+    (0, 1),
+    (-1, 0),
+]
 
 
 def add(a: tuple[int, int], b: tuple[int, int]) -> tuple[int, int]:
@@ -22,7 +20,7 @@ class LoopError(RuntimeError):
 
 class Guard(Grid):
     pos: tuple[int, int]
-    dir: str
+    dir: int
 
     def __init__(self, data: str) -> None:
         super().__init__(data)
@@ -33,22 +31,25 @@ class Guard(Grid):
             for y in range(self.height)
             if self.get(x, y) == "^"
         )
-        self.dir = "U"
+        self.dir = 0
 
-    def walk(self) -> set[tuple[int, int]]:
-        visited: set[tuple[int, int]] = set()
-        visited_directions: set[tuple[int, int, str]] = set()
+    def walk(self) -> list[bool]:
+        visited: list[bool] = [False] * self.width * self.height
+        visited_directions: list[bool] = [False] * self.width * self.height * 4
 
         while True:
-            if (*self.pos, self.dir) in visited_directions:
+            v_index = self.pos[0] + self.pos[1] * self.width
+            vd_index = v_index * 4 + self.dir
+
+            if visited_directions[vd_index]:
                 raise LoopError()
 
-            visited.add(self.pos)
-            visited_directions.add((*self.pos, self.dir))
+            visited[v_index] = True
+            visited_directions[vd_index] = True
 
             try:
                 while self.get(*add(self.pos, DIRECTIONS[self.dir])) == "#":
-                    self.dir = NEXT_DIR[self.dir]
+                    self.dir = (self.dir + 1) % 4
             except IndexError:
                 return visited
 
@@ -60,24 +61,32 @@ class Day6(Puzzle):
 
     def part1(self) -> int:
         guard = Guard(self.data)
-        return len(guard.walk())
+        return guard.walk().count(True)
 
     def part2(self) -> int:
-        g = Guard(self.data)
-        start_pos = g.pos
-        positions = g.walk()
-        positions.remove(start_pos)
-        positions = list(positions)
+        guard = Guard(self.data)
+        start_pos = guard.pos
+        visited = guard.walk()
+
+        positions = [
+            (x, y)
+            for x in range(guard.width)
+            for y in range(guard.height)
+            if (x, y) != start_pos and visited[x + y * guard.width]
+        ]
 
         loops: int = 0
 
         for x, y in positions:
-            guard = Guard(self.data)
+            guard.pos = start_pos
+            guard.dir = 0
             guard.set(x, y, "#")
 
             try:
                 guard.walk()
             except LoopError:
                 loops += 1
+
+            guard.set(x, y, ".")
 
         return loops
