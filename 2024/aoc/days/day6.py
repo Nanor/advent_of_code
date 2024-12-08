@@ -1,17 +1,15 @@
+import cProfile
 from aoc.grid import Grid
 from aoc.puzzle import Puzzle
+from aoc.vec import Vec2
 
 
 DIRECTIONS = [
-    (0, -1),
-    (1, 0),
-    (0, 1),
-    (-1, 0),
+    Vec2(0, -1),
+    Vec2(1, 0),
+    Vec2(0, 1),
+    Vec2(-1, 0),
 ]
-
-
-def add(a: tuple[int, int], b: tuple[int, int]) -> tuple[int, int]:
-    return (a[0] + b[0], a[1] + b[1])
 
 
 class LoopError(RuntimeError):
@@ -19,17 +17,17 @@ class LoopError(RuntimeError):
 
 
 class Guard(Grid):
-    pos: tuple[int, int]
+    pos: Vec2
     dir: int
 
     def __init__(self, data: str) -> None:
         super().__init__(data)
 
         self.pos = next(
-            (x, y)
+            Vec2(x, y)
             for x in range(self.width)
             for y in range(self.height)
-            if self.get(x, y) == "^"
+            if self.get(Vec2(x, y)) == "^"
         )
         self.dir = 0
 
@@ -38,7 +36,7 @@ class Guard(Grid):
         visited_directions: list[bool] = [False] * self.width * self.height * 4
 
         while True:
-            v_index = self.pos[0] + self.pos[1] * self.width
+            v_index = self.pos.x + self.pos.y * self.width
             vd_index = v_index * 4 + self.dir
 
             if visited_directions[vd_index]:
@@ -48,12 +46,12 @@ class Guard(Grid):
             visited_directions[vd_index] = True
 
             try:
-                while self.get(*add(self.pos, DIRECTIONS[self.dir])) == "#":
+                while self.get(self.pos + DIRECTIONS[self.dir]) == "#":
                     self.dir = (self.dir + 1) % 4
             except IndexError:
                 return visited
 
-            self.pos = add(self.pos, DIRECTIONS[self.dir])
+            self.pos += DIRECTIONS[self.dir]
 
 
 class Day6(Puzzle):
@@ -80,13 +78,17 @@ class Day6(Puzzle):
         for x, y in positions:
             guard.pos = start_pos
             guard.dir = 0
-            guard.set(x, y, "#")
+            guard.set(Vec2(x, y), "#")
 
             try:
                 guard.walk()
             except LoopError:
                 loops += 1
 
-            guard.set(x, y, ".")
+            guard.set(Vec2(x, y), ".")
 
         return loops
+
+
+if __name__ == "__main__":
+    cProfile.run("Day6().part2()")

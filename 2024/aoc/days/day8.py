@@ -1,14 +1,14 @@
 from collections import defaultdict
 from dataclasses import dataclass
 from itertools import combinations
+from aoc.vec import Vec2
 from aoc.grid import Grid
 from aoc.puzzle import Puzzle
 
 
 @dataclass
 class Antenna:
-    x: int
-    y: int
+    position: Vec2
     frequency: str
 
 
@@ -29,41 +29,44 @@ class Day8(Puzzle):
         self.antennae = defaultdict(lambda: [])
         for x in range(grid.width):
             for y in range(grid.height):
-                freq = grid.get(x, y)
+                freq = grid.get(Vec2(x, y))
                 if freq != ".":
-                    self.antennae[freq].append(Antenna(x, y, freq))
+                    self.antennae[freq].append(Antenna(Vec2(x, y), freq))
 
-    def in_bounds(self, x: int, y: int) -> bool:
-        return x >= 0 and x < self.width and y >= 0 and y < self.height
+    def in_bounds(self, position: Vec2) -> bool:
+        return (
+            position.x >= 0
+            and position.x < self.width
+            and position.y >= 0
+            and position.y < self.height
+        )
 
     def part1(self) -> int:
-        antinodes: set[tuple[int, int]] = set()
+        antinodes: set[Vec2] = set()
 
         for anns in self.antennae.values():
             for a, b in combinations(anns, 2):
-                dx = a.x - b.x
-                dy = a.y - b.y
+                d = a.position - b.position
 
-                if self.in_bounds(a.x + dx, a.y + dy):
-                    antinodes.add((a.x + dx, a.y + dy))
+                if self.in_bounds(a.position + d):
+                    antinodes.add(a.position + d)
 
-                if self.in_bounds(a.x - 2 * dx, a.y - 2 * dy):
-                    antinodes.add((a.x - 2 * dx, a.y - 2 * dy))
+                if self.in_bounds(a.position - 2 * d):
+                    antinodes.add(a.position - 2 * d)
 
         return len(antinodes)
 
     def part2(self) -> int:
-        antinodes: set[tuple[int, int]] = set()
+        antinodes: set[Vec2] = set()
 
         for anns in self.antennae.values():
             for a, b in combinations(anns, 2):
-                dx: int = a.x - b.x
-                dy: int = a.y - b.y
+                d: Vec2 = a.position - b.position
 
                 i = 0
                 while True:
-                    pos = (a.x + dx * i, a.y + dy * i)
-                    if self.in_bounds(*pos):
+                    pos = a.position + d * i
+                    if self.in_bounds(pos):
                         antinodes.add(pos)
                         i += 1
                     else:
@@ -71,8 +74,8 @@ class Day8(Puzzle):
 
                 i = -1
                 while True:
-                    pos = (a.x + dx * i, a.y + dy * i)
-                    if self.in_bounds(*pos):
+                    pos = a.position + d * i
+                    if self.in_bounds(pos):
                         antinodes.add(pos)
                         i -= 1
                     else:

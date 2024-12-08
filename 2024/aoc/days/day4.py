@@ -1,10 +1,11 @@
 from aoc.grid import Grid
 from aoc.puzzle import Puzzle
+from aoc.vec import Vec2
 
 
 class SearchGrid(Grid):
-    def get_line(self, x: int, y: int, dx: int, dy: int, length: int = 4) -> str:
-        return "".join((self.get(x + dx * i, y + dy * i) for i in range(length)))
+    def get_line(self, start: Vec2, dir: Vec2, length: int = 4) -> str:
+        return "".join((self.get(start + dir * i) for i in range(length)))
 
 
 class Day4(Puzzle):
@@ -19,17 +20,17 @@ class Day4(Puzzle):
         total = 0
 
         ds = [
-            [0, 1],
-            [1, 0],
-            [1, 1],
-            [-1, 1],
+            Vec2(0, 1),
+            Vec2(1, 0),
+            Vec2(1, 1),
+            Vec2(-1, 1),
         ]
 
         for x in range(self.grid.width):
             for y in range(self.grid.height):
-                for dx, dy in ds:
+                for d in ds:
                     try:
-                        line = self.grid.get_line(x, y, dx, dy)
+                        line = self.grid.get_line(Vec2(x, y), d)
                     except IndexError:
                         continue
                     if line == "XMAS" or line == "SAMX":
@@ -42,11 +43,12 @@ class Day4(Puzzle):
 
         for x in range(1, self.grid.width - 1):
             for y in range(1, self.grid.height - 1):
-                if self.grid.get(x, y) != "A":
+                mid = Vec2(x, y)
+                if self.grid.get(mid) != "A":
                     continue
 
-                pos = self.grid.get_line(x - 1, y - 1, 1, 1, 3)
-                neg = self.grid.get_line(x + 1, y - 1, -1, 1, 3)
+                pos = self.grid.get_line(mid - Vec2(1, 1), Vec2(1, 1), 3)
+                neg = self.grid.get_line(mid + Vec2(1, -1), Vec2(-1, 1), 3)
 
                 if (pos == "MAS" or pos == "SAM") and (neg == "MAS" or neg == "SAM"):
                     total += 1
