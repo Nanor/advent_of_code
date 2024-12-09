@@ -1,4 +1,3 @@
-import cProfile
 from aoc.grid import Grid
 from aoc.puzzle import Puzzle
 from aoc.vec import Vec2
@@ -88,7 +87,3 @@ class Day6(Puzzle):
             guard.set(Vec2(x, y), ".")
 
         return loops
-
-
-if __name__ == "__main__":
-    cProfile.run("Day6().part2()")
