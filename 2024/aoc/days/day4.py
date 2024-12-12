@@ -1,9 +1,9 @@
-from aoc.grid import Grid
+from aoc.grid import StrGrid
 from aoc.puzzle import Puzzle
 from aoc.vec import Vec2
 
 
-class SearchGrid(Grid):
+class SearchGrid(StrGrid):
     def get_line(self, start: Vec2, dir: Vec2, length: int = 4) -> str:
         return "".join((self.get(start + dir * i) for i in range(length)))
 
@@ -14,7 +14,7 @@ class Day4(Puzzle):
 
     def __init__(self, data: str | None = None) -> None:
         super().__init__(data)
-        self.grid = SearchGrid(self.data)
+        self.grid = SearchGrid.from_data(self.data)
 
     def part1(self) -> int:
         total = 0

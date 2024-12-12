@@ -2,7 +2,7 @@ from collections import defaultdict
 from dataclasses import dataclass
 from itertools import combinations
 from aoc.vec import Vec2
-from aoc.grid import Grid
+from aoc.grid import StrGrid
 from aoc.puzzle import Puzzle
 
 
@@ -22,7 +22,7 @@ class Day8(Puzzle):
     def __init__(self, data: str | None = None) -> None:
         super().__init__(data)
 
-        grid = Grid(self.data)
+        grid = StrGrid.from_data(self.data)
         self.width = grid.width
         self.height = grid.height
 

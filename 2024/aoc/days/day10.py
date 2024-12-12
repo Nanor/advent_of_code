@@ -1,4 +1,4 @@
-from aoc.grid import Grid
+from aoc.grid import StrGrid
 from aoc.puzzle import Puzzle
 from aoc.vec import Vec2
 
@@ -14,12 +14,12 @@ DIRECTIONS = [
 class Day10(Puzzle):
     day = 10
 
-    grid: Grid
+    grid: StrGrid
 
     def __init__(self, data: str | None = None) -> None:
         super().__init__(data)
 
-        self.grid = Grid(self.data)
+        self.grid = StrGrid.from_data(self.data)
 
     def count_ends(self, pos: Vec2) -> set[Vec2]:
         h = self.grid.get(pos)

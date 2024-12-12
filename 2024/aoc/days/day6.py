@@ -1,4 +1,5 @@
-from aoc.grid import Grid
+from typing import Self
+from aoc.grid import StrGrid
 from aoc.puzzle import Puzzle
 from aoc.vec import Vec2
 
@@ -15,20 +16,23 @@ class LoopError(RuntimeError):
     pass
 
 
-class Guard(Grid):
+class Guard(StrGrid):
     pos: Vec2
     dir: int
 
-    def __init__(self, data: str) -> None:
-        super().__init__(data)
+    @classmethod
+    def from_data(cls, data: str) -> Self:
+        g = super().from_data(data)
 
-        self.pos = next(
+        g.pos = next(
             Vec2(x, y)
-            for x in range(self.width)
-            for y in range(self.height)
-            if self.get(Vec2(x, y)) == "^"
+            for x in range(g.width)
+            for y in range(g.height)
+            if g.get(Vec2(x, y)) == "^"
         )
-        self.dir = 0
+        g.dir = 0
+
+        return g
 
     def walk(self) -> list[bool]:
         visited: list[bool] = [False] * self.width * self.height
@@ -57,11 +61,11 @@ class Day6(Puzzle):
     day = 6
 
     def part1(self) -> int:
-        guard = Guard(self.data)
+        guard = Guard.from_data(self.data)
         return guard.walk().count(True)
 
     def part2(self) -> int:
-        guard = Guard(self.data)
+        guard = Guard.from_data(self.data)
         start_pos = guard.pos
         visited = guard.walk()
 
