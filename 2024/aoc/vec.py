@@ -27,3 +27,6 @@ class Vec2:
 
     def __sub__(self, other: Self) -> Self:
         return self + (-other)
+
+    def __iter__(self):
+        return iter([self.x, self.y])

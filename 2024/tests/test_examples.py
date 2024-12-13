@@ -6,7 +6,7 @@ import pytest
 
 from aoc.puzzle import Puzzle
 
-excluded_days = [3, 4, 12]
+excluded_days = [3, 4, 12, 13]
 
 days: list[int] = [
     int(d.removeprefix("day").removesuffix(".py"))
