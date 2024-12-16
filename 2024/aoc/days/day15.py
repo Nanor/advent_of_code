@@ -16,12 +16,7 @@ class Warehouse(StrGrid):
     def __init__(self, width: int, height: int, data: list[list[str]]) -> None:
         super().__init__(width, height, data)
 
-        self.robot = next(
-            Vec2(x, y)
-            for x in range(self.width)
-            for y in range(self.height)
-            if self.get(Vec2(x, y)) == "@"
-        )
+        self.robot = self.find("@")
 
     def _test_move(self, move: Vec2, pos: Vec2) -> bool:
         next_loc = self.get(pos + move)

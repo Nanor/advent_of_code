@@ -24,12 +24,7 @@ class Guard(StrGrid):
     def from_data(cls, data: str) -> Self:
         g = super().from_data(data)
 
-        g.pos = next(
-            Vec2(x, y)
-            for x in range(g.width)
-            for y in range(g.height)
-            if g.get(Vec2(x, y)) == "^"
-        )
+        g.pos = g.find("^")
         g.dir = 0
 
         return g

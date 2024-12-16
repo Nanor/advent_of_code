@@ -32,6 +32,14 @@ class Grid[T]:
     def __repr__(self) -> str:
         return "\n".join(["".join([str(c) for c in l]) for l in self._data])
 
+    def find(self, value: T) -> Vec2:
+        return next(
+            Vec2(x, y)
+            for x in range(self.width)
+            for y in range(self.height)
+            if self.get(Vec2(x, y)) == value
+        )
+
 
 class StrGrid(Grid[str]):
     @classmethod
