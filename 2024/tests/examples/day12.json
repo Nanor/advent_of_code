@@ -1,0 +1,25 @@
+[
+  {
+    "input": "AAAA\nBBCD\nBBCC\nEEEC",
+    "part1": "140",
+    "part2": "80"
+  },
+  {
+    "input": "OOOOO\nOXOXO\nOOOOO\nOXOXO\nOOOOO",
+    "part1": "772",
+    "part2": "436"
+  },
+  {
+    "input": "RRRRIICCFF\nRRRRIICCCF\nVVRRRCCFFF\nVVRCCCJFFF\nVVVVCJJCFE\nVVIVCCJJEE\nVVIIICJJEE\nMIIIIIJJEE\nMIIISIJEEE\nMMMISSJEEE",
+    "part1": "1930",
+    "part2": "1206"
+  },
+  {
+    "input": "EEEEE\nEXXXX\nEEEEE\nEXXXX\nEEEEE",
+    "part2": "236"
+  },
+  {
+    "input": "AAAAAA\nAAABBA\nAAABBA\nABBAAA\nABBAAA\nAAAAAA",
+    "part2": "368"
+  }
+]

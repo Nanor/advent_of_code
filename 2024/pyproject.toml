@@ -6,6 +6,7 @@ authors = ["Ronan <ronan131@gmail.com>"]
 
 [tool.poetry.scripts]
 solve = "aoc.main:main"
+examples = "tests.download_examples:main"
 
 [tool.poetry.dependencies]
 python = "^3.13"
