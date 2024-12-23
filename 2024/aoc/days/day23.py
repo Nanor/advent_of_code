@@ -1,5 +1,5 @@
-# type: ignore
-from igraph import Graph
+from networkx import Graph
+from networkx.algorithms import enumerate_all_cliques
 from aoc.puzzle import Puzzle
 
 
@@ -11,36 +11,19 @@ class Day23(Puzzle):
     def __init__(self, data: str | None = None) -> None:
         super().__init__(data)
 
-        self.graph = Graph()
-
-        v_set: set[str] = set()
-        for line in self.data.splitlines():
-            [a, b] = line.split("-")
-            v_set.add(a)
-            v_set.add(b)
-
-        vs: list[str] = list(v_set)
-        self.graph.add_vertices(len(vs))
-        self.graph.vs["name"] = vs
-
-        for line in self.data.splitlines():
-            [a, b] = line.split("-")
-            self.graph.add_edges([(vs.index(a), vs.index(b))])
+        self.graph = Graph([l.split("-") for l in self.data.splitlines()])
 
     def part1(self) -> int:
-        cliques = self.graph.cliques(3, 3)
-
         count = 0
 
-        for clique in cliques:
-            names: list[str] = self.graph.vs[clique]["name"]
-            if [n for n in names if n.startswith("t")]:
+        for clique in enumerate_all_cliques(self.graph):
+            if len(clique) == 3 and [n for n in clique if n.startswith("t")]:
                 count += 1
 
         return count
 
     def part2(self) -> str:
-        clique = self.graph.largest_cliques()[0]
-
-        names: list[str] = self.graph.vs[clique]["name"]
-        return ",".join(sorted(names))
+        clique: list[str] = []
+        for c in enumerate_all_cliques(self.graph):
+            clique = c
+        return ",".join(sorted(clique))
