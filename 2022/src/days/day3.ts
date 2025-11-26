@@ -1,3 +1,5 @@
+import { Input } from "../input";
+
 const LETTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 export const part1 = (input: Input) =>

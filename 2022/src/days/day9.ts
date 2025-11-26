@@ -1,3 +1,5 @@
+import { Input } from "../input";
+
 type Coord = {
   x: number;
   y: number;

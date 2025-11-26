@@ -1,4 +1,5 @@
 import Grid from "../common/Grid";
+import { Input } from "../input";
 
 type Tree = { height: number; visible: boolean };
 

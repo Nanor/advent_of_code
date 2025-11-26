@@ -1,3 +1,5 @@
+import { Input } from "../input";
+
 enum Throw {
   Rock = 1,
   Paper = 2,

@@ -1,3 +1,5 @@
+import { Input } from "../input";
+
 const parse = (input: Input) => {
   const [stackInput] = input.asParagraphs();
 

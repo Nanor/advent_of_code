@@ -1,6 +1,8 @@
 import Grid from "../common/Grid";
 import HashSet from "../common/HashSet";
 import aStar from "../common/aStar";
+import { Input } from "../input";
+import { Vec2 } from "../types";
 
 interface Blizzard extends Vec2 {
   dir: number;

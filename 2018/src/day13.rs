@@ -135,6 +135,7 @@ fn main() {
   }
 
   // draw(&tracks, &carts);
+  let mut first = true;
 
   loop {
     carts.sort_by_key(|c| c.y * 1000 + c.x);
@@ -151,7 +152,10 @@ fn main() {
         .next();
       match m {
         Some((_, c)) => {
-          println!("Crash: {},{}", carts[n].x, carts[n].y);
+          if first {
+            println!("{},{}", carts[n].x, carts[n].y);
+            first = false
+          }
 
           carts[n].crash();
           c.crash();
@@ -162,7 +166,7 @@ fn main() {
     // draw(&tracks, &carts);
     if carts.iter().filter(|c| !c.crashed.get()).count() == 1 {
       let cart = carts.iter().filter(|c| !c.crashed.get()).next().unwrap();
-      println!("End:   {},{}", cart.x, cart.y);
+      println!("{},{}", cart.x, cart.y);
       break;
     }
   }

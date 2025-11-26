@@ -1,5 +1,7 @@
 import Grid from "../common/Grid";
 import breadthFirstSearch from "../common/breadthFirstSearch";
+import { Input } from "../input";
+import { Vec2 } from "../types";
 
 const letters = "abcdefghijklmnopqrstuvwxyz";
 

@@ -12,7 +12,7 @@ def part2(spreadsheet):
             for b in line:
                 if a != b and a % b == 0:
                     total += a / b
-    return total
+    return int(total)
 
 
 def main():

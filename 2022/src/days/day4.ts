@@ -1,3 +1,5 @@
+import { Input } from "../input";
+
 const parse = (input: Input) =>
   input.asMatches(/(\d+)-(\d+),(\d+)-(\d+)/g).map((l) => {
     const [a, b, c, d] = l.slice(1).map((n) => parseInt(n));

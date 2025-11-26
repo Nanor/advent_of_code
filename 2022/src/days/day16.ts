@@ -1,4 +1,5 @@
 import breadthFirstSearch from "../common/breadthFirstSearch";
+import { Input } from "../input";
 
 const parse = (input: Input) => {
   return input

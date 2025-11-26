@@ -1,3 +1,5 @@
+import { Input } from "../input";
+
 type Monkey = {
   index: number;
   count: number;

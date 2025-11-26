@@ -1,3 +1,5 @@
+import { Input } from "../input";
+
 type Link = {
   value: number;
   next?: Link;

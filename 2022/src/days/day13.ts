@@ -1,3 +1,5 @@
+import { Input } from "../input";
+
 type Value = Value[] | number;
 
 const parse = (s: string): Value => {

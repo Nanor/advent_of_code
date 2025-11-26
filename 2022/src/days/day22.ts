@@ -1,4 +1,6 @@
 import Grid from "../common/Grid";
+import { Input } from "../input";
+import { Vec2 } from "../types";
 
 class WrappingGrid extends Grid<boolean> {
   height: number;

@@ -1,4 +1,6 @@
 import HashSet from "../common/HashSet";
+import { Input } from "../input";
+import { Vec2 } from "../types";
 
 class ElfGrid extends HashSet<Vec2, number> {
   order: ("N" | "S" | "W" | "E")[];

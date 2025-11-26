@@ -1,3 +1,5 @@
+import { Input } from "../input";
+
 export const part1 = (input: Input) =>
   Math.max(
     ...input

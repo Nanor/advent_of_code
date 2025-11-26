@@ -1,3 +1,5 @@
+import { Input } from "../input";
+
 type Node = Dir | File;
 
 type Dir = {

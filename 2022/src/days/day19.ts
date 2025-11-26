@@ -1,3 +1,5 @@
+import { Input } from "../input";
+
 const items = ["ore", "clay", "obsidian", "geode"] as const;
 
 type Item = typeof items[number];

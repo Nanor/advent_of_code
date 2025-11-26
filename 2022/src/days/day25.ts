@@ -1,3 +1,5 @@
+import { Input } from "../input";
+
 const digits = {
   2: 2,
   1: 1,

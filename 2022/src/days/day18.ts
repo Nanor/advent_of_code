@@ -1,4 +1,6 @@
 import HashSet from "../common/HashSet";
+import { Input } from "../input";
+import { Vec3 } from "../types";
 
 class Cubes extends HashSet<Vec3, number> {
   hash({ x, y, z }) {

@@ -1,3 +1,5 @@
+import { Input } from "../input";
+
 const solve = (input: Input, size: number) => {
   const chars = input.asChars();
 

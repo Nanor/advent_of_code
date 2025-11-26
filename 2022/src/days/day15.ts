@@ -1,3 +1,6 @@
+import { Input } from "../input";
+import { Vec2 } from "../types";
+
 interface Sensor extends Vec2 {
   beacon: Vec2;
   distance: number;

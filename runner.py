@@ -18,16 +18,24 @@ class Colors(Enum):
 
 COMMANDS = {
     2015: lambda day: ["python3", f"day{day}.py"],
+    2016: lambda day: ["go", "run", ".", f"{day}"],
+    2017: lambda day: ["python3", f"day{day}.py"],
+    2018: lambda day: ["cargo", "run", "--release", "--bin", f"day{day}"],
+    2019: lambda day: ["npm", "--silent", "start", f"{day}"],
+    2020: lambda day: ["npm", "--silent", "start", f"{day}"],
+    2021: lambda day: ["npm", "--silent", "start", f"{day}"],
+    2022: lambda day: ["npm", "--silent", "start", f"{day}"],
+    2023: lambda day: ["bun", "--silent", "start", f"{day}"],
+    2024: lambda day: ["poetry", "run", "solve", f"{day}"],
 }
 
 
-def main():
-    year = 2015
+def run_year(year):
     for day in range(1, 26):
         start_time = time.time()
         try:
             output = subprocess.run(
-                COMMANDS[2015](day),
+                COMMANDS[year](day),
                 cwd=f"{year}",
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
@@ -69,6 +77,19 @@ def main():
             color = Colors.green.value
 
         print(f"{color}{symbol} {year} {day:>2} {ex_time:>7.4f}s{Colors.reset.value}")
+
+
+def main():
+    run_year(2015)
+    run_year(2016)
+    run_year(2017)
+    run_year(2018)
+    run_year(2019)
+    run_year(2020)
+    run_year(2021)
+    run_year(2022)
+    run_year(2023)
+    run_year(2024)
 
 
 if __name__ == "__main__":

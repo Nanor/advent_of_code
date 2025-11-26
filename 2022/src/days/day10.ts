@@ -1,3 +1,5 @@
+import { Input } from "../input";
+
 const render = (
   input: Input,
   time: number,
@@ -47,7 +49,7 @@ export const part2 = (input: Input) => {
   const width = 40;
   const height = 6;
 
-  let output = "\n";
+  let output = "";
 
   const callback = (xReg: number, cycle: number) => {
     output += Math.abs(xReg - ((cycle - 1) % width)) <= 1 ? "#" : ".";

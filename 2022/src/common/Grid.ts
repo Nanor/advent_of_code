@@ -1,3 +1,5 @@
+import { Vec2 } from "../types";
+
 class Grid<T> {
   protected grid: Map<number, T>;
   readonly width: number;
