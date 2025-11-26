@@ -1,61 +1,23 @@
 #!/usr/local/bin/python3
-from math import ceil, sqrt
-from typing import DefaultDict
-
-
-def calc(house):
-    presents = 0
-    for j in range(1, ceil(sqrt(house)) + 1):
-        if house % j == 0:
-            presents += j
-            if j != house // j:
-                presents += house // j
-
-    return presents
+import numpy as np
 
 
 def part1(target: int):
-    house = 1
+    houses = np.zeros((target // 30,))
 
-    while True:
-        v = calc(house)
+    for i in range(2, target // 30):
+        houses[i::i] += i
 
-        if v >= target // 10:
-            return house
-
-        if house % 100000 == 0:
-            print(house)
-
-        house += 1
+    return np.argmax(houses > target // 10)
 
 
 def part2(target: int):
-    elf = 1
+    houses = np.zeros((target // 30,))
 
-    bound = None
+    for i in range(2, target // 30):
+        houses[i : i + i * 50 : i] += i
 
-    houses = DefaultDict(lambda: 0)
-
-    while True:
-        for n in range(1, 51):
-            house = elf * n
-
-            if bound and house > bound:
-                break
-
-            houses[house] += 11 * elf
-            if houses[house] >= target:
-                if bound is None:
-                    bound = house
-                else:
-                    bound = min(bound, house)
-
-        if houses[elf] >= target:
-            return elf
-        else:
-            del houses[elf]
-
-        elf += 1
+    return np.argmax(houses > target // 11)
 
 
 def main():
@@ -63,5 +25,5 @@ def main():
     print(part2(34000000))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
