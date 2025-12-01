@@ -3,6 +3,7 @@
 
 from enum import Enum
 import subprocess
+import sys
 import time
 
 TIMEOUT = 15
@@ -27,27 +28,12 @@ COMMANDS = {
     2022: lambda day: ["npm", "--silent", "start", f"{day}"],
     2023: lambda day: ["bun", "--silent", "start", f"{day}"],
     2024: lambda day: ["poetry", "run", "solve", f"{day}"],
+    2025: lambda day: ["cargo", "run", "--release", f"{day}"],
 }
 
 
 def run_year(year):
     for day in range(1, 26):
-        start_time = time.time()
-        try:
-            output = subprocess.run(
-                COMMANDS[year](day),
-                cwd=f"{year}",
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
-                timeout=TIMEOUT,
-            )
-            end_time = time.time()
-
-            answers = output.stdout.decode()
-        except subprocess.TimeoutExpired:
-            answers = ""
-            end_time = time.time()
-
         try:
             with open(f"files/{year}_{day:02}a_answer.txt", mode="r") as f1:
                 a1 = f1.read()
@@ -63,6 +49,22 @@ def run_year(year):
             continue
 
         expected = f"{a1}\n{a2}\n"
+
+        start_time = time.time()
+        try:
+            output = subprocess.run(
+                COMMANDS[year](day),
+                cwd=f"{year}",
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                timeout=TIMEOUT,
+            )
+            end_time = time.time()
+
+            answers = output.stdout.decode()
+        except subprocess.TimeoutExpired:
+            answers = ""
+            end_time = time.time()
 
         correct = answers.strip() == expected.strip()
 
@@ -80,16 +82,10 @@ def run_year(year):
 
 
 def main():
-    run_year(2015)
-    run_year(2016)
-    run_year(2017)
-    run_year(2018)
-    run_year(2019)
-    run_year(2020)
-    run_year(2021)
-    run_year(2022)
-    run_year(2023)
-    run_year(2024)
+    years = sys.argv[1:] or range(2015, 2026)
+
+    for year in years:
+        run_year(int(year))
 
 
 if __name__ == "__main__":
