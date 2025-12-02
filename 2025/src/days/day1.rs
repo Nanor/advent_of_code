@@ -7,7 +7,7 @@ pub fn run() {
     println!("{}", part2(&input));
 }
 
-pub fn part1(input: &str) -> u32 {
+fn part1(input: &str) -> u32 {
     let mut dial: i32 = 50;
     let mut count = 0;
 
@@ -29,7 +29,7 @@ pub fn part1(input: &str) -> u32 {
     return count;
 }
 
-pub fn part2(input: &str) -> u32 {
+fn part2(input: &str) -> u32 {
     let mut dial: i32 = 1000050;
     let mut count = 0;
 
