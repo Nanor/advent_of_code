@@ -9,6 +9,7 @@ fn main() {
         Some(d) => match d.parse() {
             Ok(1) => days::day1::run(),
             Ok(2) => days::day2::run(),
+            Ok(3) => days::day3::run(),
             _ => println!("Invalid day"),
         },
         None => println!("No day provided"),
