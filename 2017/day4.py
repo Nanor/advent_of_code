@@ -17,12 +17,12 @@ def part2(inputs):
 
 
 def main():
-    with open('day4.txt') as f:
-        inputs = [line.strip().split(' ') for line in f]
+    with open("../files/2017_04_input.txt") as f:
+        inputs = [line.strip().split(" ") for line in f]
 
     print(part1(inputs))
     print(part2(inputs))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

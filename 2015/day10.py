@@ -193,10 +193,9 @@ evolves = {
     Atoms.U: [Atoms.Pa],
 }
 
+
 def say(input):
-    return [
-        atom for a in input for atom in evolves[a] 
-    ]
+    return [atom for a in input for atom in evolves[a]]
 
 
 def say_multiple(input, times):
@@ -209,8 +208,10 @@ def say_multiple(input, times):
 def length(atoms):
     return sum(len(str(a.value)) for a in atoms)
 
+
 def main():
-    input = [Atoms(1321131112)]
+    with open("../files/2015_10_input.txt") as f:
+        input = [Atoms(int(f.read()))]
 
     # part1
     output = say_multiple(input, 40)

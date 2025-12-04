@@ -67,7 +67,7 @@ def part2(board, times):
 
 
 def main():
-    with open("day18.txt") as fin:
+    with open("../files/2015_18_input.txt") as fin:
         board = [[c == "#" for c in line.strip()] for line in fin if line]
     # board = [[c == "#" for c in line] for line in test_input.split("\n") if line]
 
@@ -77,4 +77,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

@@ -42,10 +42,11 @@ def part2(input):
 
 
 def main():
-    input = 347991
+    with open("../files/2017_03_input.txt") as f:
+        input = int(f.read())
     print(part1(input))
     print(part2(input))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

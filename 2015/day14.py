@@ -10,8 +10,7 @@ def get_distance(speed, on_time, off_time, time):
 
 
 def at_time(reindeer, time):
-    return ((name, get_distance(int(speed), int(on), int(off), time))
-            for (name, speed, on, off) in reindeer)
+    return ((name, get_distance(int(speed), int(on), int(off), time)) for (name, speed, on, off) in reindeer)
 
 
 def part1(reindeer, time):
@@ -33,9 +32,8 @@ def part2(reindeer, time):
 
 def main():
     reindeer = []
-    with open('day14.txt') as file:
-        exp = re.compile(
-            r'(\w+) can fly (\d+) km/s for (\d+) seconds, but then must rest for (\d+) seconds.')
+    with open("../files/2015_14_input.txt") as file:
+        exp = re.compile(r"(\w+) can fly (\d+) km/s for (\d+) seconds, but then must rest for (\d+) seconds.")
         for line in file:
             m = exp.match(line)
             reindeer.append(m.groups())
@@ -45,5 +43,5 @@ def main():
     print(part2(reindeer, time))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

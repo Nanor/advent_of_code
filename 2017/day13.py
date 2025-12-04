@@ -20,9 +20,9 @@ def part2(layers):
 
 def main():
     layers = {}
-    with open('day13.txt') as f:
+    with open("../files/2017_13_input.txt") as f:
         for line in f:
-            m = re.search(r'^(\d+): (\d+)$', line)
+            m = re.search(r"^(\d+): (\d+)$", line)
             (layer, depth) = m.groups()
             layers[int(layer)] = int(depth)
 
@@ -30,5 +30,5 @@ def main():
     print(part2(layers))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

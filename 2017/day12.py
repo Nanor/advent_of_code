@@ -36,11 +36,11 @@ def part2(connections):
 
 def main():
     connections = defaultdict(lambda: set())
-    with open('day12.txt') as f:
+    with open("../files/2017_12_input.txt") as f:
         for line in f:
-            program_1, programs = line.split('<->')
+            program_1, programs = line.split("<->")
 
-            for program_2 in programs.strip().split(','):
+            for program_2 in programs.strip().split(","):
                 connections[int(program_1)].add(int(program_2))
                 connections[int(program_2)].add(int(program_1))
 
@@ -50,5 +50,5 @@ def main():
     print(part2(connections))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

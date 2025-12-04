@@ -9,12 +9,12 @@ def evaluate(wire, instructions):
         return int(instruction)
     except ValueError:
         pass
-    if re.match(r'^\w+$', instruction):
+    if re.match(r"^\w+$", instruction):
         value = evaluate(instruction, instructions)
         instructions[wire] = value
         return value
 
-    m = re.search(r'^(\w+ )?(AND|OR|NOT|LSHIFT|RSHIFT) (\w+)$', instruction)
+    m = re.search(r"^(\w+ )?(AND|OR|NOT|LSHIFT|RSHIFT) (\w+)$", instruction)
     (x, inst, y) = m.groups()
 
     if x:
@@ -27,15 +27,15 @@ def evaluate(wire, instructions):
     except ValueError:
         y = evaluate(y, instructions)
 
-    if inst == 'AND':
+    if inst == "AND":
         value = x & y
-    if inst == 'OR':
+    if inst == "OR":
         value = x | y
-    if inst == 'NOT':
+    if inst == "NOT":
         value = ~y
-    if inst == 'LSHIFT':
+    if inst == "LSHIFT":
         value = x << y
-    if inst == 'RSHIFT':
+    if inst == "RSHIFT":
         value = x >> y
 
     instructions[wire] = value
@@ -43,18 +43,17 @@ def evaluate(wire, instructions):
 
 
 def main():
-    with open('day7.txt') as f:
-        instructions = {
-            k: v for (v, k) in [line.strip().split(' -> ') for line in f]}
+    with open("../files/2015_07_input.txt") as f:
+        instructions = {k: v for (v, k) in [line.strip().split(" -> ") for line in f]}
 
     # part1
-    a_value = evaluate('a', instructions.copy())
+    a_value = evaluate("a", instructions.copy())
     print(a_value)
 
     i = instructions.copy()
-    i['b'] = a_value
-    print(evaluate('a', i))
+    i["b"] = a_value
+    print(evaluate("a", i))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

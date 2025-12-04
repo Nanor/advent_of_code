@@ -41,6 +41,6 @@ export const asInput = (str: string) => ({
 export type Input = ReturnType<typeof asInput>;
 
 export default async (name: string): Promise<Input> => {
-  const file = Bun.file(`./inputs/day${name}.txt`);
-  return asInput(await file.text());
+  const file = Bun.file(`../files/2023_${String(name).padStart(2, "0")}_input.txt`);
+  return asInput((await file.text()).trim());
 };

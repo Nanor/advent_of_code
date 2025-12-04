@@ -16,17 +16,17 @@ def part1(instructions):
     while pointer < len(instructions):
         (op, x, y) = instructions[pointer]
 
-        if op == 'set':
+        if op == "set":
             registers[x] = value(y)
             pointer += 1
-        elif op == 'sub':
+        elif op == "sub":
             registers[x] -= value(y)
             pointer += 1
-        elif op == 'mul':
+        elif op == "mul":
             registers[x] *= value(y)
             pointer += 1
             mul_count += 1
-        elif op == 'jnz':
+        elif op == "jnz":
             if value(x) != 0:
                 pointer += value(y)
             else:
@@ -53,11 +53,12 @@ def part2():
 
 
 def main():
-    with open('day23.txt') as f:
-        instructions = [line.strip().split(' ') for line in f]
+    with open("../files/2017_23_input.txt") as f:
+        instructions = [line.strip().split(" ") for line in f]
 
     print(part1(instructions))
     print(part2())
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

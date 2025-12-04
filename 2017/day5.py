@@ -33,12 +33,12 @@ def part2(instructions):
 
 
 def main():
-    with open('day5.txt') as f:
+    with open("../files/2017_05_input.txt") as f:
         inputs = [int(line) for line in f]
 
     print(part1(list(inputs)))
     print(part2(list(inputs)))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

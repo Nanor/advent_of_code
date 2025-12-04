@@ -23,7 +23,7 @@ def part1(a_start, b_start):
     a_gen = gen(16807, 2147483647, a_start)
     b_gen = gen(48271, 2147483647, b_start)
 
-    return judge(a_gen, b_gen, 4 * (10 ** 7))
+    return judge(a_gen, b_gen, 4 * (10**7))
 
 
 def part2(a_start, b_start):
@@ -38,17 +38,16 @@ def part2(a_start, b_start):
     a_gen = gen(16807, 2147483647, a_start, 4)
     b_gen = gen(48271, 2147483647, b_start, 8)
 
-    return judge(a_gen, b_gen, 5 * (10 ** 6))
+    return judge(a_gen, b_gen, 5 * (10**6))
 
 
 def main():
-    with open('day15.txt') as f:
-        (a_start, b_start) = [
-            int(re.search(r'(\d+)', line).group(0)) for line in f]
+    with open("../files/2017_15_input.txt") as f:
+        (a_start, b_start) = [int(re.search(r"(\d+)", line).group(0)) for line in f]
 
     print(part1(a_start, b_start))
     print(part2(a_start, b_start))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

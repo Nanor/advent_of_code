@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/nanor/advent_of_code/2016/days/day1"
 	"github.com/nanor/advent_of_code/2016/days/day10"
@@ -33,13 +34,13 @@ import (
 
 func main() {
 	day := os.Args[1]
-	file, err := os.ReadFile(fmt.Sprintf("./inputs/day%v.txt", day))
+	file, err := os.ReadFile(fmt.Sprintf("../files/2016_%02v_input.txt", day))
 
 	if err != nil {
 		panic(err)
 	}
 
-	input := string(file)
+	input := strings.TrimSpace(string(file))
 
 	switch day {
 	case "1":

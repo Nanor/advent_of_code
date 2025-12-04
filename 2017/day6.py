@@ -20,8 +20,8 @@ def redistribute(stacks):
 
 
 def main():
-    with open('day6.txt') as f:
-        stacks = [int(x) for x in f.read().strip().split('\t')]
+    with open("../files/2017_06_input.txt") as f:
+        stacks = [int(x) for x in f.read().strip().split("\t")]
 
     history = redistribute(stacks)
 
@@ -33,5 +33,5 @@ def main():
     print(len(history) - loop_start - 1)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

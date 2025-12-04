@@ -63,7 +63,7 @@ def part2(loadouts, boss_stats):
 
 
 def main():
-    with open("day21.txt") as fin:
+    with open("../files/2015_21_input.txt") as fin:
         [hp, damage, armour] = [int(re.search(r"(\d+)", l).group(0)) for l in fin]
 
         boss_stats = {"hp": hp, "damage": damage, "armour": armour}

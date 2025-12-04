@@ -50,7 +50,7 @@ def run(insts, registers):
 
 
 def main():
-    with open("day23.txt") as fin:
+    with open("../files/2015_23_input.txt") as fin:
         insts = [l.strip() for l in fin]
 
     print(run(insts, {"a": 0, "b": 0}))

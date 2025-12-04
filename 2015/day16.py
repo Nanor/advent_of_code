@@ -41,7 +41,7 @@ def part2(aunts):
 
 def main():
     aunts = []
-    with open("day16.txt") as fin:
+    with open("../files/2015_16_input.txt") as fin:
         exp = re.compile(r"(\w+): (\d+)")
         for line in fin:
             m = exp.findall(line)

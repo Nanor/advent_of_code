@@ -17,13 +17,13 @@ def part2(spreadsheet):
 
 def main():
     spreadsheet = []
-    with open('day2.txt') as f:
+    with open("../files/2017_02_input.txt") as f:
         for line in f:
-            spreadsheet.append([int(d) for d in line.strip().split('\t')])
+            spreadsheet.append([int(d) for d in line.strip().split("\t")])
 
     print(part1(spreadsheet))
     print(part2(spreadsheet))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

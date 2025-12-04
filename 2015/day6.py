@@ -46,7 +46,7 @@ def parse(line):
 
 
 def main():
-    with open("day6.txt") as f:
+    with open("../files/2015_06_input.txt") as f:
         instructions = [parse(line) for line in f]
 
     print(part1(instructions))

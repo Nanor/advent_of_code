@@ -128,7 +128,7 @@ def game(boss_stats, hard=False):
 
 
 def main():
-    with open("day22.txt") as fin:
+    with open("../files/2015_22_input.txt") as fin:
         [hp, damage] = [int(re.search(r"(\d+)", l).group(0)) for l in fin]
 
         boss_stats = {"hp": hp, "damage": damage}

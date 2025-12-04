@@ -9,9 +9,7 @@ qualities = {"capacity", "durability", "flavor", "texture"}
 def partition(max, groups):
     if groups == 1:
         return [[max]]
-    return [
-        [i] + rest for i in range(max + 1) for rest in partition(max - i, groups - 1)
-    ]
+    return [[i] + rest for i in range(max + 1) for rest in partition(max - i, groups - 1)]
 
 
 def mix(ratios, ingredients):
@@ -28,9 +26,7 @@ def score(scores):
 
 
 def part1(ingredients):
-    return max(
-        score(mix(parts, ingredients)) for parts in partition(100, len(ingredients))
-    )
+    return max(score(mix(parts, ingredients)) for parts in partition(100, len(ingredients)))
 
 
 def part2(ingredients):
@@ -40,15 +36,12 @@ def part2(ingredients):
 
 def main():
     ingredients = []
-    with open("day15.txt") as fin:
+    with open("../files/2015_15_input.txt") as fin:
         for line in fin:
             ingredients.append(
                 {
                     name.strip(): int(value)
-                    for (name, value) in (
-                        part.strip().split(" ")
-                        for part in line.split(":")[1].split(",")
-                    )
+                    for (name, value) in (part.strip().split(" ") for part in line.split(":")[1].split(","))
                 }
             )
 

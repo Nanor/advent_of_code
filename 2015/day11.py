@@ -32,7 +32,8 @@ def valid(password):
 
 
 def main():
-    input = "hepxcrrq"
+    with open("../files/2015_11_input.txt") as f:
+        input = f.read().strip()
     gen = (password for password in password_generator(input) if valid(password))
 
     print(next(gen))

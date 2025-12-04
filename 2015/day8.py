@@ -32,7 +32,7 @@ def part2(strings):
 
 
 def main():
-    with open("day8.txt") as f:
+    with open("../files/2015_08_input.txt") as f:
         strings = [line.strip() for line in f]
 
     print(part1(strings))

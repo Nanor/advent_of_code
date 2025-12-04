@@ -5,8 +5,7 @@ import itertools
 
 
 def calculate(happiness, arangement):
-    threes = [(arangement + arangement)[n - 1:n + 2]
-              for n in range(len(arangement) - 1, len(arangement) * 2 - 1)]
+    threes = [(arangement + arangement)[n - 1 : n + 2] for n in range(len(arangement) - 1, len(arangement) * 2 - 1)]
 
     total = 0
     for left, middle, right in threes:
@@ -24,24 +23,23 @@ def calc_max(happiness):
 def main():
     happiness = defaultdict(lambda: {})
 
-    with open('day13.txt') as file:
-        exp = re.compile(
-            r'(\w+) would (gain|lose) (\d+) happiness units by sitting next to (\w+).')
+    with open("../files/2015_13_input.txt") as file:
+        exp = re.compile(r"(\w+) would (gain|lose) (\d+) happiness units by sitting next to (\w+).")
         for line in file:
             m = exp.match(line)
             person_1, direction, amount, person_2 = m.groups()
-            happiness[person_1][person_2] = int(
-                amount) if direction == 'gain' else -int(amount)
+            happiness[person_1][person_2] = int(amount) if direction == "gain" else -int(amount)
 
     # Part 1
     print(calc_max(happiness))
 
     # Part 2
     for person in list(happiness.keys()):
-        happiness['Me'][person] = 0
-        happiness[person]['Me'] = 0
+        happiness["Me"][person] = 0
+        happiness[person]["Me"] = 0
 
     print(calc_max(happiness))
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

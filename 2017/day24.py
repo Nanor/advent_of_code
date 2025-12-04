@@ -6,9 +6,8 @@ def part1(components):
         bridges = []
         for i, component in enumerate(components):
             if port in component:
-                other_port = component[0] if component[
-                    1] == port else component[1]
-                other_components = components[:i] + components[i + 1:]
+                other_port = component[0] if component[1] == port else component[1]
+                other_components = components[:i] + components[i + 1 :]
 
                 recur = build(other_components, other_port)
                 if recur:
@@ -28,9 +27,8 @@ def part2(components):
         bridges = []
         for i, component in enumerate(components):
             if port in component:
-                other_port = component[0] if component[
-                    1] == port else component[1]
-                other_components = components[:i] + components[i + 1:]
+                other_port = component[0] if component[1] == port else component[1]
+                other_components = components[:i] + components[i + 1 :]
 
                 recur = build(other_components, other_port)
                 if recur:
@@ -45,12 +43,12 @@ def part2(components):
 
 
 def main():
-    with open('day24.txt') as f:
-        components = [(int(l[0]), int(l[1]))
-                      for l in [l.split('/') for l in f]]
+    with open("../files/2017_24_input.txt") as f:
+        components = [(int(l[0]), int(l[1])) for l in [l.split("/") for l in f]]
 
     print(part1(components))
     print(part2(components))
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

@@ -36,11 +36,14 @@ export const asInput = (str: string): Input => ({
 
 export default (day: string | number): Promise<Input> => {
   return new Promise((resolve, reject) => {
-    readFile(`./resources/day${day}.txt`, (_err, data) => {
-      const inputString = data ? data.toString() : "";
-      const input = asInput(inputString);
+    readFile(
+      `../files/2021_${String(day).padStart(2, "0")}_input.txt`,
+      (_err, data) => {
+        const inputString = data ? data.toString().trim() : "";
+        const input = asInput(inputString);
 
-      resolve(input);
-    });
+        resolve(input);
+      }
+    );
   });
 };

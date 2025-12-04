@@ -3,11 +3,10 @@ from day10 import hash
 
 
 def make_grid(input):
-    hashes = [bin(int(hash('{0}-{1}'.format(input, n)), base=16))
-              for n in range(128)]
+    hashes = [bin(int(hash("{0}-{1}".format(input, n)), base=16)) for n in range(128)]
     padded = [hash[2:].zfill(128) for hash in hashes]
 
-    return [[0 if c == '1' else None for c in line] for line in padded]
+    return [[0 if c == "1" else None for c in line] for line in padded]
 
 
 def part1(grid):
@@ -28,8 +27,7 @@ def part2(grid):
     partition = 0
 
     while part1(grid):
-        x, y = [(x, y) for (y, line) in enumerate(grid)
-                for (x, cell) in enumerate(line) if cell == 0][0]
+        x, y = [(x, y) for (y, line) in enumerate(grid) for (x, cell) in enumerate(line) if cell == 0][0]
         partition += 1
         grid = fill(grid, x, y, partition)
 
@@ -37,12 +35,13 @@ def part2(grid):
 
 
 def main():
-    input = 'wenycdww'
+    with open("../files/2017_14_input.txt") as f:
+        input = f.read().strip()
     grid = make_grid(input)
 
     print(part1(grid))
     print(part2(grid))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

@@ -82,7 +82,7 @@ def part2(weights):
 
 
 def main():
-    with open("day24.txt") as fin:
+    with open("../files/2015_24_input.txt") as fin:
         weights = [int(w) for w in fin]
 
     print(part1(weights))

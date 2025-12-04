@@ -1,6 +1,7 @@
 #!/usr/local/bin/python3
 import re
 
+
 class Particle:
     def __init__(self, index, pos, vel, acc):
         self.index = index
@@ -10,7 +11,7 @@ class Particle:
 
     @classmethod
     def from_string(cls, index, string):
-        values = re.findall(r'(-?\d+)', string)
+        values = re.findall(r"(-?\d+)", string)
         values = [int(v) for v in values]
         return Particle(index, values[0:3], values[3:6], values[6:9])
 
@@ -24,12 +25,14 @@ class Particle:
     def colliding(self, others):
         return any(self.pos == other.pos for other in others if self != other)
 
+
 def part1(particles):
     for _ in range(1000):
         for p in particles:
             p.simulate()
 
     return min(particles, key=lambda p: p.distance()).index
+
 
 def part2(particles):
     for _ in range(100):
@@ -40,16 +43,18 @@ def part2(particles):
 
     return len(particles)
 
+
 def main():
-    with open('day20.txt') as f:
+    with open("../files/2017_20_input.txt") as f:
         particles = [Particle.from_string(i, line) for i, line in enumerate(f)]
 
     print(part1(particles))
 
-    with open('day20.txt') as f:
+    with open("../files/2017_20_input.txt") as f:
         particles = [Particle.from_string(i, line) for i, line in enumerate(f)]
 
     print(part2(particles))
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

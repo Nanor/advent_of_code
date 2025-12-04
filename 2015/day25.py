@@ -3,7 +3,7 @@ import re
 
 
 def main():
-    with open("day25.txt") as fin:
+    with open("../files/2015_25_input.txt") as fin:
         [row, col] = [int(x) for x in re.findall(r"(\d+)", next(fin))]
 
     code = 20151125

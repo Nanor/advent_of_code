@@ -2,7 +2,7 @@
 
 
 def part1(inputs):
-    return inputs.count('(') - inputs.count(')')
+    return inputs.count("(") - inputs.count(")")
 
 
 def part2(inputs):
@@ -10,9 +10,9 @@ def part2(inputs):
     i = 1
 
     for c in inputs:
-        if c == '(':
+        if c == "(":
             floor += 1
-        elif c == ')':
+        elif c == ")":
             floor -= 1
 
         if floor < 0:
@@ -22,11 +22,12 @@ def part2(inputs):
 
 
 def main():
-    with open('day1.txt') as f:
+    with open("../files/2015_01_input.txt") as f:
         inputs = f.read().strip()
 
     print(part1(inputs))
     print(part2(inputs))
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

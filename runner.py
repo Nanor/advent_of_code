@@ -17,11 +17,21 @@ class Colors(Enum):
     yellow = "\033[33m"
 
 
+PRE_RUN = {
+    2018: ["cargo", "build", "--release"],
+    2019: ["npm", "i"],
+    2020: ["npm", "i"],
+    2021: ["npm", "i"],
+    2022: ["npm", "i"],
+    2023: ["bun", "i"],
+    2025: ["cargo", "build", "--release"],
+}
+
 COMMANDS = {
     2015: lambda day: ["python3", f"day{day}.py"],
     2016: lambda day: ["go", "run", ".", f"{day}"],
     2017: lambda day: ["python3", f"day{day}.py"],
-    2018: lambda day: ["cargo", "run", "--release", "--bin", f"day{day}"],
+    2018: lambda day: ["cargo", "run", "--release", f"{day}"],
     2019: lambda day: ["npm", "--silent", "start", f"{day}"],
     2020: lambda day: ["npm", "--silent", "start", f"{day}"],
     2021: lambda day: ["npm", "--silent", "start", f"{day}"],
@@ -33,6 +43,14 @@ COMMANDS = {
 
 
 def run_year(year):
+    if year in PRE_RUN:
+        subprocess.run(
+            PRE_RUN[year],
+            cwd=f"{year}",
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+
     for day in range(1, 26):
         try:
             with open(f"files/{year}_{day:02}a_answer.txt", mode="r") as f1:

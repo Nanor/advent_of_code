@@ -21,8 +21,11 @@ def part2(target: int):
 
 
 def main():
-    print(part1(34000000))
-    print(part2(34000000))
+    with open("../files/2015_20_input.txt") as fin:
+        input = int(fin.read())
+
+    print(part1(input))
+    print(part2(input))
 
 
 if __name__ == "__main__":

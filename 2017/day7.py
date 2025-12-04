@@ -18,8 +18,7 @@ class Program:
         try:
             return self._stack_weight
         except AttributeError:
-            self._stack_weight = self.weight + \
-                sum(child.stack_weight() for child in self.children())
+            self._stack_weight = self.weight + sum(child.stack_weight() for child in self.children())
             return self._stack_weight
 
 
@@ -66,14 +65,13 @@ def part2(root):
 
 
 def main():
-    with open('day7.txt') as f:
+    with open("../files/2017_07_input.txt") as f:
         programs = {}
         for line in f:
-            name = line.split(' ')[0]
-            weight = int(re.search('\((\d+)\)', line).group(1))
-            if '->' in line:
-                children = [child.strip()
-                            for child in line.split('->')[1].split(',')]
+            name = line.split(" ")[0]
+            weight = int(re.search("\((\d+)\)", line).group(1))
+            if "->" in line:
+                children = [child.strip() for child in line.split("->")[1].split(",")]
             else:
                 children = []
             Program(name, weight, children, programs)
@@ -87,5 +85,5 @@ def main():
     print(part2(root))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

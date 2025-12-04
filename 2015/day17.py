@@ -3,14 +3,7 @@ from itertools import combinations
 
 
 def part1(containers):
-    return len(
-        [
-            o
-            for i in range(1, len(containers))
-            for o in combinations(containers, i)
-            if sum(o) == 150
-        ]
-    )
+    return len([o for i in range(1, len(containers)) for o in combinations(containers, i) if sum(o) == 150])
 
 
 def part2(containers):
@@ -21,7 +14,7 @@ def part2(containers):
 
 
 def main():
-    with open("day17.txt") as fin:
+    with open("../files/2015_17_input.txt") as fin:
         containers = [int(c) for c in fin]
 
     print(part1(containers))

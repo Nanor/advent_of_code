@@ -5,7 +5,7 @@ const day = process.argv[2];
 
 const run = async (day: string) => {
   const code = days[`day${day}`];
-  const input = await getInput(`day${day}`);
+  const input = await getInput(day);
 
   if ("load" in code) {
     code.load(input);
