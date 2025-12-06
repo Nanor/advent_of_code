@@ -26,7 +26,7 @@ fn find_max(line: &str, min_rest: usize) -> (u8, &str) {
 fn solve(input: &str, size: usize) -> u64 {
     let mut joltage = 0;
 
-    for mut line in input.split("\n") {
+    for mut line in input.lines() {
         if line.trim().len() > 0 {
             let mut value: u64 = 0;
 

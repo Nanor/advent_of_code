@@ -12,7 +12,7 @@ pub fn run() {
 fn solve(input: &str) -> (u32, u32) {
     let mut rolls: HashSet<(usize, usize)> = HashSet::new();
 
-    for (y, line) in input.split('\n').enumerate() {
+    for (y, line) in input.lines().enumerate() {
         for (x, c) in line.chars().enumerate() {
             if c == '@' {
                 rolls.insert((x, y));

@@ -11,7 +11,7 @@ fn part1(input: &str) -> u32 {
     let mut dial: i32 = 50;
     let mut count = 0;
 
-    for line in input.split_whitespace() {
+    for line in input.lines() {
         let dir = &line[0..1];
         let a: &i32 = &line[1..].parse().unwrap();
 
@@ -33,7 +33,7 @@ fn part2(input: &str) -> u32 {
     let mut dial: i32 = 1000050;
     let mut count = 0;
 
-    for line in input.split_whitespace() {
+    for line in input.lines() {
         let dir = &line[0..1];
         let a: &i32 = &line[1..].parse().unwrap();
 

@@ -13,7 +13,7 @@ pub fn run() {
     let ranges: Vec<Range> = paragraphs
         .next()
         .unwrap()
-        .split('\n')
+        .lines()
         .filter(|l| l.trim().len() > 0)
         .map(|l| {
             let mut vs = l.trim().split('-');
@@ -28,7 +28,7 @@ pub fn run() {
     let ingredients: Vec<u64> = paragraphs
         .next()
         .unwrap()
-        .split('\n')
+        .lines()
         .filter(|l| l.trim().len() > 0)
         .map(|l| l.trim().parse().unwrap())
         .collect();
