@@ -31,14 +31,14 @@ COMMANDS = {
     2015: lambda day: ["python3", f"day{day}.py"],
     2016: lambda day: ["go", "run", ".", f"{day}"],
     2017: lambda day: ["python3", f"day{day}.py"],
-    2018: lambda day: ["cargo", "run", "--release", f"{day}"],
+    2018: lambda day: ["./target/release/year2018", f"{day}"],
     2019: lambda day: ["npm", "--silent", "start", f"{day}"],
     2020: lambda day: ["npm", "--silent", "start", f"{day}"],
     2021: lambda day: ["npm", "--silent", "start", f"{day}"],
     2022: lambda day: ["npm", "--silent", "start", f"{day}"],
     2023: lambda day: ["bun", "--silent", "start", f"{day}"],
     2024: lambda day: ["poetry", "run", "solve", f"{day}"],
-    2025: lambda day: ["cargo", "run", "--release", f"{day}"],
+    2025: lambda day: ["./target/release/y2025", f"{day}"],
 }
 
 
