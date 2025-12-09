@@ -8,12 +8,12 @@ pub fn run() {
 }
 
 fn part1(input: &str) -> u32 {
-    let mut dial: i32 = 50;
+    let mut dial = 1000050;
     let mut count = 0;
 
     for line in input.lines() {
         let dir = &line[0..1];
-        let a: &i32 = &line[1..].parse().unwrap();
+        let a: &u32 = &line[1..].parse().unwrap();
 
         if dir == "L" {
             dial -= a;
@@ -30,12 +30,12 @@ fn part1(input: &str) -> u32 {
 }
 
 fn part2(input: &str) -> u32 {
-    let mut dial: i32 = 1000050;
+    let mut dial = 1000050;
     let mut count = 0;
 
     for line in input.lines() {
         let dir = &line[0..1];
-        let a: &i32 = &line[1..].parse().unwrap();
+        let a: &u32 = &line[1..].parse().unwrap();
 
         let old_dial = dial;
 
@@ -45,7 +45,7 @@ fn part2(input: &str) -> u32 {
             dial += a;
         }
 
-        let mut c = ((old_dial / 100) - (dial / 100)).abs() as u32;
+        let mut c = (old_dial / 100).abs_diff(dial / 100);
         if dir == "L" {
             if dial % 100 == 0 {
                 c += 1;

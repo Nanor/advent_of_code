@@ -1,11 +1,11 @@
 use itertools::Itertools;
-use std::{collections::HashMap, fs, i64};
+use std::{collections::HashMap, fs, u64};
 
 #[derive(Clone, Copy)]
 struct Point {
-    x: i64,
-    y: i64,
-    z: i64,
+    x: u64,
+    y: u64,
+    z: u64,
     index: usize,
 }
 
@@ -20,15 +20,17 @@ impl Point {
         }
     }
 
-    fn sqr_dist(self: &Self, other: &Point) -> i64 {
-        (self.x - other.x).pow(2) + (self.y - other.y).pow(2) + (self.z - other.z).pow(2)
+    fn sqr_dist(self: &Self, other: &Point) -> u64 {
+        self.x.abs_diff(other.x).pow(2)
+            + self.y.abs_diff(other.y).pow(2)
+            + self.z.abs_diff(other.z).pow(2)
     }
 }
 
 struct Pair {
     a: Point,
     b: Point,
-    sqr_dist: i64,
+    sqr_dist: u64,
 }
 
 impl Pair {
