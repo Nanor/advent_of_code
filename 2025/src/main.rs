@@ -17,6 +17,7 @@ fn main() {
             Ok(8) => days::day8::run(),
             Ok(9) => days::day9::run(),
             Ok(10) => days::day10::run(),
+            Ok(11) => days::day11::run(),
             _ => println!("Invalid day"),
         },
         None => println!("No day provided"),
