@@ -2,16 +2,6 @@ use std::{collections::HashMap, fs};
 
 pub fn run() {
     let input = fs::read_to_string("../files/2025_11_input.txt").unwrap();
-    let _input = "aaa: you hhh
-you: bbb ccc
-bbb: ddd eee
-ccc: ddd eee fff
-ddd: ggg
-eee: out
-fff: out
-ggg: out
-hhh: ccc fff iii
-iii: out";
 
     let mut nodes: HashMap<&str, Vec<&str>> = HashMap::new();
     for line in input.lines() {
